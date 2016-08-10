@@ -1,0 +1,40 @@
+﻿
+<div class="modal-header">
+    <h3 class="modal-title">Edit Phrase</h3>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label for="Text">Phrase Text</label>
+        <input type="text" class="form-control" id="Text" placeholder="Email" ng-model="phrase.Text" >
+    </div>
+    <h4>Categories</h4>
+    <form class="form-group">
+        <div class="input-group" ng-submit="addTag()">
+            <input type="text" class="form-control" placeholder="Feelings, Desires, etc." ng-model="newTag">
+            <span class="input-group-btn">
+                <button class="btn btn-info" type="button">Add</button>
+            </span>
+        </div>
+    </form>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="tag in allTags">
+            {{tag}}
+            <div class="pull-right">
+                <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-small bootstrap-switch-id-test bootstrap-switch-animate bootstrap-switch-on" style="width: 88px;">
+                    <div class="bootstrap-switch-container" style="width: 129px; margin-left: 0px;">
+                        <span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 43px;">ON</span>
+                        <span class="bootstrap-switch-label" style="width: 43px;">&nbsp;</span>
+                        <span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 43px;">OFF</span>
+                        <input type="checkbox" checked="" class="make-switch" id="test" data-size="small">
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            </div>
+        </li>
+    </ul>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
