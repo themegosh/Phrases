@@ -222,6 +222,7 @@
     <None Include=".bin\bower.cmd" />
     <None Include=".bin\git.cmd" />
     <None Include=".bin\node.cmd" />
+    <Content Include="Scripts\Angular\angular-bootstrap-switch.js" />
     <Content Include="Scripts\Angular\angular-confirm.js" />
     <Content Include="Scripts\Angular\angular-mocks.js" />
     <Content Include="Scripts\Angular\angular-route.js" />
@@ -286,9 +287,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DBHelper.cs" />
-    <Compile Include="Models\PhraseService.cs" />
-    <Compile Include="Models\WatsonService.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Services\LogRepository.cs" />
+    <Compile Include="Services\PhraseRepository.cs" />
+    <Compile Include="Services\PhraseService.cs" />
+    <Compile Include="Services\UserRepository.cs" />
+    <Compile Include="Services\WatsonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

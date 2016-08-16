@@ -12,17 +12,18 @@
             service.phrases.length = 0;//clear the old ones
             service.phraseIndex = 1;
             angular.forEach(inPhrases, function (phrase) {
-                addSoundManagerProperties(phrase);
+                service.addSoundManagerProperties(phrase);
                 service.phrases.push(phrase);
                 service.phraseIndex++;
             });
+            service.refreshTags();
         }
 
         service.add = function (phrase) {
-            addSoundManagerProperties(phrase);
+            service.addSoundManagerProperties(phrase);
             service.phrases.push(phrase);
             service.phraseIndex++;
-            refreshTags();
+            service.refreshTags();
         }
         
         service.delete = function (phrase) {
@@ -31,15 +32,34 @@
                     service.phrases.splice(key, 1); //remove this one
                 }
             });
-            refreshTags();
+            service.refreshTags();
         }
 
-        service.update = function (newPhrase, oldPhrase) {
-
+        service.replace = function (newPhrase, oldPhrase) {
+            angular.forEach(service.phrases, function (aPhrase, key, phrases) {
+                if (aPhrase.Text === oldPhrase.Text) { //found it
+                    //replace it
+                    newPhrase.id = service.phraseIndex;
+                    service.phraseIndex++;
+                    service.phrases[key] = newPhrase;
+                }
+            });
+            service.refreshTags();
         }
-        
+
+        service.addSoundManagerProperties = function (phrase) {
+            //required attributes for angular sound-manager
+            phrase.id = service.phraseIndex;
+            service.phraseIndex++;
+            phrase.title = phrase.Text;
+            phrase.artist = "john doe";
+            phrase.url = "/tts/" + md5(phrase.Text) + ".ogg";
+            phrase.Hash = md5(phrase.Text);
+        }
+                
         //private functions
-        function refreshTags() {
+        service.refreshTags = function () {
+            service.tags.length = 0;
             angular.forEach(service.phrases, function (aPhrase, key) {
                 angular.forEach(aPhrase.Tags, function (tag) {
                     if ($.inArray(tag, service.tags) == -1) {
@@ -47,14 +67,6 @@
                     }
                 });
             });
-        }
-
-        function addSoundManagerProperties(phrase) {
-            //required attributes for angular sound-manager
-            phrase.id = service.phraseIndex;
-            phrase.title = phrase.Text;
-            phrase.artist = "john doe";
-            phrase.url = "/tts/" + md5(phrase.Text) + ".ogg";
         }
 
         return service;

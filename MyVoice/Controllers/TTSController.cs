@@ -8,6 +8,7 @@ using System.Web.Http;
 using Newtonsoft.Json;
 using Amazon.DynamoDBv2.DocumentModel;
 using System.Text;
+using MyVoice.Services;
 
 namespace MyVoice.Controllers
 {
@@ -18,7 +19,7 @@ namespace MyVoice.Controllers
         {
             try
             {
-                return jsonResponse(JsonConvert.SerializeObject(DBHelper.Instance.GetAllPhrases()), HttpStatusCode.OK);
+                return jsonResponse(JsonConvert.SerializeObject(new PhraseRepository().GetAllPhrases()), HttpStatusCode.OK);
             }
             catch (Exception ex)
             {

@@ -104,6 +104,11 @@ body {
     display: inline;
 }
 
+.tag-label {
+    font-size: 1.2em;
+    line-height: 1.8;
+}
+
 
 /* Mobile */
 @media (max-width: 767px) {

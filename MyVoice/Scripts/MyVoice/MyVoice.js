@@ -3,6 +3,7 @@
     angular.module("MyVoice", [
         "ui.bootstrap",
         'angularSoundManager',
+        'frapontillo.bootstrap-switch'
     ]);
 
 })();

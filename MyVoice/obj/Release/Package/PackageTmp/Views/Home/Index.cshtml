@@ -14,7 +14,7 @@
                         <h2>Tap on a Phrase to hear it</h2>
                     </div>
                 </div>
-                <div ng-repeat="phrase in phrases" ng-click="btnPlay(phrase)">
+                <div ng-repeat="phrase in phrases | filter:filter()" ng-click="btnPlay(phrase)">
                     <div class="todo-projects-item clearfix">
                         <div class="todo-inline todo-float-r">
                             <button type="button" class="btn btn-icon-only btn-lg btn-warning" ng-click="btnEditPhrase(phrase, $event)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>

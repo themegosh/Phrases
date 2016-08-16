@@ -1,37 +1,49 @@
 ﻿
-<div class="modal-header">
+<div class="modal-header" ng-init="init()">
     <h3 class="modal-title">Edit Phrase</h3>
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <label for="Text">Phrase Text</label>
+        <h4 for="Text">Phrase Text</h4>
         <input type="text" class="form-control" id="Text" placeholder="Email" ng-model="phrase.Text" >
     </div>
     <h4>Categories</h4>
-    <form class="form-group">
-        <div class="input-group" ng-submit="addTag()">
-            <input type="text" class="form-control" placeholder="Feelings, Desires, etc." ng-model="newTag">
-            <span class="input-group-btn">
-                <button class="btn btn-info" type="button">Add</button>
-            </span>
-        </div>
-    </form>
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="tag in allTags">
-            {{tag}}
+        <li class="list-group-item clearfix" ng-repeat="tag in checkedTags">
+            
+            <span class="tag-label">{{tag.Tag}}</span>
             <div class="pull-right">
-                <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-small bootstrap-switch-id-test bootstrap-switch-animate bootstrap-switch-on" style="width: 88px;">
-                    <div class="bootstrap-switch-container" style="width: 129px; margin-left: 0px;">
-                        <span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 43px;">ON</span>
-                        <span class="bootstrap-switch-label" style="width: 43px;">&nbsp;</span>
-                        <span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 43px;">OFF</span>
-                        <input type="checkbox" checked="" class="make-switch" id="test" data-size="small">
-                    </div>
-                </div>
-                <button class="btn btn-sm btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                <input bs-switch
+                       ng-model="tag.Checked"
+                       type="checkbox"
+                       switch-size="small"
+                       switch-animate="{{ animate }}"
+                       switch-label="{{ label }}"
+                       switch-icon="{{ icon }}"
+                       switch-on-text="{{ onLabel }}"
+                       switch-off-text="{{ offLabel }}"
+                       switch-on-color="{{ on }}"
+                       switch-off-color="{{ off }}"
+                       switch-radio-off="{{ radioOff }}"
+                       switch-label-width="{{ labelWidth }}"
+                       switch-handle-width="{{ handleWidth }}"
+                       switch-inverse="{{ inverse }}"
+                       switch-change="checkChanged(tag)"
+                       ng-true-value="true"
+                       ng-false-value="false">
             </div>
         </li>
     </ul>
+
+    <h4>New Category</h4>
+    <form class="form-group" ng-submit="addTag()">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Feelings, Desires, etc." ng-model="newTag">
+            <span class="input-group-btn">
+                <button class="btn btn-info" ng-click="addTag()" type="button">Add</button>
+            </span>
+        </div>
+    </form>
 
 </div>
 <div class="modal-footer">

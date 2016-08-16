@@ -10,12 +10,32 @@
                 Hash: ""
             };
 
+            $scope.tagFilter = '';
+
             $scope.allTags = ps.tags;
 
             $scope.init = function () {
                 api.getAllPhrases();
                 $scope.phrases = ps.phrases;
 
+            }
+
+            $scope.changeFilter = function (tag) {
+                $scope.tagFilter = tag;
+            }
+
+            $scope.filter = function () {
+                /*
+                if ($scope.tagFilter != '') {
+                $scope.phrases.length = 0;
+                    angular.forEach($scope.phrases, function (phrase) {
+                        angular.forEach(phrase.Tags, function (tag) {
+                            if (tag === $scope.tagFilter) {
+                                $scope.phrases.push(phrase);
+                            }
+                        });
+                    });
+                }*/
             }
 
             $scope.btnCreateNewPhrase = function () {
@@ -43,7 +63,7 @@
                 //});
             }
 
-            $scope.delete = function (phrase, $event) {
+            $scope.btnDeletePhrase = function (phrase, $event) {
                 $event.stopPropagation();
                 console.log("btnDeletePhrase!");
                 api.deletePhrase(phrase);
