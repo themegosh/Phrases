@@ -697,7 +697,8 @@ var App = function() {
                     height: height,
                     alwaysVisible: ($(this).attr("data-always-visible") == "1" ? true : false),
                     railVisible: ($(this).attr("data-rail-visible") == "1" ? true : false),
-                    disableFadeOut: true
+                    disableFadeOut: true,
+                    touchScrollStep: 50
                 });
 
                 $(this).attr("data-initialized", "1");
@@ -963,7 +964,8 @@ var App = function() {
         },
 
         // check IE8 mode
-        isAngularJsApp: function() {
+        isAngularJsApp: function () {
+            return false;
             return (typeof angular == 'undefined') ? false : true;
         },
 

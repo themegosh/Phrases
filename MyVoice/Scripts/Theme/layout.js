@@ -70,7 +70,7 @@ var Layout = function () {
             });
         }
 
-        if (!el || el.size() == 0) {
+        if (!el || el.length == 0) {
             return;
         }
 
@@ -112,11 +112,11 @@ var Layout = function () {
             $(this).addClass('active');
             $(this).find('> a > span.arrow').addClass('open');
 
-            if ($(this).parent('ul.page-sidebar-menu').size() === 1) {
+            if ($(this).parent('ul.page-sidebar-menu').length === 1) {
                 $(this).find('> a').append('<span class="selected"></span>');
             }
             
-            if ($(this).children('ul.sub-menu').size() === 1) {
+            if ($(this).children('ul.sub-menu').length === 1) {
                 $(this).addClass('open');
             }
         });
@@ -134,13 +134,13 @@ var Layout = function () {
         $('.page-sidebar-menu').on('click', 'li > a.nav-toggle, li > a > span.nav-toggle', function (e) {
             var that = $(this).closest('.nav-item').children('.nav-link');
 
-            if (App.getViewPort().width >= resBreakpointMd && !$('.page-sidebar-menu').attr("data-initialized") && $('body').hasClass('page-sidebar-closed') &&  that.parent('li').parent('.page-sidebar-menu').size() === 1) {
+            if (App.getViewPort().width >= resBreakpointMd && !$('.page-sidebar-menu').attr("data-initialized") && $('body').hasClass('page-sidebar-closed') &&  that.parent('li').parent('.page-sidebar-menu').length === 1) {
                 return;
             }
 
             var hasSubMenu = that.next().hasClass('sub-menu');
 
-            if (App.getViewPort().width >= resBreakpointMd && that.parents('.page-sidebar-menu-hover-submenu').size() === 1) { // exit of hover sidebar menu
+            if (App.getViewPort().width >= resBreakpointMd && that.parents('.page-sidebar-menu-hover-submenu').length === 1) { // exit of hover sidebar menu
                 return;
             }
 
@@ -279,7 +279,7 @@ var Layout = function () {
             e.preventDefault();
             if ($('body').hasClass("page-sidebar-closed")) {
                 if ($('.sidebar-search').hasClass('open') === false) {
-                    if ($('.page-sidebar-fixed').size() === 1) {
+                    if ($('.page-sidebar-fixed').length === 1) {
                         $('.page-sidebar .sidebar-toggler').click(); //trigger sidebar toggle button
                     }
                     $('.sidebar-search').addClass("open");
@@ -292,7 +292,7 @@ var Layout = function () {
         });
 
         // handle close on body click
-        if ($('.sidebar-search').size() !== 0) {
+        if ($('.sidebar-search').length !== 0) {
             $('.sidebar-search .input-group').on('click', function(e){
                 e.stopPropagation();
             });
@@ -349,17 +349,20 @@ var Layout = function () {
         var menu = $('.page-sidebar-menu');
 
         App.destroySlimScroll(menu);
+        menu.attr("data-height", _calculateFixedSidebarViewportHeight());
+        App.initSlimScroll(menu);
+        handleSidebarAndContentHeight();
 
-        if ($('.page-sidebar-fixed').size() === 0) {
-            handleSidebarAndContentHeight();
-            return;
-        }
+        //if ($('.page-sidebar-fixed').length === 0) {
+        //    handleSidebarAndContentHeight();
+        //    return;
+        //}
 
-        if (App.getViewPort().width >= resBreakpointMd) {
-            menu.attr("data-height", _calculateFixedSidebarViewportHeight());
-            App.initSlimScroll(menu);
-            handleSidebarAndContentHeight();
-        }
+        //if (App.getViewPort().width >= resBreakpointMd) {
+        //    menu.attr("data-height", _calculateFixedSidebarViewportHeight());
+        //    App.initSlimScroll(menu);
+        //    handleSidebarAndContentHeight();
+        //}
     };
 
     // Handles sidebar toggler to close/hide the sidebar.
@@ -533,7 +536,8 @@ var Layout = function () {
             handleGoTop(); //handles scroll to top functionality in the footer
         },
 
-        init: function () {            
+        init: function () {
+            console.log("Layout init() CALLED");
             this.initHeader();
             this.initSidebar();
             this.initContent();
@@ -557,7 +561,7 @@ var Layout = function () {
                         ajaxContentSuccessCallbacks[i].call(res);
                     }
 
-                    if (sidebarMenuLink.size() > 0 && sidebarMenuLink.parents('li.open').size() === 0) {
+                    if (sidebarMenuLink.length > 0 && sidebarMenuLink.parents('li.open').length === 0) {
                         $('.page-sidebar-menu > li.open > a').click();
                     }
 

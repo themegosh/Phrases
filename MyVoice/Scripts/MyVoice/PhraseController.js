@@ -54,8 +54,13 @@
 
             $scope.btnPlay = function (phrase) {
 
-                angularPlayer.addTrack(phrase);
-                angularPlayer.playTrack(phrase.id);
+                try {
+                    angularPlayer.addTrack(phrase);
+                    angularPlayer.playTrack(phrase.id);
+                }
+                catch (ex) {
+                    showNotification("Error", ex, "error");
+                }
 
                 //angularPlayer.clearPlaylist(function () {
                 //    angularPlayer.addTrack(phrase);

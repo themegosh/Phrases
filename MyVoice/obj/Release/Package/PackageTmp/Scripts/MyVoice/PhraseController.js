@@ -37,7 +37,7 @@
             }
 
             $scope.changeFilter = function (tag) {
-                showNotification("DEBUG", "Changing tag: " + tag, "info");
+                //showNotification("DEBUG", "Changing tag: " + tag, "info");
                 ps.tagFilter = angular.copy(tag);
                 $scope.tagFilter = ps.tagFilter;
             }

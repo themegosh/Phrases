@@ -963,7 +963,8 @@ var App = function() {
         },
 
         // check IE8 mode
-        isAngularJsApp: function() {
+        isAngularJsApp: function () {
+            return false;
             return (typeof angular == 'undefined') ? false : true;
         },
 
