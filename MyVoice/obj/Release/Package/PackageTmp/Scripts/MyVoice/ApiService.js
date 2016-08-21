@@ -30,7 +30,7 @@
                 console.log("getAllPhrases SUCCESS: ");
                 console.log(response.data);
                 ps.assignAllPhrases(angular.fromJson(response.data));
-                showNotification("Success", "Phrases retrieved!", "success");
+                //showNotification("Success", "Phrases retrieved!", "success");
             }, function errorCallback(response) {
                 console.log("getAllPhrases FAIL:");
                 console.log(response);

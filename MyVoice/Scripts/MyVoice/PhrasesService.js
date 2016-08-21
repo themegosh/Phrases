@@ -7,6 +7,7 @@
         service.phrases = [];
         service.phraseIndex = 1;
         service.tags = [];
+        service.tagFilter = "All"
 
         service.assignAllPhrases = function (inPhrases) {
             service.phrases.length = 0;//clear the old ones
@@ -53,7 +54,7 @@
             service.phraseIndex++;
             phrase.title = phrase.Text;
             phrase.artist = "john doe";
-            phrase.url = "/tts/" + md5(phrase.Text) + ".ogg";
+            phrase.url = "/tts/" + md5(phrase.Text) + ".wav";
             phrase.Hash = md5(phrase.Text);
         }
                 

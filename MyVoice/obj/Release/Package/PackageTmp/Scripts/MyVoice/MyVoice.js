@@ -3,7 +3,9 @@
     angular.module("MyVoice", [
         "ui.bootstrap",
         'angularSoundManager',
-        'frapontillo.bootstrap-switch'
+        'frapontillo.bootstrap-switch',
+        'rzModule',
+        'ngTouch'
     ]);
 
 })();

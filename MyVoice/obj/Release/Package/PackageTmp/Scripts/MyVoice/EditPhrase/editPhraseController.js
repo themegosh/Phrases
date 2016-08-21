@@ -50,6 +50,11 @@
                 $uibModalInstance.dismiss('cancel');
             }
 
+            $scope.delete = function () {
+                api.deletePhrase(items);
+                $uibModalInstance.dismiss('cancel');
+            }
+
             $scope.checkChanged = function (tag) {
                 if (tag.Checked === false) {
                     removeA($scope.phrase.Tags, tag.Tag);

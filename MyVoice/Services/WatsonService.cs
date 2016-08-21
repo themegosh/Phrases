@@ -47,9 +47,9 @@ namespace MyVoice.Services
                 {
                     using (var handler = new HttpClientHandler { Credentials = new NetworkCredential(USERNAME, PASSWORD) })
                     using (var client = new HttpClient(handler))
-                    using (var response = client.PostAsJsonAsync(URL + "synthesize?voice=en-US_AllisonVoice", new TTSRequest() { text = phrase["Text"] }))
+                    using (var response = client.PostAsJsonAsync(URL + "synthesize?voice=en-US_AllisonVoice&accept=audio/wav", new TTSRequest() { text = phrase["Text"] }))
                     using (var mediaFile = response.Result.Content.ReadAsStreamAsync())
-                    using (var fileStream = new FileStream(HttpContext.Current.Server.MapPath("~/tts/") + phrase["Hash"] + ".ogg", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+                    using (var fileStream = new FileStream(HttpContext.Current.Server.MapPath("~/tts/") + phrase["Hash"] + ".wav", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                     {
                         mediaFile.Result.CopyToAsync(fileStream);
                     }

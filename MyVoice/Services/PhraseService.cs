@@ -12,7 +12,7 @@ namespace MyVoice.Services
         {
             new PhraseRepository().DeletePhrase(phrase);
 
-            string fullPath = HttpContext.Current.Server.MapPath("~/tts/") + phrase["Hash"] + ".ogg";
+            string fullPath = HttpContext.Current.Server.MapPath("~/tts/") + phrase["Hash"] + ".wav";
             if (System.IO.File.Exists(fullPath))
             {
                 System.IO.File.Delete(fullPath);
