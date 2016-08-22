@@ -78,7 +78,7 @@
                                     <div ng-repeat="phrase in phrases  | selectedTag:tagFilter track by $index" ng-click="btnPlay(phrase)" class="col-lg-6">
                                         <div class="todo-projects-item clearfix">
                                             <div class="todo-inline todo-float-r">
-                                                <button type="button" class="btn btn-info btn-icon-only" ng-click="btnEditPhrase(phrase, $event)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-info btn-icon-only btn-lg" ng-click="btnEditPhrase(phrase, $event)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
                                             </div>
                                             <div class="phrase">{{ phrase.title }}</div>
                                         </div>
