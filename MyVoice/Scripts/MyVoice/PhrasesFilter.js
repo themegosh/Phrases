@@ -13,7 +13,7 @@
                     var shouldAdd = false;
                     angular.forEach(phrase.Tags, function (tag) {
                         if (tag == curTag) {
-                            console.log("adding" + phrase.Text + " tag " + curTag);
+                            //console.log("adding" + phrase.Text + " tag " + curTag);
                             shouldAdd = true;
                         }
                     });
