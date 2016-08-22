@@ -1,4 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DocumentModel;
+using NAudio.Lame;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,25 +41,33 @@ namespace MyVoice.Services
         }
 
         //query watson and save the file to the ~/tts/ dir based on the hash'd "Text"
-        public static bool GetTTS(Document phrase)
+        public static async Task<Document> GetTTS(Document phrase)
         {
             try
             {
+                var filenameWithoutExtention = HttpContext.Current.Server.MapPath("~/tts/") + phrase["Hash"];
+
                 if (phrase["Text"] != null)
                 {
                     using (var handler = new HttpClientHandler { Credentials = new NetworkCredential(USERNAME, PASSWORD) })
                     using (var client = new HttpClient(handler))
                     using (var response = client.PostAsJsonAsync(URL + "synthesize?voice=en-US_AllisonVoice&accept=audio/wav", new TTSRequest() { text = phrase["Text"] }))
                     using (var mediaFile = response.Result.Content.ReadAsStreamAsync())
-                    using (var fileStream = new FileStream(HttpContext.Current.Server.MapPath("~/tts/") + phrase["Hash"] + ".wav", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+                    using (var fileStream = new FileStream(filenameWithoutExtention + ".wav", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                     {
-                        mediaFile.Result.CopyToAsync(fileStream);
+                        await mediaFile.Result.CopyToAsync(fileStream);
                     }
-                    return true;
+                    using (var reader = new WaveFileReader(filenameWithoutExtention + ".wav"))
+                    using (var writer = new LameMP3FileWriter(filenameWithoutExtention + ".mp3", reader.WaveFormat, 128))
+                    {
+                        reader.CopyTo(writer);
+                        phrase["url"] = "/api/tts/GetAudio?id="+ phrase["Hash"] + ".mp3";
+                    }
+                    return phrase;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
             catch (Exception ex)

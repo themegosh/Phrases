@@ -4,10 +4,14 @@
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <h4 for="Text">Phrase Text</h4>
+        <h3 for="Text">Phrase Text</h3>
         <input type="text" class="form-control" id="Text" placeholder="Email" ng-model="phrase.Text" >
     </div>
-    <h4>Categories</h4>
+    <div class="alert alert-info">
+        <strong>Url: </strong>
+        {{phrase.url}}
+    </div>
+    <h3>Categories</h3>
     <ul class="list-group">
         <li class="list-group-item clearfix" ng-repeat="tag in checkedTags">
             
@@ -47,7 +51,7 @@
 
 </div>
 <div class="modal-footer"> 
-    <button class="btn btn-danger pull-left" type="button" ng-click="delete()">Delete</button>
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-danger pull-left" type="button" ng-click="delete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+    <button class="btn btn-success" type="button" ng-click="ok()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 </div>

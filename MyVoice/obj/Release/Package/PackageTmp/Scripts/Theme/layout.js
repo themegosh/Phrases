@@ -349,17 +349,20 @@ var Layout = function () {
         var menu = $('.page-sidebar-menu');
 
         App.destroySlimScroll(menu);
+        menu.attr("data-height", _calculateFixedSidebarViewportHeight());
+        App.initSlimScroll(menu);
+        handleSidebarAndContentHeight();
 
-        if ($('.page-sidebar-fixed').length === 0) {
-            handleSidebarAndContentHeight();
-            return;
-        }
+        //if ($('.page-sidebar-fixed').length === 0) {
+        //    handleSidebarAndContentHeight();
+        //    return;
+        //}
 
-        if (App.getViewPort().width >= resBreakpointMd) {
-            menu.attr("data-height", _calculateFixedSidebarViewportHeight());
-            App.initSlimScroll(menu);
-            handleSidebarAndContentHeight();
-        }
+        //if (App.getViewPort().width >= resBreakpointMd) {
+        //    menu.attr("data-height", _calculateFixedSidebarViewportHeight());
+        //    App.initSlimScroll(menu);
+        //    handleSidebarAndContentHeight();
+        //}
     };
 
     // Handles sidebar toggler to close/hide the sidebar.

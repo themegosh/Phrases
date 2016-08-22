@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using Amazon.DynamoDBv2.DocumentModel;
 using System.Text;
 using MyVoice.Services;
+using System.Net.Http.Headers;
+using System.IO;
 
 namespace MyVoice.Controllers
 {
@@ -54,6 +56,28 @@ namespace MyVoice.Controllers
                 PhraseService.DeletePhrase(phrase);
 
                 return jsonResponse(phrase.ToJson(), HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetAudio(string id)
+        {
+            try
+            {
+                var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/tts/");
+                
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                var stream = new FileStream(mappedPath + id, FileMode.Open);
+                result.Content = new StreamContent(stream);
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("audio/mpeg");
+
+                //Response.AddHeader("Content-Range", "bytes 0-" + (resultStream.Length - 1).ToString() + "/" + resultStream.Length.ToString());
+                result.Content.Headers.ContentRange = new ContentRangeHeaderValue(stream.Length - 1);
+                return result;
             }
             catch (Exception ex)
             {

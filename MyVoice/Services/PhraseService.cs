@@ -21,7 +21,7 @@ namespace MyVoice.Services
 
         public static void SavePhrase(Document phrase)
         {
-            if (WatsonService.GetTTS(phrase))
+            if (WatsonService.GetTTS(phrase) != null)
             {
                 new PhraseRepository().SavePhrase(phrase);
             }

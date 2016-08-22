@@ -112,3 +112,8 @@ C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\bin\System.Web.Http.WebHost.
 C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\obj\Release\MyVoice.csprojResolveAssemblyReference.cache
 C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\obj\Release\MyVoice.dll
 C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\obj\Release\MyVoice.pdb
+C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\bin\NAudio.dll
+C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\bin\NAudio.xml
+C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\bin\libmp3lame.32.dll
+C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\bin\libmp3lame.64.dll
+C:\Users\mathe_000\Documents\GitHub\MyVoice\MyVoice\bin\NAudio.Lame.dll

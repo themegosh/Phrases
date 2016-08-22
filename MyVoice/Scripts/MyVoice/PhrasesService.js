@@ -54,7 +54,7 @@
             service.phraseIndex++;
             phrase.title = phrase.Text;
             phrase.artist = "john doe";
-            phrase.url = "/tts/" + md5(phrase.Text) + ".wav";
+            phrase.url = "/api/tts/GetAudio?id=" + md5(phrase.Text) + ".mp3"; //http://myvoice.dmdev.ca/api/tts/GetAudio?id= //"/tts/" + md5(phrase.Text) + ".wav";
             phrase.Hash = md5(phrase.Text);
         }
                 
