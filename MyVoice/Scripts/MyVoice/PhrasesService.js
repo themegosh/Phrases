@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-    angular.module("MyVoice").factory("PhrasesService", [ function () {
+    angular.module("MyVoice").factory("PhrasesService", ['$rootScope', function ($rootScope) {
 
         var service = {};
 
@@ -20,11 +20,23 @@
             service.refreshTags();
         }
 
-        service.add = function (phrase) {
+        service.save = function (phrase) {
             service.addSoundManagerProperties(phrase);
-            service.phrases.push(phrase);
+            var shouldAdd = true;
+            
             service.phraseIndex++;
+            angular.forEach(service.phrases, function (aPhrase, key) {
+                if (aPhrase.guid == phrase.guid) { //update this one instead of adding
+                    shouldAdd = false;
+                    service.phrases[key] = angular.copy(phrase);
+                    console.log("ps.save() updating phrase");
+                }
+            });
+            console.log("ps.save() saving new phrase");
+            if (shouldAdd === true)
+                service.phrases.push(phrase);
             service.refreshTags();
+            $rootScope.$apply()
         }
         
         service.delete = function (phrase) {
@@ -54,6 +66,7 @@
             service.phraseIndex++;
             phrase.title = phrase.text;
             phrase.artist = "";
+            phrase.url = "api/tts/GetAudio?id=" + phrase.guid + ".mp3";
         }
                 
         //private functions

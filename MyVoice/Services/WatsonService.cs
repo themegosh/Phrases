@@ -41,13 +41,11 @@ namespace MyVoice.Services
         }
 
         //query watson and save the file to the ~/tts/ dir based on the hash'd "Text"
-        public static async Task<Document> GetTTS(Document phrase)
+        public static Document GetTTS(Document phrase)
         {
             try
             {
-                //first, update the hash
-                phrase["hash"] = HashService.ToMd5(phrase["text"]);
-                var filenameWithoutExtention = HttpContext.Current.Server.MapPath("~/tts/") + phrase["hash"];
+                var filenameWithoutExtention = HttpContext.Current.Server.MapPath("~/tts/") + phrase["guid"];
 
                 if (phrase["text"] != null)
                 {
@@ -57,7 +55,7 @@ namespace MyVoice.Services
                     using (var mediaFile = response.Result.Content.ReadAsStreamAsync())
                     using (var fileStream = new FileStream(filenameWithoutExtention + ".wav", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                     {
-                        await mediaFile.Result.CopyToAsync(fileStream); //create the wav file (fallback)
+                        mediaFile.Result.CopyToAsync(fileStream); //create the wav file (fallback)
                     }
                     //convert the wav to mp3
                     using (var reader = new WaveFileReader(filenameWithoutExtention + ".wav"))

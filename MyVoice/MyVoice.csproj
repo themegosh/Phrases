@@ -312,7 +312,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
-    <Compile Include="Services\HashService.cs" />
     <Compile Include="Services\LogRepository.cs" />
     <Compile Include="Services\PhraseRepository.cs" />
     <Compile Include="Services\PhraseService.cs" />
@@ -355,7 +354,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64325</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

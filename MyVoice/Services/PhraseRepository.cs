@@ -26,13 +26,13 @@ namespace MyVoice.Services
             }
         }
 
-        public static List<Document> GetAllPhrases()
+        public static List<dynamic> GetAllPhrases()
         {
             try
             {
                 var client = new AmazonDynamoDBClient();
                 Table phrasesTable = Table.LoadTable(client, "Phrases");
-                List<Document> documents = new List<Document>();
+                List<dynamic> documents = new List<dynamic>();
                 ScanFilter scanFilter = new ScanFilter();
 
                 var search = phrasesTable.Scan(scanFilter);
@@ -42,11 +42,11 @@ namespace MyVoice.Services
                     List<Document> documentsSet = search.GetNextSet();
                     foreach (var document in documentsSet)
                     {
-                        dynamic item = JsonConvert.DeserializeObject<Document>(document.ToJson()); //this is disgusting... How does one retrieve a list of formatted json from dynamodb?
+                        var item = JsonConvert.DeserializeObject<dynamic>(document.ToJson()); //this is disgusting... How does one retrieve a list of formatted json from dynamodb?
                         documents.Add(item);
                     }
                 } while (!search.IsDone);
-
+                
                 return documents;
             }
             catch (Exception ex)

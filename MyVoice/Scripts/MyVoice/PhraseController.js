@@ -43,10 +43,9 @@
             }
             
             $scope.btnCreateNewPhrase = function () {
-
                 console.log("btnClicked!");
                 $scope.newPhrase.text = $scope.newPhrase.text.trim();
-                api.addPhrase($scope.newPhrase);
+                api.savePhrase($scope.newPhrase);
                 console.log($scope.newPhrase);
                 $scope.newPhrase.text = "";
             }

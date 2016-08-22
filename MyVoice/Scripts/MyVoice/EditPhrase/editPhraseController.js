@@ -36,13 +36,7 @@
             }
 
             $scope.ok = function () {
-                if (items.text != $scope.phrase.text) {
-                    ps.addSoundManagerProperties($scope.phrase); //update md5, etc
-                    api.replacePhrase($scope.phrase, items);
-                } else {
-                    api.updatePhrase($scope.phrase, items);
-                }
-                ps.refreshTags();
+                api.savePhrase($scope.phrase);
                 $uibModalInstance.dismiss('cancel');
             }
 

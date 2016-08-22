@@ -36,7 +36,7 @@ namespace MyVoice.Controllers
             {
                 Document phrase = Document.FromJson(value.ToString());
 
-                PhraseService.SavePhrase(phrase);
+                phrase = PhraseService.SavePhrase(phrase);
                 
                 return jsonResponse(phrase.ToJson(), HttpStatusCode.OK);
             }
