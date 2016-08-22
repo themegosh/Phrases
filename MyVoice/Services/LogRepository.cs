@@ -8,19 +8,13 @@ using System.Web;
 
 namespace MyVoice.Services
 {
-    public class LogRepository
+    public static class LogRepository
     {
-        private AmazonDynamoDBClient client;
-
-        public LogRepository()
-        {
-            client = new AmazonDynamoDBClient();
-        }
-
-        public void Log(string info)
+        public static void Log(string info)
         {
             try
             {
+                var client = new AmazonDynamoDBClient();
                 Table LogsTable = Table.LoadTable(client, "Logs");
                 var dictionary = new Dictionary<string, AttributeValue>
                 {

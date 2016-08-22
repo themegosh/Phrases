@@ -22,8 +22,8 @@
             }
 
             $scope.addTag = function () {
-                if ($.inArray($scope.newTag, $scope.phrase.Tags) == -1) {
-                    $scope.phrase.Tags.push($scope.newTag);
+                if ($.inArray($scope.newTag, $scope.phrase.tags) == -1) {
+                    $scope.phrase.tags.push($scope.newTag);
                     $scope.checkedTags.push({
                         Checked: true,
                         Tag: $scope.newTag
@@ -36,7 +36,7 @@
             }
 
             $scope.ok = function () {
-                if (items.Text != $scope.phrase.Text) {
+                if (items.text != $scope.phrase.text) {
                     ps.addSoundManagerProperties($scope.phrase); //update md5, etc
                     api.replacePhrase($scope.phrase, items);
                 } else {
@@ -57,15 +57,15 @@
 
             $scope.checkChanged = function (tag) {
                 if (tag.Checked === false) {
-                    removeA($scope.phrase.Tags, tag.Tag);
+                    removeA($scope.phrase.tags, tag.Tag);
                 } else {
-                    $scope.phrase.Tags.push(tag.Tag);
+                    $scope.phrase.tags.push(tag.Tag);
                 }
             }
 
             function doesHaveTag(aTag) {
                 var hasTag = false;
-                angular.forEach($scope.phrase.Tags, function (tag) {
+                angular.forEach($scope.phrase.tags, function (tag) {
                     if (aTag == tag)
                         hasTag = true;
                 });

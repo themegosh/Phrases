@@ -5,9 +5,9 @@
         function ($scope, $http, $uibModal, ps, angularPlayer, api, $rootScope) {
             
             $scope.newPhrase = {
-                Text: "",
-                Tags: [],
-                Hash: ""
+                text: "",
+                tags: [],
+                hash: ""
             };
 
             $scope.slider = {
@@ -45,11 +45,10 @@
             $scope.btnCreateNewPhrase = function () {
 
                 console.log("btnClicked!");
-                $scope.newPhrase.Text = $scope.newPhrase.Text.trim();
-                $scope.newPhrase.Hash = md5($scope.newPhrase.Text);
+                $scope.newPhrase.text = $scope.newPhrase.text.trim();
                 api.addPhrase($scope.newPhrase);
                 console.log($scope.newPhrase);
-                $scope.newPhrase.Text = "";
+                $scope.newPhrase.text = "";
             }
 
             $scope.btnPlay = function (phrase) {

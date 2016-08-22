@@ -21,7 +21,7 @@ namespace MyVoice.Controllers
         {
             try
             {
-                return jsonResponse(JsonConvert.SerializeObject(new PhraseRepository().GetAllPhrases()), HttpStatusCode.OK);
+                return jsonResponse(JsonConvert.SerializeObject(PhraseService.GetAllPhrases()), HttpStatusCode.OK);
             }
             catch (Exception ex)
             {

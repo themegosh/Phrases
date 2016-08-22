@@ -8,35 +8,31 @@ using System.Web;
 
 namespace MyVoice.Services
 {
-    public class PhraseRepository
+    public static class PhraseRepository
     {
-        private AmazonDynamoDBClient client;
 
-        public PhraseRepository()
-        {
-            client = new AmazonDynamoDBClient();
-        }
-
-        public void SavePhrase(Document phrase)
+        public static void SavePhrase(Document phrase)
         {
             try
             {
+                var client = new AmazonDynamoDBClient();
                 Table phrasesTable = Table.LoadTable(client, "Phrases");
                 phrasesTable.PutItem(phrase);
             }
             catch (Exception ex)
             {
-                new LogRepository().Log(ex.ToString());
+                LogRepository.Log(ex.ToString());
                 throw ex;
             }
         }
 
-        public List<dynamic> GetAllPhrases()
+        public static List<Document> GetAllPhrases()
         {
             try
             {
+                var client = new AmazonDynamoDBClient();
                 Table phrasesTable = Table.LoadTable(client, "Phrases");
-                List<dynamic> documents = new List<dynamic>();
+                List<Document> documents = new List<Document>();
                 ScanFilter scanFilter = new ScanFilter();
 
                 var search = phrasesTable.Scan(scanFilter);
@@ -46,7 +42,7 @@ namespace MyVoice.Services
                     List<Document> documentsSet = search.GetNextSet();
                     foreach (var document in documentsSet)
                     {
-                        dynamic item = JsonConvert.DeserializeObject<dynamic>(document.ToJson()); //this is disgusting... How does one retrieve a list of formatted json from dynamodb?
+                        dynamic item = JsonConvert.DeserializeObject<Document>(document.ToJson()); //this is disgusting... How does one retrieve a list of formatted json from dynamodb?
                         documents.Add(item);
                     }
                 } while (!search.IsDone);
@@ -55,22 +51,23 @@ namespace MyVoice.Services
             }
             catch (Exception ex)
             {
-                new LogRepository().Log(ex.ToString());
+                LogRepository.Log(ex.ToString());
                 throw ex;
             }
 
         }
 
-        public void DeletePhrase(Document phrase)
+        public static void DeletePhrase(Document phrase)
         {
             try
             {
+                var client = new AmazonDynamoDBClient();
                 Table phrasesTable = Table.LoadTable(client, "Phrases");
                 phrasesTable.DeleteItem(phrase);
             }
             catch (Exception ex)
             {
-                new LogRepository().Log(ex.ToString());
+                LogRepository.Log(ex.ToString());
                 throw ex;
             }
         }

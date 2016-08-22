@@ -29,7 +29,7 @@
         
         service.delete = function (phrase) {
             angular.forEach(service.phrases, function (aPhrase, key) {
-                if (aPhrase.Text === phrase.Text) {
+                if (aPhrase.text === phrase.text) {
                     service.phrases.splice(key, 1); //remove this one
                 }
             });
@@ -38,7 +38,7 @@
 
         service.replace = function (newPhrase, oldPhrase) {
             angular.forEach(service.phrases, function (aPhrase, key, phrases) {
-                if (aPhrase.Text === oldPhrase.Text) { //found it
+                if (aPhrase.text === oldPhrase.text) { //found it
                     //replace it
                     newPhrase.id = service.phraseIndex;
                     service.phraseIndex++;
@@ -52,17 +52,15 @@
             //required attributes for angular sound-manager
             phrase.id = service.phraseIndex;
             service.phraseIndex++;
-            phrase.title = phrase.Text;
-            phrase.artist = "john doe";
-            phrase.url = "/api/tts/GetAudio?id=" + md5(phrase.Text) + ".mp3"; //http://myvoice.dmdev.ca/api/tts/GetAudio?id= //"/tts/" + md5(phrase.Text) + ".wav";
-            phrase.Hash = md5(phrase.Text);
+            phrase.title = phrase.text;
+            phrase.artist = "";
         }
                 
         //private functions
         service.refreshTags = function () {
             service.tags.length = 0;
             angular.forEach(service.phrases, function (aPhrase, key) {
-                angular.forEach(aPhrase.Tags, function (tag) {
+                angular.forEach(aPhrase.tags, function (tag) {
                     if ($.inArray(tag, service.tags) == -1) {
                         service.tags.push(tag);
                     }

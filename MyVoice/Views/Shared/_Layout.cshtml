@@ -22,76 +22,10 @@
 
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
-<body ng-app="MyVoice" ng-controller="PhraseController" ng-init="init()" class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md page-sidebar-fixed">
-    <!-- BEGIN HEADER -->
-    <div class="page-header navbar navbar-fixed-top">
-        <!-- BEGIN HEADER INNER -->
-        <div class="page-header-inner ">
-            <!-- BEGIN LOGO -->
-            <div class="page-logo">
-                <a href="/">
-                    <span>MyVoice</span>
-                </a>
-                <div class="menu-toggler sidebar-toggler hide">
-                    <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-                </div>
-            </div>
-            <!-- END LOGO -->
-            <form class="nav-search" ng-submit="btnCreateNewPhrase()">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="newPhrase.Text" placeholder="Type a Phrase..." />
-                    <span class="input-group-btn">
-                        <button type="button" ng-click="btnCreateNewPhrase()" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-                    </span>
-                </div>
-            </form>
-        </div>
-        <!-- END HEADER INNER -->
-    </div>
-    <!-- END HEADER -->
-    <!-- BEGIN HEADER & CONTENT DIVIDER -->
-    <div class="clearfix"> </div>
-    <!-- END HEADER & CONTENT DIVIDER -->
-    <!-- BEGIN CONTAINER -->
-    <div class="page-container">
-        <!-- BEGIN SIDEBAR -->
-        <div class="page-sidebar-wrapper">
-            <!-- END SIDEBAR -->
-            <div class="page-sidebar">
-                <!-- BEGIN SIDEBAR MENU -->
-                <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu ">
-                    <li class="nav-item start " ng-click="changeFilter('All')" ng-class="{active: tagFilter == 'All'}">
-                        <a class="nav-link nav-toggle">
-                            <i class="icon-directions"></i>
-                            <span class="title">All</span>
-                            <span class="arrow"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item start " ng-class="{active: tagFilter == tag}" ng-repeat="tag in allTags">
-                        <a ng-click="changeFilter(tag)" class="nav-link nav-toggle">
-                            <i class="icon-tag"></i>
-                            <span class="title">{{tag}}</span>
-                            <span class="arrow"></span>
-                        </a>
-                    </li>
-                </ul>
-                <!-- END SIDEBAR MENU -->
-            </div>
-            <!-- END SIDEBAR -->
-        </div>
-        <!-- END SIDEBAR -->
-        <!-- BEGIN CONTENT -->
-        <div class="page-content-wrapper">
-            <!-- BEGIN CONTENT BODY -->
-            <div class="page-content">
-                @RenderBody()
-            </div>
-            <!-- END CONTENT BODY -->
-        </div>
-        <!-- END CONTENT -->
+<body ng-app="MyVoice" class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md page-sidebar-fixed">
     
-    </div>
-    <!-- END CONTAINER -->
+    @RenderBody()
+
     <!-- BEGIN FOOTER -->
     <div class="page-footer text-center">
         <div class="page-footer-inner">
@@ -102,22 +36,7 @@
         </div>
     </div>
 
-    <div class="bottom-music-bar">
-        <div class="navbar navbar-default navbar-fixed-bottom">
-            <div class="seekWrapper" seek-track>
-                <div class="seekProgress" ng-style="{width : ( progress + '%' ) }"></div>
-            </div>
-            <div class="container-fluid nowrap-elipsis">
-                <button type="button" class="btn btn-default navbar-btn" play-pause-toggle data-play='<i class="fa fa-play" aria-hidden="true"></i>' data-pause='<i class="fa fa-pause" aria-hidden="true"></i>'><i class="fa fa-play" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-default navbar-btn" ng-click="btnChangeVolume()"><i class="fa fa-volume-up" aria-hidden="true"></i></button>
-                <span class="nowrap-elipsis">
-                    <span class="playing-info">
-                        <strong>Playing:</strong> {{ currentPlaying.title }}
-                    </span>
-                </span>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- END FOOTER -->
     <!--[if lt IE 9]>

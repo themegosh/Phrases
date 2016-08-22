@@ -34,7 +34,7 @@ namespace MyVoice.Services
             }
             catch (Exception ex)
             {
-                new LogRepository().Log(ex.ToString());
+                LogRepository.Log(ex.ToString());
                 throw ex;
             }
             
@@ -45,23 +45,26 @@ namespace MyVoice.Services
         {
             try
             {
-                var filenameWithoutExtention = HttpContext.Current.Server.MapPath("~/tts/") + phrase["Hash"];
+                //first, update the hash
+                phrase["hash"] = HashService.ToMd5(phrase["text"]);
+                var filenameWithoutExtention = HttpContext.Current.Server.MapPath("~/tts/") + phrase["hash"];
 
-                if (phrase["Text"] != null)
+                if (phrase["text"] != null)
                 {
                     using (var handler = new HttpClientHandler { Credentials = new NetworkCredential(USERNAME, PASSWORD) })
                     using (var client = new HttpClient(handler))
-                    using (var response = client.PostAsJsonAsync(URL + "synthesize?voice=en-US_AllisonVoice&accept=audio/wav", new TTSRequest() { text = phrase["Text"] }))
+                    using (var response = client.PostAsJsonAsync(URL + "synthesize?voice=en-US_AllisonVoice&accept=audio/wav", new TTSRequest() { text = phrase["text"] }))
                     using (var mediaFile = response.Result.Content.ReadAsStreamAsync())
                     using (var fileStream = new FileStream(filenameWithoutExtention + ".wav", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                     {
-                        await mediaFile.Result.CopyToAsync(fileStream);
+                        await mediaFile.Result.CopyToAsync(fileStream); //create the wav file (fallback)
                     }
+                    //convert the wav to mp3
                     using (var reader = new WaveFileReader(filenameWithoutExtention + ".wav"))
                     using (var writer = new LameMP3FileWriter(filenameWithoutExtention + ".mp3", reader.WaveFormat, 128))
                     {
-                        reader.CopyTo(writer);
-                        phrase["url"] = "/api/tts/GetAudio?id="+ phrase["Hash"] + ".mp3";
+                        reader.CopyTo(writer); //create the mp3 as well (preferred source)
+                        //phrase["url"] = "/api/tts/GetAudio?id="+ phrase["hash"] + ".mp3";
                     }
                     return phrase;
                 }
@@ -72,16 +75,18 @@ namespace MyVoice.Services
             }
             catch (Exception ex)
             {
-                new LogRepository().Log(ex.ToString());
+                LogRepository.Log(ex.ToString());
                 throw ex;
             }
         }
         
-        public class TTSRequest
+        private class TTSRequest
         {
             public string text { get; set; } = "";
         }
 
         
+
+
     }
 }
