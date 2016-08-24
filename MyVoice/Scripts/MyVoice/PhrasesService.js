@@ -36,7 +36,6 @@
             if (shouldAdd === true)
                 service.phrases.push(phrase);
             service.refreshTags();
-            $rootScope.$apply()
         }
         
         service.delete = function (phrase) {

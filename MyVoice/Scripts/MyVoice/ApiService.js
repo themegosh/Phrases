@@ -6,30 +6,46 @@
         var api = {};
 
         api.savePhrase = function (phrase) {
-            $.ajax({
-                url: "/api/tts/SavePhrase",
+            $http({
+                method: 'POST',
+                url: '/api/tts/SavePhrase',
+                headers: { 'Content-Type': "application/json" },
                 data: angular.toJson(phrase, false),
-                contentType: "application/json",
-                type: 'POST',
-                beforeSend: function (xhr, opts) {
-                    console.log("savePhrase() beforeSend");
-                    //xhr.abort();
-                },
-                success: function (response) {
-                    console.log("savePhrase SUCCESS:");
-                    console.log(response);
-                    ps.save(angular.fromJson(response));
-                    showNotification("Success", "Phrase saved.", "success");
-                },
-                error: function (response) {
-                    console.log("savePhrase FAIL:");
-                    console.log(response);
-                    showNotification("Error", response.data, "error");
-                },
-                complete: function () {
-                    console.log("savePhrase() complete");
-                }
+            }).then(function successCallback(response) {
+                console.log("savePhrase SUCCESS:");
+                console.log(response);
+                ps.save(angular.fromJson(response));
+                showNotification("Success", "Phrase saved.", "success");
+            }, function errorCallback(response) {
+                console.log("savePhrase FAIL:");
+                console.log(response);
+                showNotification("Error", response.data, "error");
             });
+
+            //$.ajax({
+            //    url: "/api/tts/SavePhrase",
+            //    data: angular.toJson(phrase, false),
+            //    contentType: "application/json",
+            //    type: 'POST',
+            //    beforeSend: function (xhr, opts) {
+            //        console.log("savePhrase() beforeSend");
+            //        //xhr.abort();
+            //    },
+            //    success: function (response) {
+            //        console.log("savePhrase SUCCESS:");
+            //        console.log(response);
+            //        ps.save(angular.fromJson(response));
+            //        showNotification("Success", "Phrase saved.", "success");
+            //    },
+            //    error: function (response) {
+            //        console.log("savePhrase FAIL:");
+            //        console.log(response);
+            //        showNotification("Error", response.data, "error");
+            //    },
+            //    complete: function () {
+            //        console.log("savePhrase() complete");
+            //    }
+            //});
         }
 
         api.getAllPhrases = function () {
