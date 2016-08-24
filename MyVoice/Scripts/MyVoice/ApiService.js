@@ -13,39 +13,14 @@
                 data: angular.toJson(phrase, false),
             }).then(function successCallback(response) {
                 console.log("savePhrase SUCCESS:");
-                console.log(response);
-                ps.save(angular.fromJson(response));
+                console.log(response.data);
+                ps.save(angular.fromJson(response.data));
                 showNotification("Success", "Phrase saved.", "success");
             }, function errorCallback(response) {
                 console.log("savePhrase FAIL:");
-                console.log(response);
+                console.log(response.data);
                 showNotification("Error", response.data, "error");
             });
-
-            //$.ajax({
-            //    url: "/api/tts/SavePhrase",
-            //    data: angular.toJson(phrase, false),
-            //    contentType: "application/json",
-            //    type: 'POST',
-            //    beforeSend: function (xhr, opts) {
-            //        console.log("savePhrase() beforeSend");
-            //        //xhr.abort();
-            //    },
-            //    success: function (response) {
-            //        console.log("savePhrase SUCCESS:");
-            //        console.log(response);
-            //        ps.save(angular.fromJson(response));
-            //        showNotification("Success", "Phrase saved.", "success");
-            //    },
-            //    error: function (response) {
-            //        console.log("savePhrase FAIL:");
-            //        console.log(response);
-            //        showNotification("Error", response.data, "error");
-            //    },
-            //    complete: function () {
-            //        console.log("savePhrase() complete");
-            //    }
-            //});
         }
 
         api.getAllPhrases = function () {

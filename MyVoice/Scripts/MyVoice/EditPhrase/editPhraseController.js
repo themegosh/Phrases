@@ -17,8 +17,6 @@
                         Tag: tag
                     })
                 });
-
-                
             }
 
             $scope.addTag = function () {
@@ -36,6 +34,10 @@
             }
 
             $scope.ok = function () {
+                //save a tag that hasn't been "Added" yet
+                if ($scope.newTag !== "") {
+                    $scope.addTag();
+                }
                 api.savePhrase($scope.phrase);
                 $uibModalInstance.dismiss('cancel');
             }
