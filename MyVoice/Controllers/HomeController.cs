@@ -1,4 +1,5 @@
 ﻿using MyVoice.Models;
+using MyVoice.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +18,6 @@ namespace MyVoice.Controllers
         public ViewResult Index()
         {
             //WatsonService.GetTTS("This is a simple attempt to get text to speach working!");
-
             ViewBag.Title = "MyVoice";
 
             return View();

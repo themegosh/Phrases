@@ -1,6 +1,7 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +15,20 @@ namespace MyVoice.Services
         {
             try
             {
+                var dictionary = new Dictionary<string, string>
+                {
+                    { "Date", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt") },
+                    { "Message", info  }
+                };
+                var doc = Document.FromJson(JsonConvert.SerializeObject(dictionary));
                 var client = new AmazonDynamoDBClient();
                 Table LogsTable = Table.LoadTable(client, "Logs");
-                var dictionary = new Dictionary<string, AttributeValue>
-                {
-                    { DateTime.Now.Millisecond.ToString(), new AttributeValue { N = info } }
-                };
-                var doc = Document.FromAttributeMap(dictionary);
                 LogsTable.PutItem(doc);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log(ex.ToString());
-                throw ex;
+                //well, were screwed :P
+                //throw ex;
             }
         }
     }
