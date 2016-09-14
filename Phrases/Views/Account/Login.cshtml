@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Password, new { @class = "control-label visible-ie8 visible-ie9" })
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-solid placeholder-no-fix" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-solid placeholder-no-fix", @placeholder = "Password" })
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>
         <div class="form-actions">
