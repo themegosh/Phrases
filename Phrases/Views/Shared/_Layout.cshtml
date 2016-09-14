@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md page-sidebar-fixed">
+    
+    @*<div class="clearfix">
+        @using Microsoft.AspNet.Identity
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <ul class="list-inline">
+                    <li>
+                        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                </ul>
+            }
+        }
+        else
+        {
+            <ul class="list-inline">
+                <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+        }
+    </div>*@
+
+    @RenderBody()
+
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer text-center">
+        <div class="page-footer-inner">
+            @DateTime.Now.Year &copy; DMDev.ca
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/main")
+    @Scripts.Render("~/bundles/app")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
