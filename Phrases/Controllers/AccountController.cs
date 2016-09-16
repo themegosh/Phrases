@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Phrases.Models;
+using Phrases.Services;
 
 namespace Phrases.Controllers
 {
@@ -396,7 +397,7 @@ namespace Phrases.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

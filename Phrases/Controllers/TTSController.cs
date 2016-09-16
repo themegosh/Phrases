@@ -85,6 +85,54 @@ namespace Phrases.Controllers
             }
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetAllCateogies()
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                return jsonResponse(JsonConvert.SerializeObject(CategoryRepository.GetAllCategories(userId)), HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage SaveCategory([FromBody] object value)
+        {
+            try
+            {
+                Document category = Document.FromJson(value.ToString());
+                var userId = User.Identity.GetUserId();
+                category = CategoryRepository.SaveCategory(category, userId);
+
+                return jsonResponse(category.ToJson(), HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage DeleteCategory([FromBody] object value)
+        {
+            try
+            {
+                Document category = Document.FromJson(value.ToString());
+                CategoryRepository.DeleteCategory(category);
+
+                return jsonResponse(category.ToJson(), HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
+            }
+        }
+
+
         private HttpResponseMessage jsonResponse(string obj, HttpStatusCode status)
         {
             if (status == HttpStatusCode.InternalServerError)

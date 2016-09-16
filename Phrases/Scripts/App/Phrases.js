@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-    angular.module("MyVoice", [
+    angular.module("Phrases", [
         "ui.bootstrap",
         'angularSoundManager',
         'frapontillo.bootstrap-switch',

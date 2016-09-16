@@ -5,15 +5,15 @@
 <div class="modal-body">
     <div class="form-group">
         <h3 for="Text">Phrase Text</h3>
-        <input type="text" class="form-control" id="Text" placeholder="Email" ng-model="phrase.text" >
+        <input type="text" class="form-control" id="Text" placeholder="Phrase Text" ng-model="$ctrl.phrase.text" >
     </div>
-    <div class="alert alert-info">
+    <!--<div class="alert alert-info">
         <strong>Url: </strong>
-        {{phrase.url}}
-    </div>
+        {{$ctrl.phrase.url}}
+    </div>-->
     <h3>Categories</h3>
     <ul class="list-group">
-        <li class="list-group-item clearfix" ng-repeat="tag in checkedTags">
+        <li class="list-group-item clearfix" ng-repeat="tag in $ctrl.checkedTags">
             
             <span class="tag-label">{{tag.Tag}}</span>
             <div class="pull-right">
@@ -40,18 +40,18 @@
     </ul>
 
     <h4>New Category</h4>
-    <form class="form-group" ng-submit="addTag()">
+    <form class="form-group" ng-submit="$ctrl.addTag()">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Feelings, Desires, etc." ng-model="newTag">
+            <input type="text" class="form-control" placeholder="Feelings, Desires, etc." ng-model="$ctrl.newTag">
             <span class="input-group-btn">
-                <button class="btn btn-info" ng-click="addTag()" type="button">Add</button>
+                <button class="btn btn-info" ng-click="$ctrl.addTag()" type="button">Add</button>
             </span>
         </div>
     </form>
 
 </div>
 <div class="modal-footer"> 
-    <button class="btn btn-danger pull-left" type="button" ng-click="delete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-    <button class="btn btn-success" type="button" ng-click="ok()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-danger pull-left" type="button" ng-click="$ctrl.delete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+    <button class="btn btn-success" type="button" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
 </div>

@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("MyVoice").factory("ApiService", ['$http', "PhrasesService", function ($http, ps) {
+    angular.module("Phrases").factory("ApiService", ['$http', "PhrasesService", function ($http, ps) {
 
         var api = {};
 

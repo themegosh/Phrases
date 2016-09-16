@@ -33,7 +33,8 @@ namespace Phrases
                 "~/Scripts/Plugins/bootstrap-switch.min.js",
                 "~/Scripts/Plugins/toastr.js",
                 "~/Scripts/Theme/theme.js",
-                "~/Scripts/Theme/theme.layout.js"));
+                "~/Scripts/Theme/theme.layout.js",
+                "~/Scripts/App/Custom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/Angular/angular.min.js",
@@ -45,16 +46,14 @@ namespace Phrases
                 "~/Scripts/Angular/angular-bootstrap-switch.js",
                 "~/Scripts/Angular/rzslider.js",
 
-                "~/Scripts/App/MyVoice.js",
-                "~/Scripts/App/PhraseController.js",
-                "~/Scripts/App/PhrasesService.js",
-                "~/Scripts/App/ApiService.js",
-                "~/Scripts/App/PhrasesFilter.js",
-                "~/Scripts/App/EditPhrase/editPhraseController.js",
-                "~/Scripts/App/Volume/VolumeController.js",
-
-                //"~/Scripts/Plugins/md5.js",
-                "~/Scripts/App/Custom.js"));
+                "~/Scripts/App/Phrases.js",
+                "~/Scripts/App/Services/PhrasesService.js",
+                "~/Scripts/App/Services/ApiService.js",
+                "~/Scripts/App/Filters/PhrasesFilter.js",
+                "~/Scripts/App/Components/Phrases/PhrasesComponent.js",
+                "~/Scripts/App/Components/User/UserComponent.js",
+                "~/Scripts/App/Components/EditPhrase/editPhraseComponent.js",
+                "~/Scripts/App/Components/Volume/VolumeComponent.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/Bootstrap/bootstrap.min.css",
@@ -78,7 +77,7 @@ namespace Phrases
             // force minification for development
             // There is no realese version on production 
             // must be forced to minify
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

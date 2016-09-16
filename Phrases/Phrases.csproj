@@ -192,7 +192,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LayoutInjectorAttribute.cs" />
+    <Compile Include="Services\LayoutInjectorAttribute.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TTSController.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,6 +202,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CategoryRepository.cs" />
     <Compile Include="Services\LogRepository.cs" />
     <Compile Include="Services\PhraseRepository.cs" />
     <Compile Include="Services\PhraseService.cs" />
@@ -377,16 +378,20 @@
     <Content Include="Scripts\Angular\angular-touch.min.js" />
     <Content Include="Scripts\Angular\angular.js" />
     <Content Include="Scripts\Angular\angular.min.js" />
-    <Content Include="Scripts\App\ApiService.js" />
+    <Content Include="Scripts\App\Components\User\UserComponent.js" />
+    <Content Include="Scripts\App\Components\User\UserModal.html" />
+    <Content Include="Scripts\App\Components\Volume\VolumeComponent.js" />
+    <Content Include="Scripts\App\Services\ApiService.js" />
+    <Content Include="Scripts\App\Components\EditPhrase\editPhraseComponent.js" />
+    <Content Include="Scripts\App\Components\Phrases\Phrases.html" />
+    <Content Include="Scripts\App\Components\Phrases\PhrasesComponent.js" />
     <Content Include="Scripts\App\Custom.js" />
-    <Content Include="Scripts\App\EditPhrase\editPhraseController.js" />
-    <Content Include="Scripts\App\EditPhrase\editPhraseModal.html" />
-    <Content Include="Scripts\App\MyVoice.js" />
-    <Content Include="Scripts\App\PhraseController.js" />
-    <Content Include="Scripts\App\PhrasesFilter.js" />
-    <Content Include="Scripts\App\PhrasesService.js" />
-    <Content Include="Scripts\App\Volume\VolumeController.js" />
-    <Content Include="Scripts\App\Volume\VolumeModal.html" />
+    <Content Include="Scripts\App\Components\EditPhrase\editPhraseModal.html" />
+    <Content Include="Scripts\App\Phrases.js" />
+    <Content Include="Scripts\App\Filters\PhrasesFilter.js" />
+    <Content Include="Scripts\App\Services\PhrasesService.js" />
+    <Content Include="Scripts\App\Components\Volume\VolumeController.js" />
+    <Content Include="Scripts\App\Components\Volume\VolumeModal.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
@@ -465,6 +470,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\App\Components\NewPhrase\" />
+    <Folder Include="tts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

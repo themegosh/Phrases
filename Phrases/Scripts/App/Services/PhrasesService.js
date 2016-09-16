@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-    angular.module("MyVoice").factory("PhrasesService", ['$rootScope', function ($rootScope) {
+    angular.module("Phrases").factory("PhrasesService", ['$rootScope', function ($rootScope) {
 
         var service = {};
 

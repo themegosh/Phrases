@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-    angular.module("MyVoice")
+    angular.module("Phrases")
         .filter('selectedTag', function () {
             return function (phrases, curTag) {
 
