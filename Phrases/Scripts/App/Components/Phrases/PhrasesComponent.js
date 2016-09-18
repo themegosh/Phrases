@@ -31,7 +31,7 @@
 
         //events
         $ctrl.$onInit = function () {
-            api.getAllPhrases();
+            api.getUserData();
             $ctrl.allTags = ps.tags;
             $ctrl.phrases = ps.phrases;
             $ctrl.tagFilter = ps.tagFilter;
@@ -68,6 +68,7 @@
                 angularPlayer.playTrack(phrase.id);
             }
             catch (ex) {
+                console.log(ex);
                 showNotification("Error", ex, "error");
             }
 

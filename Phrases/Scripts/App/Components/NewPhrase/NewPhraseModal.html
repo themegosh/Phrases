@@ -1,11 +1,11 @@
 ﻿
 <div class="modal-header">
-    <h3 class="modal-title">Edit Phrase</h3>
+    <h3 class="modal-title">New Phrase</h3>
 </div>
 <div class="modal-body">
     <div class="form-group">
         <h3 for="Text">Phrase Text</h3>
-        <input type="text" class="form-control" id="Text" placeholder="Phrase Text" ng-model="$ctrl.phrase.text" >
+        <input type="text" class="form-control" id="Text" placeholder="Phrase Text" ng-model="$ctrl.phrase.text">
     </div>
     <!--<div class="alert alert-info">
         <strong>Url: </strong>
@@ -14,7 +14,7 @@
     <h3>Categories</h3>
     <ul class="list-group">
         <li class="list-group-item clearfix" ng-repeat="tag in $ctrl.checkedTags">
-            
+
             <span class="tag-label">{{tag.Tag}}</span>
             <div class="pull-right">
                 <input bs-switch
@@ -50,7 +50,7 @@
     </form>
 
 </div>
-<div class="modal-footer"> 
+<div class="modal-footer">
     <button class="btn btn-danger pull-left" type="button" ng-click="$ctrl.delete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
     <button class="btn btn-success" type="button" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>

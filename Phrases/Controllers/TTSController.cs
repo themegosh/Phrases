@@ -11,26 +11,13 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using Phrases.Models;
 
 namespace Phrases.Controllers
 {
     [Authorize]
     public class TTSController : ApiController
     {
-        [HttpGet]
-        public HttpResponseMessage GetAllPhrases()
-        {
-            try
-            {
-                var userId = User.Identity.GetUserId();
-                return jsonResponse(JsonConvert.SerializeObject(PhraseService.GetAllPhrases(userId)), HttpStatusCode.OK);
-            }
-            catch (Exception ex)
-            {
-                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
-            }
-        }
-
         [HttpPost]
         public HttpResponseMessage SavePhrase([FromBody] object value)
         {
@@ -86,18 +73,25 @@ namespace Phrases.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage GetAllCateogies()
+        public HttpResponseMessage GetUserData()
         {
             try
             {
                 var userId = User.Identity.GetUserId();
-                return jsonResponse(JsonConvert.SerializeObject(CategoryRepository.GetAllCategories(userId)), HttpStatusCode.OK);
+                var userData = new UserData();
+                userData.Categories = CategoryRepository.GetAllCategories(userId);
+                userData.Phrases = PhraseService.GetAllPhrases(userId);
+                userData.User = userId;
+
+                return jsonResponse(JsonConvert.SerializeObject(userData), HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
                 return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
             }
         }
+
+
 
         [HttpPost]
         public HttpResponseMessage SaveCategory([FromBody] object value)

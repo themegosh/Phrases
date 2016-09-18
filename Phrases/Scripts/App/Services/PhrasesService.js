@@ -6,10 +6,9 @@
 
         service.phrases = [];
         service.phraseIndex = 1;
-        service.tags = [];
-        service.tagFilter = "All"
+        service.categories = [];
 
-        service.assignAllPhrases = function (inPhrases) {
+        service.importPhrases = function (inPhrases) {
             service.phrases.length = 0;//clear the old ones
             service.phraseIndex = 1;
             angular.forEach(inPhrases, function (phrase) {
@@ -17,10 +16,9 @@
                 service.phrases.push(phrase);
                 service.phraseIndex++;
             });
-            service.refreshTags();
         }
 
-        service.save = function (phrase) {
+        service.savePhrase = function (phrase) {
             service.addSoundManagerProperties(phrase);
             var shouldAdd = true;
             
@@ -35,16 +33,14 @@
             console.log("ps.save() saving new phrase");
             if (shouldAdd === true)
                 service.phrases.push(phrase);
-            service.refreshTags();
         }
         
-        service.delete = function (phrase) {
+        service.deletePhrase = function (phrase) {
             angular.forEach(service.phrases, function (aPhrase, key) {
                 if (aPhrase.text === phrase.text) {
                     service.phrases.splice(key, 1); //remove this one
                 }
             });
-            service.refreshTags();
         }
 
         service.replace = function (newPhrase, oldPhrase) {
@@ -56,7 +52,6 @@
                     service.phrases[key] = newPhrase;
                 }
             });
-            service.refreshTags();
         }
 
         service.addSoundManagerProperties = function (phrase) {
@@ -69,16 +64,16 @@
         }
                 
         //private functions
-        service.refreshTags = function () {
-            service.tags.length = 0;
-            angular.forEach(service.phrases, function (aPhrase, key) {
-                angular.forEach(aPhrase.tags, function (tag) {
-                    if ($.inArray(tag, service.tags) == -1) {
-                        service.tags.push(tag);
-                    }
-                });
-            });
-        }
+        //service.refreshTags = function () {
+        //    service.tags.length = 0;
+        //    angular.forEach(service.phrases, function (aPhrase, key) {
+        //        angular.forEach(aPhrase.tags, function (tag) {
+        //            if ($.inArray(tag, service.tags) == -1) {
+        //                service.tags.push(tag);
+        //            }
+        //        });
+        //    });
+        //}
 
         return service;
 

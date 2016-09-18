@@ -192,6 +192,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\UserData.cs" />
     <Compile Include="Services\LayoutInjectorAttribute.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TTSController.cs" />
@@ -378,6 +379,8 @@
     <Content Include="Scripts\Angular\angular-touch.min.js" />
     <Content Include="Scripts\Angular\angular.js" />
     <Content Include="Scripts\Angular\angular.min.js" />
+    <Content Include="Scripts\App\Components\NewPhrase\NewPhraseComponent.js" />
+    <Content Include="Scripts\App\Components\NewPhrase\NewPhraseModal.html" />
     <Content Include="Scripts\App\Components\User\UserComponent.js" />
     <Content Include="Scripts\App\Components\User\UserModal.html" />
     <Content Include="Scripts\App\Components\Volume\VolumeComponent.js" />
@@ -470,7 +473,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\App\Components\NewPhrase\" />
     <Folder Include="tts\" />
   </ItemGroup>
   <ItemGroup>
