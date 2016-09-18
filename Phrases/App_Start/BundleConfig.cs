@@ -53,6 +53,7 @@ namespace Phrases
                 "~/Scripts/App/Components/Phrases/PhrasesComponent.js",
                 "~/Scripts/App/Components/User/UserComponent.js",
                 "~/Scripts/App/Components/EditPhrase/editPhraseComponent.js",
+                "~/Scripts/App/Components/EditCategory/editCategoryComponent.js",
                 "~/Scripts/App/Components/Volume/VolumeComponent.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

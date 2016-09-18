@@ -6,11 +6,11 @@
         var $ctrl = this;
 
         //properties
-        $ctrl.animationsEnabled = true;
-
+        $ctrl.editMode = false;
+        $ctrl.categoryFilter = "All";
         $ctrl.newPhrase = {
             text: "",
-            tags: [],
+            categories: [],
             hash: ""
         };
 
@@ -32,20 +32,47 @@
         //events
         $ctrl.$onInit = function () {
             api.getUserData();
-            $ctrl.allTags = ps.tags;
+            $ctrl.categories = ps.categories;
             $ctrl.phrases = ps.phrases;
-            $ctrl.tagFilter = ps.tagFilter;
         }
 
-        $ctrl.changeFilter = function (tag) {
-            //showNotification("DEBUG", "Changing tag: " + tag, "info");
-            ps.tagFilter = angular.copy(tag);
-            $ctrl.tagFilter = ps.tagFilter;
+        $ctrl.btnSelectFilter = function (category) {
+            if (!$ctrl.editMode) {
+                $ctrl.categoryFilter = category;
+            } else {
+                if (category === 'All')
+                    return;
+
+                //open category editor
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    component: 'editCategoryComponent',
+                    size: 'md',
+                    resolve: {
+                        category: function () {
+                            return category;
+                        }
+                    }
+                });
+            }
+        }
+
+
+        $ctrl.btnNew = function () {
+
+        }
+
+        $ctrl.btnEditMode = function () {
+            if ($ctrl.editMode === true) {
+                $ctrl.editMode = false;
+            } else {
+                $ctrl.editMode = true;
+            }
         }
 
         $ctrl.btnUser = function () {
             var modalInstance = $uibModal.open({
-                animation: $ctrl.animationsEnabled,
+                animation: true,
                 component: 'userComponent',
                 size: 'sm'
             });
@@ -88,7 +115,7 @@
             $event.stopPropagation();
 
             var modalInstance = $uibModal.open({
-                animation: $ctrl.animationsEnabled,
+                animation: true,
                 component: 'editPhraseComponent',
                 size: 'md',
                 backdrop: 'static',
@@ -105,7 +132,7 @@
             console.log("btnChangeVolume!");
 
             var modalInstance = $uibModal.open({
-                animation: $ctrl.animationsEnabled,
+                animation: true,
                 templateUrl: '/Scripts/App/Volume/VolumeModal.html',
                 controller: 'volumeCtrl',
                 size: 'md'

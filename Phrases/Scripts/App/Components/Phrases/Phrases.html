@@ -14,10 +14,10 @@
         <!-- END LOGO -->
         <form class="nav-search" ng-submit="$ctrl.btnCreateNewPhrase()">
             <div class="input-group">
-                <span class=""></span>
+                <span></span>
                 <span class="input-group-btn">
-                    <button type="button" ng-click="$ctrl.btnNew()" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> New</button>
-                    <button type="button" ng-click="$ctrl.btnEdit()" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                    <button type="button" ng-click="$ctrl.btnEditMode()" class="btn btn-warning" ng-hide="$ctrl.editMode" confirm="Are you sure you want to enter Edit Mode?"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                    <button type="button" ng-click="$ctrl.btnEditMode()" class="btn btn-danger" ng-show="$ctrl.editMode"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Exit Edit Mode</button>
                     <button type="button" ng-click="$ctrl.btnUser()" class="btn btn-primary"><i class="fa fa-user" aria-hidden="true"></i> User</button>
                 </span>
             </div>
@@ -37,17 +37,24 @@
         <div class="page-sidebar">
             <!-- BEGIN SIDEBAR MENU -->
             <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu ">
-                <li class="nav-item start " ng-click="$ctrl.changeFilter('All')" ng-class="{active: $ctrl.tagFilter == 'All'}">
+                <li class="nav-item start " ng-click="$ctrl.btnSelectFilter('All')" ng-class="{active: $ctrl.categoryFilter == 'All'}">
                     <a class="nav-link nav-toggle">
                         <i class="icon-directions"></i>
                         <span class="title">All</span>
                         <span class="arrow"></span>
                     </a>
                 </li>
-                <li class="nav-item start " ng-class="{active: $ctrl.tagFilter == tag}" ng-repeat="tag in $ctrl.allTags">
-                    <a ng-click="$ctrl.changeFilter(tag)" class="nav-link nav-toggle">
-                        <i class="icon-tag"></i>
-                        <span class="title">{{tag}}</span>
+                <li class="nav-item start " ng-class="{active: $ctrl.categoryFilter == category}" ng-repeat="category in $ctrl.categories">
+                    <a ng-click="$ctrl.btnSelectFilter(category)" class="nav-link nav-toggle">
+                        <i class="{{category.icon}}"></i>
+                        <span class="title">{{category.name}}</span>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+                <li class="nav-item start" ng-show="$ctrl.editMode" ng-click="$ctrl.btnSelectFilter(true)">
+                    <a class="nav-link nav-toggle">
+                        <i class="icon-plus"></i>
+                        <span class="title">New Category</span>
                         <span class="arrow"></span>
                     </a>
                 </li>
@@ -62,24 +69,36 @@
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
             <sound-manager></sound-manager>
-
+            <div ng-show="$ctrl.editMode" class="alert alert-warning">
+                <h3>Edit Mode...</h3>
+                <ul>
+                    <li>Tap on a Category to edit it.</li>
+                    <li>Tap on a Phrase to edit it.</li>
+                </ul>
+            </div>
             <div class="todo-container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="todo-projects-container">
                             <div class="todo-padding-b-0">
                                 <div class="todo-head">
-                                    <h1>{{$ctrl.tagFilter}}</h1>
+                                    <h1>{{$ctrl.categoryFilter}}</h1>
                                 </div>
                             </div>
                             <div ng-show="$ctrl.phrases.length == 0">
                                 <p class="text-center">You don't have any phrases!</p>
                             </div>
                             <div class="row">
-                                <div ng-repeat="phrase in $ctrl.phrases  | selectedTag:$ctrl.tagFilter track by $index" ng-click="$ctrl.btnPlay(phrase)" class="col-lg-6">
+                                <div ng-show="$ctrl.editMode" ng-click="$ctrl.btnCreateNewPhrase()" class="col-lg-6">
                                     <div class="todo-projects-item clearfix">
-                                        <div class="todo-inline todo-float-r">
-                                            <button type="button" class="btn btn-info btn-icon-only btn-lg" ng-click="$ctrl.btnEditPhrase(phrase, $event)"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+                                        <div class="btn btn-block btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> New Phrase</div>
+                                    </div>
+                                    <div class="todo-projects-divider"></div>
+                                </div>
+                                <div ng-repeat="phrase in $ctrl.phrases  | selectedCategory:$ctrl.categoryFilter track by $index" ng-click="$ctrl.btnNew(phrase)" class="col-lg-6">
+                                    <div class="todo-projects-item clearfix">
+                                        <div ng-show="$ctrl.editMode" class="todo-inline todo-float-r">
+                                            <button type="button" class="btn btn-info btn-lg" ng-click="$ctrl.btnEditPhrase(phrase, $event)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
                                         </div>
                                         <div class="phrase">{{ phrase.title }}</div>
                                     </div>
@@ -95,7 +114,6 @@
         <!-- END CONTENT BODY -->
     </div>
     <!-- END CONTENT -->
-
 </div>
 <!-- END CONTAINER -->
 

@@ -28,6 +28,7 @@ body {
 .nav-search {
     padding:0;
     height:68px;
+    background-color: #26344B;
 }
 
 .nav-search .input-group {
@@ -70,6 +71,10 @@ body {
 .todo-container .todo-projects-item .phrase {
     padding: 17px 20px;
     font-size: 20px;
+}
+
+.phrase.new-phrase {
+    border-left: 5px solid green;
 }
 
 .todo-float-r {
@@ -150,4 +155,33 @@ body {
 }
 .page-sidebar .page-sidebar-menu > li > a > .title {
     font-size: 16px;
+}
+
+.edit-status {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/*.page-sidebar .page-sidebar-menu > li > a > i[class^="icon-"], .page-sidebar .page-sidebar-menu > li > a > i[class*="icon-"] {
+    color: #4d5d7c;
+}
+
+.page-sidebar .page-sidebar-menu > li > a > i[class^="icon-"], .page-sidebar .page-sidebar-menu > li > a > i[class*="icon-"] {
+    color: #97b1e2;
+}
+
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > i, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a > i, .page-sidebar .page-sidebar-menu > li.active > a > i, .page-sidebar .page-sidebar-menu > li.active.open > a > i {
+    color: #97b1e2;
+}*/
+
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a > i[class^="icon-"], .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a > i[class*="icon-"], .page-sidebar .page-sidebar-menu > li > a > i[class^="icon-"], .page-sidebar .page-sidebar-menu > li > a > i[class*="icon-"] {
+    color: #7287b1;
+}
+
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > i, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a > i, .page-sidebar .page-sidebar-menu > li.active > a > i, .page-sidebar .page-sidebar-menu > li.active.open > a > i {
+    color: #18cdc4;
+}
+
+.alert-no-margin {
+    margin: 0px;
 }

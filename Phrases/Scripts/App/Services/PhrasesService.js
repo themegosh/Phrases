@@ -1,81 +1,120 @@
 ﻿(function () {
     "use strict";
-    angular.module("Phrases").factory("PhrasesService", ['$rootScope', function ($rootScope) {
+    angular.module("Phrases").factory("PhrasesService", [ function () {
 
-        var service = {};
+        var ps = {};
 
-        service.phrases = [];
-        service.phraseIndex = 1;
-        service.categories = [];
+        ps.phrases = [];
+        ps.phraseIndex = 1; //user for soundManager's id system
+        ps.categories = [];
+        ps.user = {};
 
-        service.importPhrases = function (inPhrases) {
-            service.phrases.length = 0;//clear the old ones
-            service.phraseIndex = 1;
-            angular.forEach(inPhrases, function (phrase) {
-                service.addSoundManagerProperties(phrase);
-                service.phrases.push(phrase);
-                service.phraseIndex++;
+        ps.importUserData = function (userData) {
+
+            //user
+            ps.user = userData.User;
+
+            //categories
+            ps.categories.length = 0;
+            angular.copy(userData.Categories, ps.categories);
+
+            //phrases
+            ps.phrases.length = 0;//clear the old ones
+            ps.phraseIndex = 1; //cant start at 0 (soundmanager req)
+            angular.forEach(userData.Phrases, function (phrase) {
+                addSoundManagerProperties(phrase);
+                ps.phrases.push(phrase);
+                ps.phraseIndex++;
             });
-        }
 
-        service.savePhrase = function (phrase) {
-            service.addSoundManagerProperties(phrase);
-            var shouldAdd = true;
+            console.log("ps.importUserData()");
+            console.log(ps);
+        }
+        
+        ps.savePhrase = function (phrase) {
+            addSoundManagerProperties(phrase);
             
-            service.phraseIndex++;
-            angular.forEach(service.phrases, function (aPhrase, key) {
+            ps.phraseIndex++;
+            var shouldAdd = true;
+            angular.forEach(ps.phrases, function (aPhrase, key) {
                 if (aPhrase.guid == phrase.guid) { //update this one instead of adding
                     shouldAdd = false;
-                    service.phrases[key] = angular.copy(phrase);
+                    ps.phrases[key] = angular.copy(phrase);
                     console.log("ps.save() updating phrase");
                 }
             });
-            console.log("ps.save() saving new phrase");
-            if (shouldAdd === true)
-                service.phrases.push(phrase);
+            if (shouldAdd === true) {
+                console.log("ps.savePhrase() saving new phrase");
+                ps.phrases.push(phrase);
+            }
         }
         
-        service.deletePhrase = function (phrase) {
-            angular.forEach(service.phrases, function (aPhrase, key) {
+        ps.deletePhrase = function (phrase) {
+            console.log("ps.deletePhrase() deleting phrase");
+            angular.forEach(ps.phrases, function (aPhrase, key) {
                 if (aPhrase.text === phrase.text) {
-                    service.phrases.splice(key, 1); //remove this one
+                    ps.phrases.splice(key, 1); //remove this one
                 }
             });
         }
 
-        service.replace = function (newPhrase, oldPhrase) {
-            angular.forEach(service.phrases, function (aPhrase, key, phrases) {
-                if (aPhrase.text === oldPhrase.text) { //found it
-                    //replace it
-                    newPhrase.id = service.phraseIndex;
-                    service.phraseIndex++;
-                    service.phrases[key] = newPhrase;
+        ps.saveCategory = function (category) {
+            var shouldAdd = true;
+            angular.forEach(ps.categories, function (aCategory, key) {
+                if (aCategory.guid == category.guid) { //update this one instead of adding
+                    shouldAdd = false;
+                    ps.categories[key] = angular.copy(category);
+                    console.log("ps.saveCategory() updating category");
+                }
+            });
+            if (shouldAdd === true) {
+                ps.categories.push(category);
+                console.log("ps.saveCategory() saving new category");
+            }
+        }
+
+        ps.deleteCategory = function (category) {
+            console.log("ps.deleteCategory() deleting category");
+            angular.forEach(ps.categories, function (aCategory, key) {
+                if (aCategory.text === category.text) {
+                    ps.categories.splice(key, 1); //remove this one
                 }
             });
         }
 
-        service.addSoundManagerProperties = function (phrase) {
-            //required attributes for angular sound-manager
-            phrase.id = service.phraseIndex;
-            service.phraseIndex++;
-            phrase.title = phrase.text;
-            phrase.artist = "";
-            phrase.url = "api/tts/GetAudio?id=" + phrase.guid + ".mp3";
-        }
-                
+        //ps.replace = function (newPhrase, oldPhrase) {
+        //    angular.forEach(ps.phrases, function (aPhrase, key, phrases) {
+        //        if (aPhrase.text === oldPhrase.text) { //found it
+        //            //replace it
+        //            newPhrase.id = ps.phraseIndex;
+        //            ps.phraseIndex++;
+        //            ps.phrases[key] = newPhrase;
+        //        }
+        //    });
+        //}
+     
         //private functions
-        //service.refreshTags = function () {
-        //    service.tags.length = 0;
-        //    angular.forEach(service.phrases, function (aPhrase, key) {
+        //ps.refreshTags = function () {
+        //    ps.tags.length = 0;
+        //    angular.forEach(ps.phrases, function (aPhrase, key) {
         //        angular.forEach(aPhrase.tags, function (tag) {
-        //            if ($.inArray(tag, service.tags) == -1) {
-        //                service.tags.push(tag);
+        //            if ($.inArray(tag, ps.tags) == -1) {
+        //                ps.tags.push(tag);
         //            }
         //        });
         //    });
         //}
 
-        return service;
+        function addSoundManagerProperties (phrase) {
+            //required attributes for angular sound-manager
+            phrase.id = ps.phraseIndex;
+            ps.phraseIndex++;
+            phrase.title = phrase.text;
+            phrase.artist = "";
+            phrase.url = "api/tts/GetAudio?id=" + phrase.guid + ".mp3";
+        }
+
+        return ps;
 
     }]);
 })();

@@ -5,7 +5,8 @@
         'angularSoundManager',
         'frapontillo.bootstrap-switch',
         'rzModule',
-        'ngTouch'
+        'ngTouch',
+        'angular-confirm'
     ]);
 
 })();
