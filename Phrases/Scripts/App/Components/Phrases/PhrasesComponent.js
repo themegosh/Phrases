@@ -9,11 +9,7 @@
         
         $ctrl.editMode = false;
         $ctrl.categoryFilter = "All";
-        $ctrl.newPhrase = {
-            text: "",
-            categories: [],
-            hash: ""
-        };
+        
 
         $ctrl.slider = {
             curVol: 99,
@@ -39,7 +35,10 @@
 
         $ctrl.btnSelectFilter = function (category) {
             if (!$ctrl.editMode) {
-                $ctrl.categoryFilter = category;
+                if (category === 'All')
+                    $ctrl.categoryFilter = "All";
+                else
+                    $ctrl.categoryFilter = category.name;
             } else {
                 if (category === 'All')
                     return;

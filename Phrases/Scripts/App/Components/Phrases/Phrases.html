@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="nav-item start " ng-class="{active: $ctrl.categoryFilter == category.name}" ng-repeat="category in $ctrl.categories">
-                    <a ng-click="$ctrl.btnSelectFilter(category.name)" class="nav-link nav-toggle">
+                    <a ng-click="$ctrl.btnSelectFilter(category)" class="nav-link nav-toggle">
                         <i class="{{category.icon}}"></i>
                         <span class="title">{{category.name}}</span>
                         <span class="arrow"></span>
@@ -79,7 +79,7 @@
             <div class="todo-container">
 
 
-                <phrase-list phrases="$ctrl.phrases | selectedCategory:$ctrl.categoryFilter" edit-mode="$ctrl.editMode" category-filter="$ctrl.categoryFilter"></phrase-list>
+                <phrase-list all-phrases="$ctrl.phrases" edit-mode="$ctrl.editMode" category-filter="$ctrl.categoryFilter"></phrase-list>
 
 
                 <!--<div class="todo-projects-container">

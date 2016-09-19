@@ -185,3 +185,7 @@ body {
 .alert-no-margin {
     margin: 0px;
 }
+
+.alert h2 {
+    margin-top: 0px;
+}

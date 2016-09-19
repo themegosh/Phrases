@@ -13,9 +13,9 @@
     </div>-->
     <h3>Categories</h3>
     <ul class="list-group">
-        <li class="list-group-item clearfix" ng-repeat="tag in $ctrl.checkedTags">
+        <li class="list-group-item clearfix" ng-repeat="category in $ctrl.categories">
             
-            <span class="tag-label">{{tag.Tag}}</span>
+            <span class="tag-label">{{category.name}}</span>
             <div class="pull-right">
                 <input bs-switch
                        ng-model="tag.Checked"

@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict";
 
-    PhraseListController.$inject = ['ApiService', 'PhrasesService', '$uibModal'];
-    function PhraseListController(api, ps, $uibModal) {
+    PhraseListController.$inject = ['ApiService', 'PhrasesService', '$uibModal', '$filter', 'angularPlayer'];
+    function PhraseListController(api, ps, $uibModal, $filter, angularPlayer) {
         var $ctrl = this;
 
         //properties
@@ -18,9 +18,8 @@
         $ctrl.$onInit = function () {
             console.log("$onInit PhraseListController");
             console.log($ctrl);
-
+            $ctrl.phrases = $filter('selectedCategory')($ctrl.allPhrases, $ctrl.categoryFilter);
             $ctrl.sortableOptions.disabled = $ctrl.editMode;
-
             angular.forEach($ctrl.allTags, function (tag) {
                 $ctrl.checkedTags.push({
                     Checked: doesHaveTag(tag),
@@ -30,38 +29,33 @@
         }
 
         $ctrl.$onChanges = function (changesObj) {
-            $ctrl.editMode = changesObj.editMode.currentValue;
-            //console.log(changesObj);
-            //if (changesObj.editMode) {
-            //    var prefix;
-            //    (changesObj.editMode.currentValue === 'Pascal') ?
-            //      prefix = 'Howdy ' : prefix = 'Hello ';
-            //    this.name = prefix + this.name;
-            //}
+            //$ctrl.editMode = changesObj.editMode.currentValue;
+            //$ctrl.phrases = $filter('selectedCategory')($ctrl.allPhrases, $ctrl.categoryFilter);
+            //var desiredFilter = $filter('selectedCategory');
         }
 
-        $ctrl.btnCreateNewPhrase = function () {
-            var modalInstance = $uibModal.open({
-                animation: true,
-                component: 'editPhraseComponent',
-                size: 'md',
-                backdrop: 'static',
-                keyboard: false,
-                resolve: {
-                    phrase: function () {
-                        return null;
-                    }
-                }
-            });
+        //$ctrl.btnCreateNewPhrase = function () {
+        //    var modalInstance = $uibModal.open({
+        //        animation: true,
+        //        component: 'editPhraseComponent',
+        //        size: 'md',
+        //        backdrop: 'static',
+        //        keyboard: false,
+        //        resolve: {
+        //            phrase: function () {
+        //                return null;
+        //            }
+        //        }
+        //    });
 
-            console.log("btnClicked!");
-            $ctrl.newPhrase.text = $ctrl.newPhrase.text.trim();
-            if ($ctrl.newPhrase.text.length) {
-                api.savePhrase($ctrl.newPhrase);
-                console.log($ctrl.newPhrase);
-                $ctrl.newPhrase.text = "";
-            }
-        }
+        //    console.log("btnClicked!");
+        //    $ctrl.newPhrase.text = $ctrl.newPhrase.text.trim();
+        //    if ($ctrl.newPhrase.text.length) {
+        //        api.savePhrase($ctrl.newPhrase);
+        //        console.log($ctrl.newPhrase);
+        //        $ctrl.newPhrase.text = "";
+        //    }
+        //}
 
         $ctrl.btnPlay = function (phrase) {
             if (!$ctrl.editMode) {
@@ -101,7 +95,7 @@
         bindings: {
             categoryFilter: '<',
             editMode: '<',
-            phrases: '<'
+            allPhrases: '<'
         },
         controller: PhraseListController
     });
