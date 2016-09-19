@@ -37,10 +37,12 @@ namespace Phrases
                 "~/Scripts/App/Custom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/Scripts/jQuery/jquery-ui.min.js",
                 "~/Scripts/Angular/angular.min.js",
                 "~/Scripts/Angular/angular-touch.min.js",
                 "~/Scripts/Angular/angular-route.min.js",
                 "~/Scripts/Angular/angular-ui/ui-bootstrap-tpls.min.js",
+                "~/Scripts/Angular/angular-ui/ui-sortable.min.js",
                 "~/Scripts/Angular/angular-confirm.js",
                 "~/Scripts/Angular/angular-soundmanager2.js",
                 "~/Scripts/Angular/angular-bootstrap-switch.js",
@@ -52,11 +54,13 @@ namespace Phrases
                 "~/Scripts/App/Filters/PhrasesFilter.js",
                 "~/Scripts/App/Components/Phrases/PhrasesComponent.js",
                 "~/Scripts/App/Components/User/UserComponent.js",
+                "~/Scripts/App/Components/PhraseList/phraseListComponent.js",
                 "~/Scripts/App/Components/EditPhrase/editPhraseComponent.js",
                 "~/Scripts/App/Components/EditCategory/editCategoryComponent.js",
                 "~/Scripts/App/Components/Volume/VolumeComponent.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Scripts/jQuery/jquery-ui.min.css",
                 "~/Content/Bootstrap/bootstrap.min.css",
                 "~/Content/Theme/layout.css",
                 "~/Content/Theme/components-md.css",

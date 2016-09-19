@@ -87,27 +87,7 @@
                 console.log(response);
                 showNotification("Error", response.data, "error");
             });
-        }
-
-        //api.getAllPhrases = function () {
-        //    $http({
-        //        method: 'Get',
-        //        url: '/api/tts/GetAllPhrases'
-        //    }).then(function successCallback(response) {
-        //        console.log("getAllPhrases SUCCESS: ");
-        //        console.log(response.data);
-        //        ps.importPhrases(angular.fromJson(response.data));
-        //        //showNotification("Success", "Phrases retrieved!", "success");
-        //    }, function errorCallback(response) {
-        //        console.log("getAllPhrases FAIL:");
-        //        console.log(response);
-        //        showNotification("Error", response.data, "error");
-        //    });
-        //}
-
-        
-
-        
+        }        
 
         return api;
 

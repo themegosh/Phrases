@@ -38,17 +38,6 @@
             </div>
         </li>
     </ul>
-
-    <h4>New Category</h4>
-    <form class="form-group" ng-submit="$ctrl.addTag()">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Feelings, Desires, etc." ng-model="$ctrl.newTag">
-            <span class="input-group-btn">
-                <button class="btn btn-info" ng-click="$ctrl.addTag()" type="button">Add</button>
-            </span>
-        </div>
-    </form>
-
 </div>
 <div class="modal-footer"> 
     <button class="btn btn-danger pull-left" confirm="Are you sure you want to delete this phrase?" type="button" ng-click="$ctrl.delete()"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>

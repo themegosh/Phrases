@@ -6,6 +6,7 @@
         var $ctrl = this;
 
         //properties
+        
         $ctrl.editMode = false;
         $ctrl.categoryFilter = "All";
         $ctrl.newPhrase = {
@@ -57,11 +58,6 @@
             }
         }
 
-
-        $ctrl.btnNew = function () {
-
-        }
-
         $ctrl.btnEditMode = function () {
             if ($ctrl.editMode === true) {
                 $ctrl.editMode = false;
@@ -78,55 +74,7 @@
             });
         }
 
-        $ctrl.btnCreateNewPhrase = function () {
-            console.log("btnClicked!");
-            $ctrl.newPhrase.text = $ctrl.newPhrase.text.trim();
-            if ($ctrl.newPhrase.text.length) {
-                api.savePhrase($ctrl.newPhrase);
-                console.log($ctrl.newPhrase);
-                $ctrl.newPhrase.text = "";
-            }
-        }
-
-        $ctrl.btnPlay = function (phrase) {
-
-            try {
-                angularPlayer.addTrack(phrase);
-                angularPlayer.playTrack(phrase.id);
-            }
-            catch (ex) {
-                console.log(ex);
-                showNotification("Error", ex, "error");
-            }
-
-            //angularPlayer.clearPlaylist(function () {
-            //    angularPlayer.addTrack(phrase);
-            //    angularPlayer.playTrack(phrase.id);
-            //});
-        }
-
-        $ctrl.btnDeletePhrase = function (phrase, $event) {
-            console.log("btnDeletePhrase!");
-            api.deletePhrase(phrase);
-        }
-
-        $ctrl.btnEditPhrase = function (phrase, $event) {
-            console.log("btnEditPhrase!");
-            $event.stopPropagation();
-
-            var modalInstance = $uibModal.open({
-                animation: true,
-                component: 'editPhraseComponent',
-                size: 'md',
-                backdrop: 'static',
-                keyboard: false,
-                resolve: {
-                    phrase: function () {
-                        return phrase;
-                    }
-                }
-            });
-        }
+        
 
         $ctrl.btnChangeVolume = function () {
             console.log("btnChangeVolume!");

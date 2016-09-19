@@ -364,6 +364,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\Angular\angular-route.min.js.map" />
+    <Content Include="Scripts\Angular\angular-ui\ui-sortable.min.js" />
+    <Content Include="Scripts\Angular\angular-ui\ui-sortable.js" />
     <Content Include="Scripts\Angular\angular-ui\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\Angular\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\Angular\angular-ui\ui-bootstrap.js" />
@@ -381,8 +383,8 @@
     <Content Include="Scripts\Angular\angular.min.js" />
     <Content Include="Scripts\App\Components\EditCategory\editCategoryComponent.js" />
     <Content Include="Scripts\App\Components\EditCategory\editCategoryModal.html" />
-    <Content Include="Scripts\App\Components\NewPhrase\NewPhraseComponent.js" />
-    <Content Include="Scripts\App\Components\NewPhrase\NewPhraseModal.html" />
+    <Content Include="Scripts\App\Components\phraseList\phraseListComponent.js" />
+    <Content Include="Scripts\App\Components\phraseList\phraseListComponent.html" />
     <Content Include="Scripts\App\Components\User\UserComponent.js" />
     <Content Include="Scripts\App\Components\User\UserModal.html" />
     <Content Include="Scripts\App\Components\Volume\VolumeComponent.js" />
@@ -415,6 +417,8 @@
     <Content Include="Scripts\jQuery\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jQuery\jquery-3.1.0.slim.js" />
     <Content Include="Scripts\jQuery\jquery-3.1.0.slim.min.js" />
+    <Content Include="Scripts\jQuery\jquery-ui.min.css" />
+    <Content Include="Scripts\jQuery\jquery-ui.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Plugins\bootstrap-switch.min.js" />
     <Content Include="Scripts\Plugins\excanvas.min.js" />

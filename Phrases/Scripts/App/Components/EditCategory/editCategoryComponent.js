@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict";
 
-    EditCategoryController.$inject = ['ApiService', 'PhrasesService'];
-    function EditCategoryController(api, ps) {
+    EditCategoryController.$inject = ['ApiService', 'PhrasesService', '$confirm'];
+    function EditCategoryController(api, ps, $confirm) {
         var $ctrl = this;
 
         //properties
@@ -13,7 +13,7 @@
         //events
         $ctrl.$onInit = function () {
             console.log("$onInit EditPhrasesController");
-            if ($ctrl.resolve.category === true) { //new category
+            if ($ctrl.resolve.category == null) { //new category
                 $ctrl.modalTitle = "New Category";
                 $ctrl.category = {
                     name: "",
@@ -25,6 +25,7 @@
         }
 
         $ctrl.save = function () {
+            $ctrl.isDirty = false;
             if ($ctrl.category.name != "") {
                 api.saveCategory($ctrl.category);
             }

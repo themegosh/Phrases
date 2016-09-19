@@ -6,7 +6,8 @@
         'frapontillo.bootstrap-switch',
         'rzModule',
         'ngTouch',
-        'angular-confirm'
+        'angular-confirm',
+        'ui.sortable'
     ]);
 
 })();

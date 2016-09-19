@@ -1,0 +1,29 @@
+﻿<div class="todo-projects-container">
+    <div class="todo-padding-b-0">
+        <div class="todo-head">
+            <h1>{{$ctrl.categoryFilter}}</h1>
+        </div>
+    </div>
+    <div ng-show="$ctrl.phrases.length == 0">
+        <p class="text-center">You don't have any phrases!</p>
+    </div>
+    <div>
+        <div ng-show="$ctrl.editMode" ng-click="$ctrl.btnCreateNewPhrase()">
+            <div class="todo-projects-item clearfix">
+                <div class="btn btn-block btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> New Phrase</div>
+            </div>
+            <div class="todo-projects-divider"></div>
+        </div>
+        <div ui-sortable="$ctrl.sortableOptions" ng-model="$ctrl.phrases">
+            <div ng-repeat="phrase in $ctrl.phrases  | selectedCategory:$ctrl.categoryFilter track by $index" ng-click="$ctrl.btnPlay(phrase)">
+                <div class="todo-projects-item clearfix">
+                    <div ng-show="$ctrl.editMode" class="todo-inline todo-float-r">
+                        <button type="button" class="btn btn-info btn-lg"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                    </div>
+                    <div class="phrase">{{ phrase.title }}</div>
+                </div>
+                <div class="todo-projects-divider"></div>
+            </div>
+        </div>
+    </div>
+</div>
