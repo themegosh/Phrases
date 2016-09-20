@@ -13,18 +13,15 @@
 
             //user
             ps.user = userData.User;
-
             //categories
             ps.categories.length = 0;
             angular.copy(userData.Categories, ps.categories);
-
             //phrases
             ps.phrases.length = 0;//clear the old ones
             ps.phraseIndex = 1; //cant start at 0 (soundmanager req)
             angular.forEach(userData.Phrases, function (phrase) {
                 addSoundManagerProperties(phrase);
                 ps.phrases.push(phrase);
-                ps.phraseIndex++;
             });
 
             console.log("ps.importUserData()");
@@ -33,8 +30,6 @@
         
         ps.savePhrase = function (phrase) {
             addSoundManagerProperties(phrase);
-            
-            ps.phraseIndex++;
             var shouldAdd = true;
             angular.forEach(ps.phrases, function (aPhrase, key) {
                 if (aPhrase.guid == phrase.guid) { //update this one instead of adding
@@ -76,7 +71,7 @@
         ps.deleteCategory = function (category) {
             console.log("ps.deleteCategory() deleting category");
             angular.forEach(ps.categories, function (aCategory, key) {
-                if (aCategory.text === category.text) {
+                if (aCategory.name === category.name) {
                     ps.categories.splice(key, 1); //remove this one
                 }
             });

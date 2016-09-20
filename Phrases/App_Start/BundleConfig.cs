@@ -42,7 +42,7 @@ namespace Phrases
                 "~/Scripts/Angular/angular-touch.min.js",
                 "~/Scripts/Angular/angular-route.min.js",
                 "~/Scripts/Angular/angular-ui/ui-bootstrap-tpls.min.js",
-                "~/Scripts/Angular/angular-ui/ui-sortable.min.js",
+                "~/Scripts/Angular/angular-ui/ng-sortable.min.js",
                 "~/Scripts/Angular/angular-confirm.js",
                 "~/Scripts/Angular/angular-soundmanager2.js",
                 "~/Scripts/Angular/angular-bootstrap-switch.js",
@@ -61,6 +61,7 @@ namespace Phrases
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Scripts/jQuery/jquery-ui.min.css",
+                "~/Scripts/Angular/angular-ui/ng-sortable.min.css",
                 "~/Content/Bootstrap/bootstrap.min.css",
                 "~/Content/Theme/layout.css",
                 "~/Content/Theme/components-md.css",

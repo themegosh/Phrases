@@ -189,3 +189,15 @@ body {
 .alert h2 {
     margin-top: 0px;
 }
+
+.category-list {
+}
+
+.category-list label {
+    margin-bottom:0;
+    font-size: 26px;
+}
+
+.category-list span {
+    margin: 10px 0;
+}

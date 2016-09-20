@@ -364,6 +364,10 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\Angular\angular-route.min.js.map" />
+    <Content Include="Scripts\Angular\angular-ui\ng-sortable.css" />
+    <Content Include="Scripts\Angular\angular-ui\ng-sortable.js" />
+    <Content Include="Scripts\Angular\angular-ui\ng-sortable.min.css" />
+    <Content Include="Scripts\Angular\angular-ui\ng-sortable.min.js" />
     <Content Include="Scripts\Angular\angular-ui\ui-sortable.min.js" />
     <Content Include="Scripts\Angular\angular-ui\ui-sortable.js" />
     <Content Include="Scripts\Angular\angular-ui\ui-bootstrap-tpls.js" />

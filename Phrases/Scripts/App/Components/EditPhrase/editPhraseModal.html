@@ -1,41 +1,24 @@
 ﻿
 <div class="modal-header">
-    <h3 class="modal-title">Edit Phrase</h3>
+    <h1 class="modal-title">Edit Phrase</h1>
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <h3 for="Text">Phrase Text</h3>
-        <input type="text" class="form-control" id="Text" placeholder="Phrase Text" ng-model="$ctrl.phrase.text" >
+        <h2 for="Text">Phrase Text</h2>
+        <input type="text" class="form-control input-lg" id="Text" placeholder="Phrase Text" ng-model="$ctrl.phrase.text" >
     </div>
     <!--<div class="alert alert-info">
         <strong>Url: </strong>
         {{$ctrl.phrase.url}}
     </div>-->
-    <h3>Categories</h3>
+    <h2>Categories</h2>
     <ul class="list-group">
-        <li class="list-group-item clearfix" ng-repeat="category in $ctrl.categories">
-            
-            <span class="tag-label">{{category.name}}</span>
-            <div class="pull-right">
-                <input bs-switch
-                       ng-model="tag.Checked"
-                       type="checkbox"
-                       switch-size="small"
-                       switch-animate="{{ animate }}"
-                       switch-label="{{ label }}"
-                       switch-icon="{{ icon }}"
-                       switch-on-text="{{ onLabel }}"
-                       switch-off-text="{{ offLabel }}"
-                       switch-on-color="{{ on }}"
-                       switch-off-color="{{ off }}"
-                       switch-radio-off="{{ radioOff }}"
-                       switch-label-width="{{ labelWidth }}"
-                       switch-handle-width="{{ handleWidth }}"
-                       switch-inverse="{{ inverse }}"
-                       switch-change="checkChanged(tag)"
-                       ng-true-value="true"
-                       ng-false-value="false">
-            </div>
+        <li class="list-group-item clearfix category-list" ng-repeat="category in $ctrl.checkedCategories">
+            <label class="check mt-checkbox mt-checkbox-outline">
+                {{category.name}}
+                <input type="checkbox" ng-model="category.checked">
+                <span></span>
+            </label>
         </li>
     </ul>
 </div>

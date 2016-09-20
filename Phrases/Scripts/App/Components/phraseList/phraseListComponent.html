@@ -14,7 +14,7 @@
             </div>
             <div class="todo-projects-divider"></div>
         </div>
-        <div ui-sortable="$ctrl.sortableOptions" ng-model="$ctrl.phrases">
+        <div id="phraseContainer" ng-model="$ctrl.phrases">
             <div ng-repeat="phrase in $ctrl.phrases  | selectedCategory:$ctrl.categoryFilter track by $index" ng-click="$ctrl.btnPlay(phrase)">
                 <div class="todo-projects-item clearfix">
                     <div ng-show="$ctrl.editMode" class="todo-inline todo-float-r">

@@ -6,20 +6,13 @@
         var $ctrl = this;
 
         //properties
-        $ctrl.sortableOptions = {
-            disabled: true,
-            axis: 'y',
-            update: function (e, ui) { console.log("dragged"); },
-        };
         $ctrl.newTag = "";
         $ctrl.checkedTags = [];
 
         //events
         $ctrl.$onInit = function () {
-            console.log("$onInit PhraseListController");
             console.log($ctrl);
             $ctrl.phrases = $filter('selectedCategory')($ctrl.allPhrases, $ctrl.categoryFilter);
-            $ctrl.sortableOptions.disabled = $ctrl.editMode;
             angular.forEach($ctrl.allTags, function (tag) {
                 $ctrl.checkedTags.push({
                     Checked: doesHaveTag(tag),
@@ -34,29 +27,22 @@
             //var desiredFilter = $filter('selectedCategory');
         }
 
-        //$ctrl.btnCreateNewPhrase = function () {
-        //    var modalInstance = $uibModal.open({
-        //        animation: true,
-        //        component: 'editPhraseComponent',
-        //        size: 'md',
-        //        backdrop: 'static',
-        //        keyboard: false,
-        //        resolve: {
-        //            phrase: function () {
-        //                return null;
-        //            }
-        //        }
-        //    });
+        //todo: https://github.com/a5hik/ng-sortable
+        //$ctrl.dragControlListeners = {
+        //    //accept: function (sourceItemHandleScope, destSortableScope) {return true},//override to determine drag is allowed or not. default is true.
+        //    itemMoved: function (event) {},//Do what you want
+        //    orderChanged: function(event) {},//Do what you want
+        //    //containment: '#phraseContainer',//optional param.
+        //    //clone: true, //optional param for clone feature.
+        //    //allowDuplicates: false //optional param allows duplicates to be dropped.
+        //};
 
-        //    console.log("btnClicked!");
-        //    $ctrl.newPhrase.text = $ctrl.newPhrase.text.trim();
-        //    if ($ctrl.newPhrase.text.length) {
-        //        api.savePhrase($ctrl.newPhrase);
-        //        console.log($ctrl.newPhrase);
-        //        $ctrl.newPhrase.text = "";
-        //    }
-        //}
+        //    $scope.dragControlListeners1 = {
+        //        //containment: '#board',//optional param.
+        //        //allowDuplicates: true //optional param allows duplicates to be dropped.
+        //};
 
+        
         $ctrl.btnPlay = function (phrase) {
             if (!$ctrl.editMode) {
                 try {
@@ -86,8 +72,6 @@
                 });
             }
         }
-
-        
     }
 
     angular.module("Phrases").component('phraseList', {

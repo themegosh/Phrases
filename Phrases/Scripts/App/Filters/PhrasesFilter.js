@@ -3,7 +3,7 @@
     angular.module("Phrases")
         .filter('selectedCategory', function () {
             return function (phrases, curCategory) {
-
+                
                 if (curCategory === 'All' || curCategory === '')
                     return phrases;
 
@@ -11,6 +11,7 @@
 
                 angular.forEach(phrases, function (phrase) {
                     var shouldAdd = false;
+                    console.log(phrase);
                     angular.forEach(phrase.categories, function (category) {
                         if (category == curCategory) {
                             console.log("adding" + phrase.Text + " category " + curCategory);

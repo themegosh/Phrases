@@ -10,7 +10,7 @@
                 method: 'Get',
                 url: '/api/tts/getUserData'
             }).then(function successCallback(response) {
-                console.log("getAllPhrases SUCCESS: ");
+                //console.log("getAllPhrases SUCCESS: ");
                 //console.log(response.data);
                 ps.importUserData(angular.fromJson(response.data));
             }, function errorCallback(response) {

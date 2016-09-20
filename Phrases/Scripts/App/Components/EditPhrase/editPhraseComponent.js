@@ -6,7 +6,8 @@
         var $ctrl = this;
 
         //properties
-        $ctrl.checkedTags = [];
+        $ctrl.checkedCategories = [];
+        $ctrl.categories = [];
 
         //events
         $ctrl.$onInit = function () {
@@ -21,20 +22,34 @@
             } else {
                 $ctrl.phrase = $ctrl.resolve.phrase;
             }
-            $ctrl.categories = angular.copy(ps.categories);
+            angular.copy(ps.categories, $ctrl.categories);
+            //$ctrl.categories = angular.copy(ps.categories);
 
-            //angular.forEach($ctrl.categories, function (tag) {
-            //    $ctrl.checkedTags.push({
-            //        Checked: doesHaveTag(tag),
-            //        Tag: tag
-            //    })
-            //});
+            angular.forEach($ctrl.categories, function (category) {
+                $ctrl.checkedCategories.push({
+                    checked: $ctrl.hasCategory(category),
+                    name: category.name
+                })
+            });
+
+            console.log(ps.categories);
+            console.log($ctrl);
         }
 
         
 
         $ctrl.ok = function () {
-            //save a tag that hasn't been "Added" yet
+            //update the categories to align with the checked ones
+            $ctrl.phrase.categories.length = 0;
+            angular.forEach($ctrl.checkedCategories, function (category) {
+                if (category.checked) {
+                    $ctrl.phrase.categories.push(category.name);
+                }
+            })
+
+            console.log("ABOUT TO SAVE:");
+            console.log($ctrl.phrase);
+
             if ($ctrl.phrase.text !== "") {
                 api.savePhrase($ctrl.phrase);
             }
@@ -48,6 +63,15 @@
         $ctrl.delete = function () {
             api.deletePhrase($ctrl.phrase);
             $ctrl.dismiss({ $value: 'cancel' });
+        }
+
+        $ctrl.hasCategory = function (aCategory) {
+            var hasCategory = false;
+            angular.forEach($ctrl.phrase.categories, function (category) {
+                if (aCategory.name == category)
+                    hasCategory = true;
+            });
+            return hasCategory;
         }
 
         //$ctrl.addTag = function () {
@@ -72,14 +96,7 @@
         //    }
         //}
 
-        //function doesHaveTag(aTag) {
-        //    var hasTag = false;
-        //    angular.forEach($ctrl.phrase.tags, function (tag) {
-        //        if (aTag == tag)
-        //            hasTag = true;
-        //    });
-        //    return hasTag;
-        //}
+        
 
         //function removeA(arr) {
         //    var what, a = arguments, L = a.length, ax;

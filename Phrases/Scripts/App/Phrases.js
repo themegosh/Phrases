@@ -7,7 +7,7 @@
         'rzModule',
         'ngTouch',
         'angular-confirm',
-        'ui.sortable'
+        'as.sortable'
     ]);
 
 })();
