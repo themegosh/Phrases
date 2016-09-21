@@ -19,6 +19,10 @@
                     categories: [],
                     hash: ""
                 };
+                $('#txtPhrase').ready(function () {
+                    $('#txtPhrase').focus();
+                    $('#txtPhrase').click();
+                });
             } else {
                 $ctrl.phrase = $ctrl.resolve.phrase;
             }
@@ -45,11 +49,7 @@
                 if (category.checked) {
                     $ctrl.phrase.categories.push(category.name);
                 }
-            })
-
-            console.log("ABOUT TO SAVE:");
-            console.log($ctrl.phrase);
-
+            });
             if ($ctrl.phrase.text !== "") {
                 api.savePhrase($ctrl.phrase);
             }

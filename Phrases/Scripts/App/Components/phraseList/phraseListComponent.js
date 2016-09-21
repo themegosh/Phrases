@@ -44,7 +44,7 @@
 
         
         $ctrl.btnPlay = function (phrase) {
-            if (!$ctrl.editMode) {
+            if (!$ctrl.editMode && phrase != null) {
                 try {
                     angularPlayer.addTrack(phrase);
                     angularPlayer.playTrack(phrase.id);

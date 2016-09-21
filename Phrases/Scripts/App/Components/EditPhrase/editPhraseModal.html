@@ -4,8 +4,8 @@
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <h2 for="Text">Phrase Text</h2>
-        <input type="text" class="form-control input-lg" id="Text" placeholder="Phrase Text" ng-model="$ctrl.phrase.text" >
+        <h2 for="Text">{{$ctrl.modalTitle}}</h2>
+        <input type="text" id="txtPhrase" class="form-control input-lg" placeholder="Phrase Text" ng-model="$ctrl.phrase.text" >
     </div>
     <!--<div class="alert alert-info">
         <strong>Url: </strong>

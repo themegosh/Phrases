@@ -6,13 +6,11 @@
         var $ctrl = this;
 
         //properties
-        
         $ctrl.editMode = false;
         $ctrl.categoryFilter = "All";
-        
 
         $ctrl.slider = {
-            curVol: 99,
+            curVol: 100,
             options: {
                 floor: 0,
                 ceil: 100,
@@ -31,6 +29,7 @@
             api.getUserData();
             $ctrl.categories = ps.categories;
             $ctrl.phrases = ps.phrases;
+            angularPlayer.changeVolume($ctrl.slider.curVol)
         }
 
         $ctrl.btnSelectFilter = function (category) {
@@ -61,6 +60,7 @@
             if ($ctrl.editMode === true) {
                 $ctrl.editMode = false;
             } else {
+                $ctrl.categoryFilter = "All";
                 $ctrl.editMode = true;
             }
         }
@@ -70,6 +70,21 @@
                 animation: true,
                 component: 'userComponent',
                 size: 'sm'
+            });
+        }
+
+        $ctrl.btnAddPhrase = function () {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                component: 'editPhraseComponent',
+                size: 'md',
+                backdrop: 'static',
+                keyboard: false,
+                resolve: {
+                    phrase: function () {
+                        return null;
+                    }
+                }
             });
         }
 

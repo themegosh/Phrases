@@ -6108,10 +6108,10 @@ Custom color buttons
 
 @media (max-width: 768px) {
   /* 768px */
-  .input-large {
+  /*.input-large {
     width: 250px !important; }
   .input-xlarge {
-    width: 300px !important; } }
+    width: 300px !important; }*/ }
 
 .input-inline {
   display: inline-block;
@@ -6129,10 +6129,10 @@ Custom color buttons
 
 @media (max-width: 768px) {
   /* 768px */
-  .input-lg {
+  /*.input-lg {
     width: 250px !important; }
   .input-xlg {
-    width: 300px !important; } }
+    width: 300px !important; }*/ }
 
 /* Circle Inputs */
 .input-circle {
