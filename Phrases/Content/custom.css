@@ -237,3 +237,8 @@ body {
     max-height: calc(100vh - 220px);
     overflow-y: auto;
 }
+
+.navbar-default {
+    background-color: #FFF;
+    border-color: #e7e7e7;
+}

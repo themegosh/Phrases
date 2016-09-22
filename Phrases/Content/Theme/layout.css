@@ -1037,8 +1037,15 @@ Page content
       .page-sidebar-closed.page-sidebar-reversed.page-sidebar-hide .page-content-wrapper .page-content {
         margin-right: 0 !important; }
       .page-full-width .page-content-wrapper .page-content {
-        margin-left: 0px !important; } 
-
+        margin-left: 0px !important; }
+@media (max-width: 767px) {
+    .page-sidebar {
+        width: 100px;
+    }
+    .page-content-wrapper .page-content {
+         margin-left: 100px;
+    }
+}
 /***
 Page footer
 ***/
