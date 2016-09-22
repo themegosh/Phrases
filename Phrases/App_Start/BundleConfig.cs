@@ -41,6 +41,7 @@ namespace Phrases
                 "~/Scripts/Angular/angular.min.js",
                 "~/Scripts/Angular/angular-touch.min.js",
                 "~/Scripts/Angular/angular-route.min.js",
+                "~/Scripts/Angular/angular-http-loader.min.js",
                 "~/Scripts/Angular/angular-ui/ui-bootstrap-tpls.min.js",
                 "~/Scripts/Angular/angular-ui/ng-sortable.min.js",
                 "~/Scripts/Angular/angular-confirm.js",

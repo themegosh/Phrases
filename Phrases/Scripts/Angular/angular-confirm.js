@@ -31,11 +31,11 @@ angular.module('angular-confirm', ['ui.bootstrap.modal'])
 
   }])
   .value('$confirmModalDefaults', {
-    template: '<div class="modal-header"><h3 class="modal-title">{{data.title}}</h3></div>' +
-    '<div class="modal-body">{{data.text}}</div>' +
+    template: '<div class="modal-header"><h1 class="modal-title">{{data.title}}</h1></div>' +
+    '<div class="modal-body"><span class="text-md">{{data.text}}</span></div>' +
     '<div class="modal-footer">' +
-    '<button class="btn btn-primary" ng-click="ok()">{{data.ok}}</button>' +
-    '<button class="btn btn-default" ng-click="cancel()">{{data.cancel}}</button>' +
+    '<button class="btn btn-primary btn-lg" ng-click="ok()">{{data.ok}}</button>' +
+    '<button class="btn btn-default btn-lg" ng-click="cancel()">{{data.cancel}}</button>' +
     '</div>',
     controller: 'ConfirmModalController',
     defaultLabels: {

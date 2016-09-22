@@ -24,6 +24,7 @@
                     $('#txtPhrase').click();
                 });
             } else {
+                $ctrl.modalTitle = "Edit Phrase";
                 $ctrl.phrase = $ctrl.resolve.phrase;
             }
             angular.copy(ps.categories, $ctrl.categories);

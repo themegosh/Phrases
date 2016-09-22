@@ -7,7 +7,13 @@
         'rzModule',
         'ngTouch',
         'angular-confirm',
-        'as.sortable'
+        'as.sortable',
+        'ng.httpLoader'
+    ])
+    .config(['httpMethodInterceptorProvider',
+        function (httpMethodInterceptorProvider) {
+            httpMethodInterceptorProvider.whitelistLocalRequests();
+        }
     ]);
 
 })();

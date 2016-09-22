@@ -39,8 +39,6 @@
         }
 
         api.quickPhrase = function (phrase) {
-            console.log(phrase);
-            showNotification("Please Wait", "Loading phrase...", "warning");
             $http({
                 method: 'POST',
                 url: '/api/tts/QuickPhrase',
@@ -50,9 +48,12 @@
                 console.log("quickPhrase SUCCESS:");
                 angular.copy(response.data, phrase);
                 ps.addSoundManagerProperties(phrase);
-                angularPlayer.addTrack(phrase);
-                angularPlayer.playTrack(phrase.id);
-                showNotification("Success", "Playing!", "success");
+                angularPlayer.clearPlaylist(function () {
+                    angularPlayer.addTrack(phrase);
+                    angularPlayer.playTrack(phrase.id);
+                });
+                //angularPlayer.addTrack(phrase);
+                //angularPlayer.playTrack(phrase.id);
                 console.log(phrase);
             }, function errorCallback(response) {
                 console.log("quickPhrase FAIL:");
