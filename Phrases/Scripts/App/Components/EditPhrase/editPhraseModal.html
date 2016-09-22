@@ -6,7 +6,7 @@
     <div class="form-group">
         <button type="button" ng-click="$ctrl.btnQuickPhrase()" ng-disabled="$ctrl.phrase.text < 1" class="pull-right btn btn-info btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
         <h2 class="section-head" for="Text">Phrase Text</h2>
-        <input type="text" id="txtPhrase" ng-change="$ctrl.txtPhraseChanged()" class="form-control input-lg" placeholder="Phrase Text" ng-model="$ctrl.phrase.text" >
+        <input type="text" id="txtPhrase" ng-change="$ctrl.phrase.isClean = false" class="form-control input-lg" placeholder="Phrase Text" ng-model="$ctrl.phrase.text" >
     </div>
     <!--<div class="alert alert-info">
         <strong>Url: </strong>
@@ -28,6 +28,6 @@
         <button class="btn btn-danger btn-lg btn-block" confirm="Are you sure you want to delete this phrase?" type="button" ng-click="$ctrl.delete()"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
     </div>
     <div class="col-xs-8">
-        <button class="btn btn-success btn-lg btn-block" type="button" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+        <button class="btn btn-success btn-lg btn-block" ng-disabled="$ctrl.phrase.text < 1" type="button" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
     </div>
 </div>

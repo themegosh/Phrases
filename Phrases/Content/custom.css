@@ -216,3 +216,24 @@ body {
 .text-md {
     font-size: 20px;
 }
+
+.icon-picker {
+    font-size: 30px;
+    line-height: normal;
+}
+.icon-picker i:hover {
+    background-color:#e9e8e8;
+}
+.icon-picker i{
+    cursor:pointer;
+    padding: 10px;
+}
+
+.icon-picker i.picked{
+    outline: 2px solid #17C4BB;
+}
+
+.modal-body {
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+}

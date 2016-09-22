@@ -40,11 +40,7 @@
             console.log(ps.categories);
             console.log($ctrl);
         }
-
-        $ctrl.txtPhraseChanged = function () {
-            $ctrl.phrase.isClean = false;
-        }
-
+        
         $ctrl.btnQuickPhrase = function () {
             if ($ctrl.phrase.isClean) {
                 angularPlayer.addTrack($ctrl.phrase);

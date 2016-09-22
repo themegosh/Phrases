@@ -76,6 +76,7 @@
 
     angular.module("Phrases").component('phraseList', {
         templateUrl: '/Scripts/App/Components/PhraseList/phraseListComponent.html',
+        require: '^phrases',
         bindings: {
             categoryFilter: '<',
             editMode: '<',
