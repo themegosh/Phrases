@@ -55,13 +55,33 @@ namespace Phrases.Services
                     {
                         mediaFile.Result.CopyToAsync(fileStream); //create the wav file (fallback)
                     }
-                    //convert the wav to mp3
-                    using (var reader = new WaveFileReader(filenameWithoutExtention + ".wav"))
-                    using (var writer = new LameMP3FileWriter(filenameWithoutExtention + ".mp3", reader.WaveFormat, 128))
+
+                    //use sox
+                    try
                     {
-                        reader.CopyTo(writer); //create the mp3 as well (preferred source)
-                        //phrase["url"] = "/api/tts/GetAudio?id="+ phrase["hash"] + ".mp3";
+                        System.Diagnostics.Process process = new System.Diagnostics.Process();
+                        process.StartInfo = new System.Diagnostics.ProcessStartInfo();
+                        process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                        process.StartInfo.FileName = @"C:\sox\sox.exe";
+                        process.StartInfo.Arguments = " -t wav -v 3.0 " + filenameWithoutExtention + ".wav -t mp3 -C 128.2 " + filenameWithoutExtention + ".mp3";
+                        //phrase.Add("Argruments", process.StartInfo.Arguments);
+                        process.Start();
+                        process.WaitForExit();
+                        int exitCode = process.ExitCode;
+                        
                     }
+                    catch (Exception ex)
+                    {
+                        //throw ex;
+                    }
+
+                    //convert the wav to mp3
+                    //using (var reader = new WaveFileReader(filenameWithoutExtention + ".wav"))
+                    //using (var writer = new LameMP3FileWriter(filenameWithoutExtention + ".mp3", reader.WaveFormat, 128))
+                    //{
+                    //    reader.CopyTo(writer); //create the mp3 as well (preferred source)
+                    //    //phrase["url"] = "/api/tts/GetAudio?id="+ phrase["hash"] + ".mp3";
+                    //}
                     return phrase;
                 }
                 else

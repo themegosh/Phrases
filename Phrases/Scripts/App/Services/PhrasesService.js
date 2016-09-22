@@ -20,7 +20,7 @@
             ps.phrases.length = 0;//clear the old ones
             ps.phraseIndex = 1; //cant start at 0 (soundmanager req)
             angular.forEach(userData.Phrases, function (phrase) {
-                addSoundManagerProperties(phrase);
+                ps.addSoundManagerProperties(phrase);
                 ps.phrases.push(phrase);
             });
 
@@ -29,7 +29,7 @@
         }
         
         ps.savePhrase = function (phrase) {
-            addSoundManagerProperties(phrase);
+            ps.addSoundManagerProperties(phrase);
             var shouldAdd = true;
             angular.forEach(ps.phrases, function (aPhrase, key) {
                 if (aPhrase.guid == phrase.guid) { //update this one instead of adding
@@ -100,7 +100,7 @@
         //    });
         //}
 
-        function addSoundManagerProperties (phrase) {
+        ps.addSoundManagerProperties = function (phrase) {
             //required attributes for angular sound-manager
             phrase.id = ps.phraseIndex;
             ps.phraseIndex++;

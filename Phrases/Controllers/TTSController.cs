@@ -12,6 +12,7 @@ using System.Text;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Phrases.Models;
+using System.Web.Services;
 
 namespace Phrases.Controllers
 {
@@ -42,6 +43,22 @@ namespace Phrases.Controllers
             {
                 Document phrase = Document.FromJson(value.ToString());
                 PhraseService.DeletePhrase(phrase);
+
+                return jsonResponse(phrase.ToJson(), HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage QuickPhrase([FromBody] object value)
+        {
+            try
+            {
+                Document phrase = Document.FromJson(value.ToString());
+                phrase = PhraseService.QuickPhrase(phrase);
 
                 return jsonResponse(phrase.ToJson(), HttpStatusCode.OK);
             }

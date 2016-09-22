@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict";
 
-    EditPhrasesController.$inject = ['ApiService', 'PhrasesService'];
-    function EditPhrasesController(api, ps) {
+    EditPhrasesController.$inject = ['ApiService', 'PhrasesService', 'angularPlayer'];
+    function EditPhrasesController(api, ps, angularPlayer) {
         var $ctrl = this;
 
         //properties
@@ -40,7 +40,19 @@
             console.log($ctrl);
         }
 
-        
+        $ctrl.txtPhraseChanged = function () {
+            $ctrl.phrase.isClean = false;
+        }
+
+        $ctrl.btnQuickPhrase = function () {
+            if ($ctrl.phrase.isClean) {
+                angularPlayer.addTrack($ctrl.phrase);
+                angularPlayer.playTrack($ctrl.phrase.id);
+            } else {
+                $ctrl.phrase.isClean = true;
+                api.quickPhrase($ctrl.phrase);
+            }
+        }
 
         $ctrl.ok = function () {
             //update the categories to align with the checked ones

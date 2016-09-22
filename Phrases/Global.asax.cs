@@ -20,5 +20,16 @@ namespace Phrases
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ApplicationUserManager.Startup();
         }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+
+        }
+
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

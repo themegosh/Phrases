@@ -6,20 +6,20 @@
     </div>
     <div class="text-center" ng-show="$ctrl.phrases.length == 0">
         <p>You don't have any phrases! <a href="/">Refresh...</a></p>
-        <p><button type="button" ng-click="$ctrl.btnPlay(null)" class="btn btn-primary">Add a Phrase</button></p>
+        <p><button type="button" ng-click="$ctrl.btnPlay(null)" class="btn btn-primary btn-lg">Add a Phrase</button></p>
     </div>
     <div>
-        <div ng-show="$ctrl.editMode" ng-click="$ctrl.btnPlay(null)">
+        <!--<div ng-show="$ctrl.editMode && $ctrl.phrases.length > 0" ng-click="$ctrl.btnPlay(null)">
             <div class="todo-projects-item clearfix">
                 <div class="btn btn-block btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> New Phrase</div>
             </div>
             <div class="todo-projects-divider"></div>
-        </div>
+        </div>-->
         <div id="phraseContainer" ng-model="$ctrl.phrases">
             <div ng-repeat="phrase in $ctrl.phrases  | selectedCategory:$ctrl.categoryFilter track by $index" ng-click="$ctrl.btnPlay(phrase)">
                 <div class="todo-projects-item clearfix">
                     <div ng-show="$ctrl.editMode" class="todo-inline todo-float-r">
-                        <button type="button" class="btn btn-info btn-lg"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+                        <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
                     </div>
                     <div class="phrase">{{ phrase.title }}</div>
                 </div>

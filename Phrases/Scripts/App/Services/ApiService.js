@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("Phrases").factory("ApiService", ['$http', "PhrasesService", function ($http, ps) {
+    angular.module("Phrases").factory("ApiService", ['$http', "PhrasesService", 'angularPlayer', function ($http, ps, angularPlayer) {
 
         var api = {};
 
@@ -33,6 +33,29 @@
                 showNotification("Success", "Phrase saved.", "success");
             }, function errorCallback(response) {
                 console.log("savePhrase FAIL:");
+                console.log(response.data);
+                showNotification("Error", response.data, "error");
+            });
+        }
+
+        api.quickPhrase = function (phrase) {
+            console.log(phrase);
+            showNotification("Please Wait", "Loading phrase...", "warning");
+            $http({
+                method: 'POST',
+                url: '/api/tts/QuickPhrase',
+                headers: { 'Content-Type': "application/json" },
+                data: angular.toJson(phrase, false),
+            }).then(function successCallback(response) {
+                console.log("quickPhrase SUCCESS:");
+                angular.copy(response.data, phrase);
+                ps.addSoundManagerProperties(phrase);
+                angularPlayer.addTrack(phrase);
+                angularPlayer.playTrack(phrase.id);
+                showNotification("Success", "Playing!", "success");
+                console.log(phrase);
+            }, function errorCallback(response) {
+                console.log("quickPhrase FAIL:");
                 console.log(response.data);
                 showNotification("Error", response.data, "error");
             });

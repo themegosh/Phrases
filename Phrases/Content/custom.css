@@ -201,3 +201,14 @@ body {
 .category-list span {
     margin: 10px 0;
 }
+
+.btn.btn-icon-only.btn-lg.btn-close {
+    background-color: #fff;
+    font-size: 25px;
+    height: auto;
+}
+
+.section-head {
+    margin: 0px 0px 10px;
+    padding: 6px 0;
+}
