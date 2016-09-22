@@ -47,6 +47,7 @@
                 angularPlayer.playTrack($ctrl.phrase.id);
             } else {
                 $ctrl.phrase.isClean = true;
+                delete $ctrl.phrase.guid;
                 api.quickPhrase($ctrl.phrase);
             }
         }

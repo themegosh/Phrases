@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Services;
 
 namespace Phrases.Services
@@ -33,6 +34,9 @@ namespace Phrases.Services
             if (!phrase.Contains("userId"))
                 phrase["userId"] = userId;
 
+            //undo cache if it exists
+            HttpContext.Current.Cache.Remove("QuickPlay_" + phrase["guid"]);
+            
             //TODO determin if we actually need to query watson for a new audio file
             phrase = WatsonService.GetTTS(phrase);
             PhraseRepository.SavePhrase(phrase);
@@ -50,13 +54,27 @@ namespace Phrases.Services
                 phrase["guid"] = Guid.NewGuid().ToString();
             
             phrase = WatsonService.GetTTS(phrase);
-            //if (HttpContext.Current.Session["QuickPhrase"] != null)
-            //{
-            //    DeletePhrase((Document)HttpContext.Current.Session["QuickPhrase"]);
-            //}
-            //HttpContext.Current.Session["QuickPhrase"] = phrase;
 
+            string filePath = HttpContext.Current.Server.MapPath("~/tts/") + phrase["guid"];
+
+            //this quick phrase gets deleted after 1hr
+            HttpContext.Current.Cache.Add("QuickPlay_" + phrase["guid"], filePath, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(30), System.Web.Caching.CacheItemPriority.Normal, OnCachedItemRemoved);
+            
             return phrase;
+        }
+        private static CacheItemRemovedCallback OnCachedItemRemoved = new CacheItemRemovedCallback(CachedItemRemovedCallback);
+        private static void CachedItemRemovedCallback(string key, Object val, CacheItemRemovedReason reason)
+        {
+            var filePath = (string)val;
+            //remove it
+            if (System.IO.File.Exists(filePath + ".wav"))
+            {
+                System.IO.File.Delete(filePath + ".wav");
+            }
+            if (System.IO.File.Exists(filePath + ".mp3"))
+            {
+                System.IO.File.Delete(filePath + ".mp3");
+            }
         }
 
     }
