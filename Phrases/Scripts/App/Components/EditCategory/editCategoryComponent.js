@@ -21,6 +21,10 @@
                     name: "",
                     icon: ""
                 };
+                $('#txtCategoryName').ready(function () {
+                    $('#txtCategoryName').focus();
+                    $('#txtCategoryName').click();
+                });
             } else {
                 angular.copy($ctrl.resolve.category, $ctrl.category);//editing existing
             }
