@@ -8,6 +8,9 @@
         //properties
         $ctrl.newTag = "";
         $ctrl.checkedTags = [];
+        $ctrl.sortProperty = {
+            type: 'text'
+        };
 
         //events
         $ctrl.$onInit = function () {

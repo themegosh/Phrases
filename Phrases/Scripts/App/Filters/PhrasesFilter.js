@@ -11,10 +11,9 @@
 
                 angular.forEach(phrases, function (phrase) {
                     var shouldAdd = false;
-                    console.log(phrase);
+                    //console.log(phrase);
                     angular.forEach(phrase.categories, function (category) {
                         if (category == curCategory) {
-                            console.log("adding" + phrase.Text + " category " + curCategory);
                             shouldAdd = true;
                         }
                     });

@@ -86,6 +86,14 @@ body {
     padding: 5px 20px;
 }
 
+.todo-container .btn-filter {
+    float:right;
+}
+
+.todo-container .btn-filter .btn {
+    margin: 18px 0px;
+}
+
 .playingInfo {
     margin: 24px;
     overflow: hidden;

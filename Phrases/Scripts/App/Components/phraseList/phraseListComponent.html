@@ -1,6 +1,16 @@
 ﻿<div class="todo-projects-container">
     <div class="todo-padding-b-0">
         <div class="todo-head">
+            <div class="btn-group btn-filter">
+                <button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a ng-click="$ctrl.sortProperty.type = ''; $ctrl.sortProperty.reverse = ''">Clear</a></li>
+                    <li><a ng-click="$ctrl.sortProperty.type = 'text'; $ctrl.sortProperty.reverse = ''">Alphabetically Ascending</a></li>
+                    <li><a ng-click="$ctrl.sortProperty.type = 'text'; $ctrl.sortProperty.reverse = 'reverse'">Alphabetically Descending</a></li>
+                </ul>
+            </div>
             <h1>{{$ctrl.categoryFilter}}</h1>
         </div>
     </div>
@@ -9,14 +19,8 @@
         <p><button type="button" ng-click="$ctrl.btnPlay(null)" class="btn btn-success btn-lg">Add a Phrase</button></p>
     </div>
     <div>
-        <!--<div ng-show="$ctrl.editMode && $ctrl.phrases.length > 0" ng-click="$ctrl.btnPlay(null)">
-            <div class="todo-projects-item clearfix">
-                <div class="btn btn-block btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> New Phrase</div>
-            </div>
-            <div class="todo-projects-divider"></div>
-        </div>-->
         <div id="phraseContainer" ng-model="$ctrl.phrases">
-            <div ng-repeat="phrase in $ctrl.phrases  | selectedCategory:$ctrl.categoryFilter track by $index" ng-click="$ctrl.btnPlay(phrase)">
+            <div ng-repeat="phrase in $ctrl.phrases  | selectedCategory:$ctrl.categoryFilter | orderBy:$ctrl.sortProperty.type:$ctrl.sortProperty.reverse track by $index" ng-click="$ctrl.btnPlay(phrase)">
                 <div class="todo-projects-item clearfix">
                     <div ng-show="$ctrl.editMode" class="todo-inline todo-float-r">
                         <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>

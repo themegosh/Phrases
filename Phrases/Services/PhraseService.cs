@@ -34,6 +34,9 @@ namespace Phrases.Services
             if (!phrase.Contains("userId"))
                 phrase["userId"] = userId;
 
+            if (!phrase.Contains("date"))
+                phrase["date"] = DateTime.Now.ToString();
+
             //undo cache if it exists
             HttpContext.Current.Cache.Remove("QuickPlay_" + phrase["guid"]);
             
