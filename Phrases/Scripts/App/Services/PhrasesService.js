@@ -31,7 +31,7 @@
         }
 
         ps.resizeScrollbar = function () {
-            console.log("Resizing scrollbar");
+            //console.log("Resizing scrollbar");
             var scrollbarMaxHeight = $('.page-sidebar-menu').outerHeight();
             $('.page-sidebar').height($(window).height() - $('.page-header').outerHeight());
         }

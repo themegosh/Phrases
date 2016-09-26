@@ -26,7 +26,7 @@ namespace Phrases
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                 "~/Scripts/jQuery/jquery-3.1.0.min.js",
                 "~/Scripts/Bootstrap/bootstrap.min.js",
-                "~/Scripts/jquery.scrollbar/jquery.scrollbar.min.js",
+                "~/Scripts/Plugins/jquery.scrollbar/jquery.scrollbar.min.js",
                 "~/Scripts/Plugins/toastr.js",
                 //"~/Scripts/Theme/theme.js",
                 //"~/Scripts/Theme/theme.layout.js",
@@ -73,7 +73,7 @@ namespace Phrases
             bundles.Add(new StyleBundle("~/Content/app/css").Include(
                 "~/Scripts/jQuery/jquery-ui.min.css",
                 "~/Scripts/Angular/angular-ui/ng-sortable.min.css",
-                "~/Scripts/jquery.scrollbar/jquery.scrollbar.css"));
+                "~/Scripts/Plugins/jquery.scrollbar/jquery.scrollbar.css"));
 
             bundles.Add(new StyleBundle("~/Content/LoginRegister").Include(
                 "~/Content/Theme/login.css"));
@@ -82,7 +82,7 @@ namespace Phrases
             // force minification for development
             // There is no realese version on production 
             // must be forced to minify
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

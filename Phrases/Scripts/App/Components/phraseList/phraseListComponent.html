@@ -6,9 +6,9 @@
                     Sort <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
                 </button>
                 <ul class="dropdown-menu pull-right">
-                    <li><a ng-click="$ctrl.sortProperty.type = ''; $ctrl.sortProperty.reverse = ''">Clear</a></li>
-                    <li><a ng-click="$ctrl.sortProperty.type = 'text'; $ctrl.sortProperty.reverse = ''">Alphabetically Ascending</a></li>
-                    <li><a ng-click="$ctrl.sortProperty.type = 'text'; $ctrl.sortProperty.reverse = 'reverse'">Alphabetically Descending</a></li>
+                    <li><a ng-click="$ctrl.sortProperty.type = ''; $ctrl.sortProperty.reverse = ''"><i class="fa fa-ban" aria-hidden="true"></i> Clear</a></li>
+                    <li><a ng-click="$ctrl.sortProperty.type = 'text'; $ctrl.sortProperty.reverse = ''"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i> Alphabetically Ascending</a></li>
+                    <li><a ng-click="$ctrl.sortProperty.type = 'text'; $ctrl.sortProperty.reverse = 'reverse'"><i class="fa fa-sort-alpha-desc" aria-hidden="true"></i> Alphabetically Descending</a></li>
                 </ul>
             </div>
             <h1>{{$ctrl.categoryFilter}}</h1>
