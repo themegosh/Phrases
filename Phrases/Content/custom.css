@@ -11,9 +11,9 @@ body {
 }
 
 .page-logo span {
-    font-weight: 300;
-    font-size: 2.5em;
-    line-height: 1.75em;
+    font-weight: 300;    
+    font-size: 2.3em;
+    line-height: 2.12em;
 }
 
 .page-header.navbar .page-logo {
@@ -241,4 +241,9 @@ body {
 .navbar-default {
     background-color: #FFF;
     border-color: #e7e7e7;
+}
+
+.page-sidebar-wrapper {
+    position:fixed;
+    overflow-y:scroll;
 }

@@ -29,7 +29,9 @@
             api.getUserData();
             $ctrl.categories = ps.categories;
             $ctrl.phrases = ps.phrases;
-            angularPlayer.changeVolume($ctrl.slider.curVol)
+            angularPlayer.changeVolume($ctrl.slider.curVol);
+            ps.resizeScrollbar();
+            $(window).resize(ps.resizeScrollbar);
         }
 
         $ctrl.btnSelectFilter = function (category) {

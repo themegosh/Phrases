@@ -23,20 +23,16 @@ namespace Phrases
             //          "~/Scripts/bootstrap.js",
             //          "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/main").Include(
+            bundles.Add(new ScriptBundle("~/bundles/js").Include(
                 "~/Scripts/jQuery/jquery-3.1.0.min.js",
                 "~/Scripts/Bootstrap/bootstrap.min.js",
-                "~/Scripts/Plugins/jquery.slimscroll.js",
-                "~/Scripts/Plugins/js.cookie.min.js", //??
-                "~/Scripts/Plugins/js.cookie-2.1.2.min.js", //??
-                "~/Scripts/Plugins/jquery.blockui.min.js",
-                "~/Scripts/Plugins/bootstrap-switch.min.js",
+                "~/Scripts/jquery.scrollbar/jquery.scrollbar.min.js",
                 "~/Scripts/Plugins/toastr.js",
-                "~/Scripts/Theme/theme.js",
-                "~/Scripts/Theme/theme.layout.js",
+                //"~/Scripts/Theme/theme.js",
+                //"~/Scripts/Theme/theme.layout.js",
                 "~/Scripts/App/Custom.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+            bundles.Add(new ScriptBundle("~/bundles/app/js").Include(
                 "~/Scripts/jQuery/jquery-ui.min.js",
                 "~/Scripts/Angular/angular.min.js",
                 "~/Scripts/Angular/angular-touch.min.js",
@@ -61,21 +57,23 @@ namespace Phrases
                 "~/Scripts/App/Components/Volume/VolumeComponent.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Scripts/jQuery/jquery-ui.min.css",
-                "~/Scripts/Angular/angular-ui/ng-sortable.min.css",
                 "~/Content/Bootstrap/bootstrap.min.css",
                 "~/Content/Theme/layout.css",
                 "~/Content/Theme/components-md.css",
                 "~/Content/Theme/plugins-md.css",
                 "~/Content/Theme/todo.css",
                 "~/Content/Theme/blue.css",
-                "~/Content/Theme/rzslider.css",
                 "~/Content/Site.css",
                 "~/Content/FontAwesome/font-awesome.min.css",
                 "~/Content/Theme/simple-line-icons.min.css",
                 "~/Content/Theme/bootstrap-switch.min.css",
                 "~/Content/Theme/toastr.css",
                 "~/Content/custom.css"));
+
+            bundles.Add(new StyleBundle("~/Content/app/css").Include(
+                "~/Scripts/jQuery/jquery-ui.min.css",
+                "~/Scripts/Angular/angular-ui/ng-sortable.min.css",
+                "~/Scripts/jquery.scrollbar/jquery.scrollbar.css"));
 
             bundles.Add(new StyleBundle("~/Content/LoginRegister").Include(
                 "~/Content/Theme/login.css"));

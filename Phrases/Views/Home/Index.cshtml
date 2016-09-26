@@ -1,4 +1,11 @@
-﻿
+﻿@section Styles {
+    @Styles.Render("~/Content/app/css")
+}
+
 <div ng-app="Phrases" >
     <phrases></phrases>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/app/js")
+}

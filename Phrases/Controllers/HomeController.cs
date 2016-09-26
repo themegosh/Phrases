@@ -11,7 +11,7 @@ namespace Phrases.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Phrases";
+            ViewBag.Title = "My Voice";
 
             return View();
         }

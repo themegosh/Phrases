@@ -352,6 +352,7 @@
     <Content Include="Content\Fonts\Simple-Line-Icons.eot" />
     <Content Include="Content\Fonts\Simple-Line-Icons.ttf" />
     <Content Include="Content\Fonts\Simple-Line-Icons.woff" />
+    <Content Include="Content\Fonts\Simple-Line-Icons.woff2" />
     <None Include="Properties\PublishProfiles\Phrases AWS.pubxml" />
     <Content Include="libmp3lame.32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -431,6 +432,9 @@
     <Content Include="Scripts\Plugins\bootstrap-switch.min.js" />
     <Content Include="Scripts\Plugins\excanvas.min.js" />
     <Content Include="Scripts\Plugins\jquery.blockui.min.js" />
+    <Content Include="Scripts\Plugins\jquery.scrollbar\jquery.scrollbar.css" />
+    <Content Include="Scripts\Plugins\jquery.scrollbar\jquery.scrollbar.js" />
+    <Content Include="Scripts\Plugins\jquery.scrollbar\jquery.scrollbar.min.js" />
     <Content Include="Scripts\Plugins\jquery.slimscroll.js" />
     <Content Include="Scripts\Plugins\jquery.slimscroll.min.js" />
     <Content Include="Scripts\Plugins\js.cookie-2.1.2.min.js" />

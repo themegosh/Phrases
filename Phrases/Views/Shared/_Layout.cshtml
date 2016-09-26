@@ -6,6 +6,7 @@
     <title>@ViewBag.Title</title>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
 
 </head>
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md page-sidebar-fixed">
@@ -47,9 +48,7 @@
         </div>
     </div>
 
-    @Scripts.Render("~/bundles/main")
-    @Scripts.Render("~/bundles/app")
-
+    @Scripts.Render("~/bundles/js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

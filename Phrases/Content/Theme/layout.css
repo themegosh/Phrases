@@ -787,9 +787,9 @@ Page sidebar
     position: relative;
     float: right; }
   .page-sidebar-fixed .page-sidebar {
-    position: fixed !important;
     margin-left: 0;
-    top: 68px; }
+    /*position: fixed !important;
+    top: 68px;*/ }
   .page-sidebar-fixed .page-sidebar-menu > li.last {
     margin-bottom: 15px !important; }
   .page-sidebar-fixed .page-sidebar-menu .sub-menu {

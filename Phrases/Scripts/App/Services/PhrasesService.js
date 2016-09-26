@@ -24,8 +24,16 @@
                 ps.phrases.push(phrase);
             });
 
+            ps.resizeScrollbar();
+
             console.log("ps.importUserData()");
             console.log(ps);
+        }
+
+        ps.resizeScrollbar = function () {
+            console.log("Resizing scrollbar");
+            var scrollbarMaxHeight = $('.page-sidebar-menu').outerHeight();
+            $('.page-sidebar').height($(window).height() - $('.page-header').outerHeight());
         }
         
         ps.savePhrase = function (phrase) {
@@ -42,6 +50,8 @@
                 console.log("ps.savePhrase() saving new phrase");
                 ps.phrases.push(phrase);
             }
+
+            ps.resizeScrollbar();
         }
         
         ps.deletePhrase = function (phrase) {
@@ -51,6 +61,7 @@
                     ps.phrases.splice(key, 1); //remove this one
                 }
             });
+            ps.resizeScrollbar();
         }
 
         ps.saveCategory = function (category) {
@@ -66,6 +77,7 @@
                 ps.categories.push(category);
                 console.log("ps.saveCategory() saving new category");
             }
+            ps.resizeScrollbar();
         }
 
         ps.deleteCategory = function (category) {
@@ -75,6 +87,7 @@
                     ps.categories.splice(key, 1); //remove this one
                 }
             });
+            ps.resizeScrollbar();
         }
 
         //ps.replace = function (newPhrase, oldPhrase) {
