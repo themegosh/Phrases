@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict";
 
-    EditPhrasesController.$inject = ['ApiService', 'PhrasesService', 'angularPlayer'];
-    function EditPhrasesController(api, ps, angularPlayer) {
+    EditPhrasesController.$inject = ['ApiService', 'PhrasesService', 'SoundService'];
+    function EditPhrasesController(api, ps, ss) {
         var $ctrl = this;
 
         //properties
@@ -43,8 +43,7 @@
         
         $ctrl.btnQuickPhrase = function () {
             if ($ctrl.phrase.isClean) {
-                angularPlayer.addTrack($ctrl.phrase);
-                angularPlayer.playTrack($ctrl.phrase.id);
+                ss.playSound($ctrl.phrase);
             } else {
                 $ctrl.phrase.isClean = true;
                 delete $ctrl.phrase.guid;

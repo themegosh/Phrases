@@ -69,7 +69,12 @@
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
-            <sound-manager></sound-manager>
+            <audio id="audio-ele">
+                <source id="audio-src" src="" type="audio/mp3" />
+            </audio>
+            <div class="fab-wrapper">
+                <div class="fab" ng-click="$ctrl.btnPlayPause()">+</div>
+            </div>
             <div ng-show="$ctrl.editMode" class="alert alert-warning">
                 <h2>Edit Mode</h2>
                 <ul>

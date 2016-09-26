@@ -20,7 +20,7 @@
             ps.phrases.length = 0;//clear the old ones
             ps.phraseIndex = 1; //cant start at 0 (soundmanager req)
             angular.forEach(userData.Phrases, function (phrase) {
-                ps.addSoundManagerProperties(phrase);
+                //ps.addSoundManagerProperties(phrase);
                 ps.phrases.push(phrase);
             });
 
@@ -37,7 +37,7 @@
         }
         
         ps.savePhrase = function (phrase) {
-            ps.addSoundManagerProperties(phrase);
+            //ps.addSoundManagerProperties(phrase);
             var shouldAdd = true;
             angular.forEach(ps.phrases, function (aPhrase, key) {
                 if (aPhrase.guid == phrase.guid) { //update this one instead of adding
@@ -50,7 +50,6 @@
                 console.log("ps.savePhrase() saving new phrase");
                 ps.phrases.push(phrase);
             }
-
             ps.resizeScrollbar();
         }
         
@@ -88,38 +87,6 @@
                 }
             });
             ps.resizeScrollbar();
-        }
-
-        //ps.replace = function (newPhrase, oldPhrase) {
-        //    angular.forEach(ps.phrases, function (aPhrase, key, phrases) {
-        //        if (aPhrase.text === oldPhrase.text) { //found it
-        //            //replace it
-        //            newPhrase.id = ps.phraseIndex;
-        //            ps.phraseIndex++;
-        //            ps.phrases[key] = newPhrase;
-        //        }
-        //    });
-        //}
-     
-        //private functions
-        //ps.refreshTags = function () {
-        //    ps.tags.length = 0;
-        //    angular.forEach(ps.phrases, function (aPhrase, key) {
-        //        angular.forEach(aPhrase.tags, function (tag) {
-        //            if ($.inArray(tag, ps.tags) == -1) {
-        //                ps.tags.push(tag);
-        //            }
-        //        });
-        //    });
-        //}
-
-        ps.addSoundManagerProperties = function (phrase) {
-            //required attributes for angular sound-manager
-            phrase.id = ps.phraseIndex;
-            ps.phraseIndex++;
-            phrase.title = phrase.text;
-            phrase.artist = "";
-            phrase.url = "api/tts/GetAudio?id=" + phrase.guid + ".mp3";
         }
 
         return ps;

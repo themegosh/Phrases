@@ -12,7 +12,8 @@ namespace Phrases
             //            "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*"
+                        ));
 
             //// Use the development version of Modernizr to develop with and learn from. Then, when you're
             //// ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -26,11 +27,12 @@ namespace Phrases
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                 "~/Scripts/jQuery/jquery-3.1.0.min.js",
                 "~/Scripts/Bootstrap/bootstrap.min.js",
-                "~/Scripts/Plugins/jquery.scrollbar/jquery.scrollbar.min.js",
+                //"~/Scripts/Plugins/jquery.scrollbar/jquery.scrollbar.min.js",
                 "~/Scripts/Plugins/toastr.js",
                 //"~/Scripts/Theme/theme.js",
                 //"~/Scripts/Theme/theme.layout.js",
-                "~/Scripts/App/Custom.js"));
+                "~/Scripts/App/Custom.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/app/js").Include(
                 "~/Scripts/jQuery/jquery-ui.min.js",
@@ -41,20 +43,22 @@ namespace Phrases
                 "~/Scripts/Angular/angular-ui/ui-bootstrap-tpls.min.js",
                 "~/Scripts/Angular/angular-ui/ng-sortable.min.js",
                 "~/Scripts/Angular/angular-confirm.js",
-                "~/Scripts/Angular/angular-soundmanager2.js",
+                //"~/Scripts/Angular/angular-soundmanager2.js",
                 "~/Scripts/Angular/angular-bootstrap-switch.js",
                 "~/Scripts/Angular/rzslider.js",
 
                 "~/Scripts/App/Phrases.js",
                 "~/Scripts/App/Services/PhrasesService.js",
                 "~/Scripts/App/Services/ApiService.js",
+                "~/Scripts/App/Services/SoundService.js",
                 "~/Scripts/App/Filters/PhrasesFilter.js",
                 "~/Scripts/App/Components/Phrases/PhrasesComponent.js",
                 "~/Scripts/App/Components/User/UserComponent.js",
                 "~/Scripts/App/Components/PhraseList/phraseListComponent.js",
                 "~/Scripts/App/Components/EditPhrase/editPhraseComponent.js",
                 "~/Scripts/App/Components/EditCategory/editCategoryComponent.js",
-                "~/Scripts/App/Components/Volume/VolumeComponent.js"));
+                "~/Scripts/App/Components/Volume/VolumeComponent.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/Bootstrap/bootstrap.min.css",
@@ -68,21 +72,24 @@ namespace Phrases
                 "~/Content/Theme/simple-line-icons.min.css",
                 "~/Content/Theme/bootstrap-switch.min.css",
                 "~/Content/Theme/toastr.css",
-                "~/Content/custom.css"));
+                "~/Content/custom.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/app/css").Include(
                 "~/Scripts/jQuery/jquery-ui.min.css",
-                "~/Scripts/Angular/angular-ui/ng-sortable.min.css",
-                "~/Scripts/Plugins/jquery.scrollbar/jquery.scrollbar.css"));
+                "~/Scripts/Angular/angular-ui/ng-sortable.min.css"
+                //"~/Scripts/Plugins/jquery.scrollbar/jquery.scrollbar.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/LoginRegister").Include(
-                "~/Content/Theme/login.css"));
+                "~/Content/Theme/login.css"
+                ));
 
 
             // force minification for development
             // There is no realese version on production 
             // must be forced to minify
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

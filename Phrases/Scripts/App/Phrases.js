@@ -2,7 +2,7 @@
     "use strict";
     angular.module("Phrases", [
         "ui.bootstrap",
-        'angularSoundManager',
+        //'angularSoundManager',
         'frapontillo.bootstrap-switch',
         'rzModule',
         'ngTouch',

@@ -396,7 +396,6 @@
     <Content Include="Scripts\App\Components\phraseList\phraseListComponent.html" />
     <Content Include="Scripts\App\Components\User\UserComponent.js" />
     <Content Include="Scripts\App\Components\User\UserModal.html" />
-    <Content Include="Scripts\App\Components\Volume\VolumeComponent.js" />
     <Content Include="Scripts\App\Services\ApiService.js" />
     <Content Include="Scripts\App\Components\EditPhrase\editPhraseComponent.js" />
     <Content Include="Scripts\App\Components\Phrases\Phrases.html" />
@@ -406,8 +405,7 @@
     <Content Include="Scripts\App\Phrases.js" />
     <Content Include="Scripts\App\Filters\PhrasesFilter.js" />
     <Content Include="Scripts\App\Services\PhrasesService.js" />
-    <Content Include="Scripts\App\Components\Volume\VolumeController.js" />
-    <Content Include="Scripts\App\Components\Volume\VolumeModal.html" />
+    <Content Include="Scripts\App\Services\SoundService.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />

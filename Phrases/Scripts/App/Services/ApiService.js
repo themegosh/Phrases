@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("Phrases").factory("ApiService", ['$http', "PhrasesService", 'angularPlayer', function ($http, ps, angularPlayer) {
+    angular.module("Phrases").factory("ApiService", ['$http', "PhrasesService", 'SoundService', function ($http, ps, ss) {
 
         var api = {};
 
@@ -47,13 +47,8 @@
             }).then(function successCallback(response) {
                 console.log("quickPhrase SUCCESS:");
                 angular.copy(response.data, phrase);
-                ps.addSoundManagerProperties(phrase);
-                angularPlayer.clearPlaylist(function () {
-                    angularPlayer.addTrack(phrase);
-                    angularPlayer.playTrack(phrase.id);
-                });
-                //angularPlayer.addTrack(phrase);
-                //angularPlayer.playTrack(phrase.id);
+                //ps.addSoundManagerProperties(phrase);
+                ss.playSound(phrase);
                 console.log(phrase);
             }, function errorCallback(response) {
                 console.log("quickPhrase FAIL:");

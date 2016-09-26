@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict";
 
-    PhraseListController.$inject = ['ApiService', 'PhrasesService', '$uibModal', '$filter', 'angularPlayer'];
-    function PhraseListController(api, ps, $uibModal, $filter, angularPlayer) {
+    PhraseListController.$inject = ['ApiService', 'PhrasesService', '$uibModal', '$filter', 'SoundService'];
+    function PhraseListController(api, ps, $uibModal, $filter, ss) {
         var $ctrl = this;
 
         //properties
@@ -48,18 +48,7 @@
         
         $ctrl.btnPlay = function (phrase) {
             if (!$ctrl.editMode && phrase != null) {
-                try {
-                    angularPlayer.addTrack(phrase);
-                    angularPlayer.playTrack(phrase.id);
-                    //angularPlayer.clearPlaylist(function () {
-                    //    angularPlayer.addTrack(phrase);
-                    //    angularPlayer.playTrack(phrase.id);
-                    //});
-                }
-                catch (ex) {
-                    console.log(ex);
-                    showNotification("Error", ex, "error");
-                }
+                ss.playSound(phrase);
             } else {
                 var modalInstance = $uibModal.open({
                     animation: true,
