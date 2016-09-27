@@ -7,17 +7,15 @@
 
         //properties
         $ctrl.checkedCategories = [];
-        $ctrl.categories = [];
+        $ctrl.phrase = {};
 
         //events
         $ctrl.$onInit = function () {
-            console.log("$onInit EditPhrasesController");
             if ($ctrl.resolve.phrase == null) {
                 $ctrl.modalTitle = "New Phrase";
                 $ctrl.phrase = {
                     text: "",
-                    categories: [],
-                    hash: ""
+                    categories: []
                 };
                 $('#txtPhrase').ready(function () {
                     $('#txtPhrase').focus();
@@ -25,38 +23,43 @@
                 });
             } else {
                 $ctrl.modalTitle = "Edit Phrase";
-                $ctrl.phrase = $ctrl.resolve.phrase;
+                angular.copy($ctrl.resolve.phrase, $ctrl.phrase);
+                
+                //$ctrl.phrase = $ctrl.resolve.phrase;
             }
-            angular.copy(ps.categories, $ctrl.categories);
-            //$ctrl.categories = angular.copy(ps.categories);
+            angular.copy(ps.categories, $ctrl.checkedCategories);
+            //angular.copy(ps.categories, $ctrl.categories);
 
-            angular.forEach($ctrl.categories, function (category) {
-                $ctrl.checkedCategories.push({
-                    checked: $ctrl.hasCategory(category),
-                    name: category.name
-                })
+            angular.forEach($ctrl.checkedCategories, function (category) {
+                category.checked = $ctrl.hasCategory(category);
             });
-
-            console.log(ps.categories);
             console.log($ctrl);
         }
         
+        $ctrl.btnUploadClick = function () {
+            $('.audio-hidden-input')[0].click();
+        }
+
         $ctrl.btnQuickPhrase = function () {
             if ($ctrl.phrase.isClean) {
-                ss.playSound($ctrl.phrase);
+                if ($ctrl.phrase.tempGuid)
+                    ss.playSound($ctrl.phrase.tempGuid);
+                else
+                    ss.playSound($ctrl.phrase.guid);
             } else {
                 $ctrl.phrase.isClean = true;
-                delete $ctrl.phrase.guid;
-                api.quickPhrase($ctrl.phrase);
+                api.quickPhrase($ctrl.phrase, true);
             }
         }
 
         $ctrl.ok = function () {
             //update the categories to align with the checked ones
+            delete $ctrl.phrase.tempGuid; //remove unneeded data
+            delete $ctrl.phrase.isClean;
             $ctrl.phrase.categories.length = 0;
             angular.forEach($ctrl.checkedCategories, function (category) {
                 if (category.checked) {
-                    $ctrl.phrase.categories.push(category.name);
+                    $ctrl.phrase.categories.push(category.guid);
                 }
             });
             if ($ctrl.phrase.text !== "") {
@@ -77,46 +80,59 @@
         $ctrl.hasCategory = function (aCategory) {
             var hasCategory = false;
             angular.forEach($ctrl.phrase.categories, function (category) {
-                if (aCategory.name == category)
+                if (aCategory.guid == category)
                     hasCategory = true;
             });
             return hasCategory;
         }
 
-        //$ctrl.addTag = function () {
-        //    if ($.inArray($ctrl.newTag, $ctrl.phrase.tags) == -1) {
-        //        $ctrl.phrase.tags.push($ctrl.newTag);
-        //        $ctrl.checkedTags.push({
-        //            Checked: true,
-        //            Tag: $ctrl.newTag
-        //        })
+        //$ctrl.$on("fileSelected", function (event, args) {
+        //    $scope.$apply(function () {            
+        //        //add the file object to the scope's files collection
+        //        $scope.files.push(args.file);
+        //    });
+        //})
+
+        //$ctrl.uploadFile = function () {
+        //    var fd = new FormData();
+        //    for (var i in scope.files) {
+        //        fd.append("uploadedFile", scope.files[i]);
         //    }
-        //    else {
-        //        showNotification("Error", "Category already exists!", "error");
-        //    }
-        //    $ctrl.newTag = "";
+        //    var xhr = new XMLHttpRequest();
+        //    xhr.upload.addEventListener("progress", uploadProgress, false);
+        //    xhr.addEventListener("load", uploadComplete, false);
+        //    xhr.addEventListener("error", uploadFailed, false);
+        //    xhr.addEventListener("abort", uploadCanceled, false);
+        //    xhr.open("POST", "/fileupload");
+        //    xhr.send(fd);
         //}
 
-        //$ctrl.checkChanged = function (tag) {
-        //    if (tag.Checked === false) {
-        //        removeA($ctrl.phrase.tags, tag.Tag);
-        //    } else {
-        //        $ctrl.phrase.tags.push(tag.Tag);
-        //    }
-        //}
-
-        
-
-        //function removeA(arr) {
-        //    var what, a = arguments, L = a.length, ax;
-        //    while (L > 1 && arr.length) {
-        //        what = a[--L];
-        //        while ((ax = arr.indexOf(what)) !== -1) {
-        //            arr.splice(ax, 1);
+        //function uploadProgress(evt) {
+        //    scope.$apply(function () {
+        //        if (evt.lengthComputable) {
+        //            scope.progress = Math.round(evt.loaded * 100 / evt.total)
+        //        } else {
+        //            scope.progress = 'unable to compute'
         //        }
-        //    }
-        //    return arr;
+        //    })
         //}
+
+        //function uploadComplete(evt) {
+        //    /* This event is raised when the server send back a response */
+        //    alert(evt.target.responseText)
+        //}
+
+        //function uploadFailed(evt) {
+        //    alert("There was an error attempting to upload the file.")
+        //}
+
+        //function uploadCanceled(evt) {
+        //    scope.$apply(function () {
+        //        scope.progressVisible = false
+        //    })
+        //    alert("The upload has been canceled by the user or the browser dropped the connection.")
+        //}
+        
     }
 
     angular.module("Phrases").component('editPhraseComponent', {
