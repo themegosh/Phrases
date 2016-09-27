@@ -73,14 +73,14 @@ namespace Phrases.Controllers
         {
             try
             {
-                var phrase = PhraseRepository.GetPhrase(id);
-                if (phrase == null)
-                    throw new Exception("Couldn't find phrase.");
-
                 var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/tts/") + id + ".mp3";
 
                 if (!File.Exists(filePath))
-                    WatsonService.GetTTS(phrase); //dev/production causes file inconsistiency. Create missing file.
+                {
+                    var phrase = PhraseRepository.GetPhrase(id);
+                    if (phrase != null)
+                        WatsonService.GetTTS(phrase); //dev/production causes file inconsistiency. Create missing file.
+                }
 
                 var stream = new FileStream(filePath, FileMode.Open);
                 var result = new HttpResponseMessage(HttpStatusCode.OK);
