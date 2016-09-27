@@ -73,14 +73,22 @@ namespace Phrases.Controllers
         {
             try
             {
-                var mappedPath = System.Web.Hosting.HostingEnvironment.MapPath("~/tts/");
-                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-                var stream = new FileStream(mappedPath + id, FileMode.Open);
+                var phrase = PhraseRepository.GetPhrase(id);
+                if (phrase == null)
+                    throw new Exception("Couldn't find phrase.");
+
+                var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/tts/") + id + ".mp3";
+
+                if (!File.Exists(filePath))
+                    WatsonService.GetTTS(phrase); //dev/production causes file inconsistiency. Create missing file.
+
+                var stream = new FileStream(filePath, FileMode.Open);
+                var result = new HttpResponseMessage(HttpStatusCode.OK);
+
                 result.Content = new StreamContent(stream);
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("audio/mpeg");
-
-                //Response.AddHeader("Content-Range", "bytes 0-" + (resultStream.Length - 1).ToString() + "/" + resultStream.Length.ToString());
-                result.Content.Headers.ContentRange = new ContentRangeHeaderValue(stream.Length - 1);
+                result.Content.Headers.ContentRange = new ContentRangeHeaderValue(stream.Length);
+                
                 return result;
             }
             catch (Exception ex)

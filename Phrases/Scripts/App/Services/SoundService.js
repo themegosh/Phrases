@@ -6,7 +6,7 @@
         ss.playSound = function (guid, shouldReload) {
             $('.fab').fadeIn();
 
-            var url = "api/tts/GetAudio?id=" + guid + ".mp3";
+            var url = "api/tts/GetAudio/" + guid;
             var audio = $('#audio-ele');
             if ($("#audio-src").attr("src") != url || shouldReload) {
                 $("#audio-src").attr("src", url);
