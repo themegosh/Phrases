@@ -28,19 +28,32 @@ namespace Phrases.Services
 
         public static Document SavePhrase(Document phrase, string userId)
         {
-            if (!phrase.Contains("guid"))
-                phrase["guid"] = Guid.NewGuid().ToString();
-            
+            var shouldGetTTS = false;
             if (!phrase.Contains("userId"))
                 phrase["userId"] = userId;
 
             if (!phrase.Contains("date"))
                 phrase["date"] = DateTime.Now.ToString();
-                        
-            //TODO determin if we actually need to query watson for a new audio file
-            phrase = WatsonService.GetTTS(phrase);
+
+            if (!phrase.Contains("guid"))
+            {
+                phrase["guid"] = Guid.NewGuid().ToString();
+                shouldGetTTS = true;
+            }
+            else
+            {
+                //determin if we actually need to query watson for a new audio file
+                var referencePhrase = PhraseRepository.GetPhrase(phrase["guid"]);
+
+                if (!String.Equals(referencePhrase["text"], phrase["text"], StringComparison.Ordinal)) //is the text different?
+                    shouldGetTTS = true;
+            }
+
+            if (shouldGetTTS)
+                phrase = WatsonService.GetTTS(phrase); //update the TTS
+
             PhraseRepository.SavePhrase(phrase);
-            return phrase;
+            return phrase;            
         }
         
         public static List<dynamic> GetAllPhrases(string userId)

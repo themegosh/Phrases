@@ -28,6 +28,21 @@ namespace Phrases.Services
             }
         }
 
+        public static Document GetPhrase(string guid)
+        {
+            try
+            {
+                var client = new AmazonDynamoDBClient();
+                Table phrasesTable = Table.LoadTable(client, TABLE_NAME);
+                return phrasesTable.GetItem(new Primitive(guid));
+            }
+            catch (Exception ex)
+            {
+                LogRepository.Log(ex.ToString());
+                throw ex;
+            }
+        }
+
         public static List<dynamic> GetAllPhrases(string userId)
         {
             try
