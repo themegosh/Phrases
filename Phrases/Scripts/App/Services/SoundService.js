@@ -3,12 +3,12 @@
     angular.module("Phrases").factory("SoundService", [function () {
         var ss = {};
 
-        ss.playSound = function (phrase) {
+        ss.playSound = function (guid, shouldReload) {
             $('.fab').fadeIn();
 
-            var url = "api/tts/GetAudio?id=" + phrase.guid + ".mp3";
+            var url = "api/tts/GetAudio?id=" + guid + ".mp3";
             var audio = $('#audio-ele');
-            if ($("#audio-src").attr("src") != url) {
+            if ($("#audio-src").attr("src") != url || shouldReload) {
                 $("#audio-src").attr("src", url);
                 audio[0].load();//load new file
             }

@@ -43,8 +43,14 @@ namespace Phrases.Services
         {
             try
             {
-                var filenameWithoutExtention = HttpContext.Current.Server.MapPath("~/tts/") + phrase["guid"];
+                var filenameWithoutExtention = HttpContext.Current.Server.MapPath("~/tts/");
 
+                //quickPhrase processing
+                if (phrase.Contains("tempGuid"))
+                    filenameWithoutExtention += phrase["tempGuid"];
+                else
+                    filenameWithoutExtention += phrase["guid"];
+                
                 if (phrase["text"] != null)
                 {
                     using (var handler = new HttpClientHandler { Credentials = new NetworkCredential(USERNAME, PASSWORD) })
@@ -56,32 +62,8 @@ namespace Phrases.Services
                         mediaFile.Result.CopyToAsync(fileStream); //create the wav file (fallback)
                     }
 
-                    //use sox
-                    try
-                    {
-                        System.Diagnostics.Process process = new System.Diagnostics.Process();
-                        process.StartInfo = new System.Diagnostics.ProcessStartInfo();
-                        process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                        process.StartInfo.FileName = @"C:\sox\sox.exe";
-                        process.StartInfo.Arguments = " -t wav -v 3.0 " + filenameWithoutExtention + ".wav -t mp3 -C 128.2 " + filenameWithoutExtention + ".mp3";
-                        //phrase.Add("Argruments", process.StartInfo.Arguments);
-                        process.Start();
-                        process.WaitForExit();
-                        int exitCode = process.ExitCode;
-                        
-                    }
-                    catch (Exception ex)
-                    {
-                        //throw ex;
-                    }
-
-                    //convert the wav to mp3
-                    //using (var reader = new WaveFileReader(filenameWithoutExtention + ".wav"))
-                    //using (var writer = new LameMP3FileWriter(filenameWithoutExtention + ".mp3", reader.WaveFormat, 128))
-                    //{
-                    //    reader.CopyTo(writer); //create the mp3 as well (preferred source)
-                    //    //phrase["url"] = "/api/tts/GetAudio?id="+ phrase["hash"] + ".mp3";
-                    //}
+                    ConvertToMp3(filenameWithoutExtention);
+                    
                     return phrase;
                 }
                 else
@@ -94,6 +76,19 @@ namespace Phrases.Services
                 LogRepository.Log(ex.ToString());
                 throw ex;
             }
+        }
+
+        private static void ConvertToMp3(string filenameWithoutExtention)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo = new System.Diagnostics.ProcessStartInfo();
+            process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            process.StartInfo.FileName = @"C:\sox\sox.exe";
+            process.StartInfo.Arguments = " -t wav -v 3.0 " + filenameWithoutExtention + ".wav -t mp3 -C 128.2 " + filenameWithoutExtention + ".mp3";
+            //phrase.Add("Argruments", process.StartInfo.Arguments);
+            process.Start();
+            process.WaitForExit();
+            //int exitCode = process.ExitCode;
         }
 
         private class TTSRequest

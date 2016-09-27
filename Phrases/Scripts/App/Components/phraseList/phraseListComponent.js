@@ -48,7 +48,7 @@
         
         $ctrl.btnPlay = function (phrase) {
             if (!$ctrl.editMode && phrase != null) {
-                ss.playSound(phrase);
+                ss.playSound(phrase.guid);
             } else {
                 var modalInstance = $uibModal.open({
                     animation: true,

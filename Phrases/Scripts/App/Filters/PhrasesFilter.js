@@ -4,16 +4,15 @@
         .filter('selectedCategory', function () {
             return function (phrases, curCategory) {
                 
-                if (curCategory === 'All' || curCategory === '')
+                if (curCategory.name === 'All' || curCategory.name === '')
                     return phrases;
 
                 var outPhrases = [];
 
                 angular.forEach(phrases, function (phrase) {
                     var shouldAdd = false;
-                    //console.log(phrase);
                     angular.forEach(phrase.categories, function (category) {
-                        if (category == curCategory) {
+                        if (category == curCategory.guid) {
                             shouldAdd = true;
                         }
                     });

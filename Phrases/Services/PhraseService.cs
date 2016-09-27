@@ -36,10 +36,7 @@ namespace Phrases.Services
 
             if (!phrase.Contains("date"))
                 phrase["date"] = DateTime.Now.ToString();
-
-            //undo cache if it exists
-            HttpContext.Current.Cache.Remove("QuickPlay_" + phrase["guid"]);
-            
+                        
             //TODO determin if we actually need to query watson for a new audio file
             phrase = WatsonService.GetTTS(phrase);
             PhraseRepository.SavePhrase(phrase);
@@ -53,15 +50,15 @@ namespace Phrases.Services
 
         public static Document QuickPhrase(Document phrase)
         {
-            if (!phrase.Contains("guid"))
-                phrase["guid"] = Guid.NewGuid().ToString();
+            if (!phrase.Contains("tempGuid"))
+                phrase["tempGuid"] = Guid.NewGuid().ToString();
             
             phrase = WatsonService.GetTTS(phrase);
 
-            string filePath = HttpContext.Current.Server.MapPath("~/tts/") + phrase["guid"];
+            string filePath = HttpContext.Current.Server.MapPath("~/tts/") + phrase["tempGuid"];
 
             //this quick phrase gets deleted after 1hr
-            HttpContext.Current.Cache.Add("QuickPlay_" + phrase["guid"], filePath, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(30), System.Web.Caching.CacheItemPriority.Normal, OnCachedItemRemoved);
+            HttpContext.Current.Cache.Add("QuickPlay_" + phrase["tempGuid"], filePath, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(30), System.Web.Caching.CacheItemPriority.Normal, OnCachedItemRemoved);
             
             return phrase;
         }

@@ -1,13 +1,15 @@
 ﻿(function () {
     "use strict";
 
-    PhrasesController.$inject = ['$scope', '$element', '$attrs', '$timeout', 'SoundService', 'ApiService', 'PhrasesService', '$rootScope', '$uibModal'];
-    function PhrasesController($scope, $element, $attrs, $timeout, ss, api, ps, $rootScope, $uibModal) {
+    PhrasesController.$inject = ['$scope', 'SoundService', 'ApiService', 'PhrasesService', '$uibModal'];
+    function PhrasesController($scope, ss, api, ps, $uibModal) {
         var $ctrl = this;
 
         //properties
         $ctrl.editMode = false;
-        $ctrl.categoryFilter = "All";
+        $ctrl.categoryFilter = {
+            name: "All"
+        };
         
         //events
         $ctrl.$onInit = function () {
@@ -20,12 +22,14 @@
 
         $ctrl.btnSelectFilter = function (category) {
             if (!$ctrl.editMode) {
-                if (category === 'All')
-                    $ctrl.categoryFilter = "All";
+                if (category.name === 'All')
+                    $ctrl.categoryFilter = {
+                        name: "All"
+                    };
                 else
-                    $ctrl.categoryFilter = category.name;
+                    angular.copy(category, $ctrl.categoryFilter);
             } else {
-                if (category === 'All')
+                if (category.name === 'All')
                     return;
 
                 //open category editor
@@ -46,7 +50,7 @@
             if ($ctrl.editMode === true) {
                 $ctrl.editMode = false;
             } else {
-                $ctrl.categoryFilter = "All";
+                $ctrl.categoryFilter.name = "All";
                 $ctrl.editMode = true;
             }
         }
@@ -73,8 +77,6 @@
                 }
             });
         }
-
-        
 
         $ctrl.btnPlayPause = function () {
             ss.playPause();

@@ -48,7 +48,7 @@
                 console.log("quickPhrase SUCCESS:");
                 angular.copy(response.data, phrase);
                 //ps.addSoundManagerProperties(phrase);
-                ss.playSound(phrase);
+                ss.playSound(phrase.tempGuid, true);
                 console.log(phrase);
             }, function errorCallback(response) {
                 console.log("quickPhrase FAIL:");

@@ -18,7 +18,7 @@
                 <span class="input-group-btn">
                     <button type="button" ng-click="$ctrl.btnAddPhrase()" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
                     <button type="button" ng-click="$ctrl.btnEditMode()" class="btn btn-warning" ng-hide="$ctrl.editMode" confirm="Are you sure you want to enter Edit Mode?"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
-                    <button type="button" ng-click="$ctrl.btnEditMode()" class="btn btn-warning" ng-show="$ctrl.editMode"><i class="fa fa-play" aria-hidden="true"></i> Play Mode</button>
+                    <button type="button" ng-click="$ctrl.btnEditMode()" class="btn btn-warning" ng-show="$ctrl.editMode"><i class="fa fa-play" aria-hidden="true"></i> Voice Mode</button>
                     <button type="button" ng-click="$ctrl.btnUser()" class="btn btn-primary"><i class="fa fa-user" aria-hidden="true"></i> User</button>
                 </span>
             </div>
@@ -38,21 +38,21 @@
         <div class="page-sidebar">
             <!-- BEGIN SIDEBAR MENU -->
             <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu ">
-                <li class="nav-item start " ng-click="$ctrl.btnSelectFilter('All')" ng-class="{active: $ctrl.categoryFilter == 'All'}">
+                <li class="nav-item start " ng-click="$ctrl.btnSelectFilter({name: 'All'})" ng-class="{active: $ctrl.categoryFilter.name == 'All'}">
                     <a class="nav-link nav-toggle">
                         <i class="icon-directions"></i>
                         <span class="title">All</span>
                         <span class="arrow"></span>
                     </a>
                 </li>
-                <li class="nav-item start " ng-class="{active: $ctrl.categoryFilter == category.name}" ng-repeat="category in $ctrl.categories">
+                <li class="nav-item start " ng-class="{active: $ctrl.categoryFilter.name == category.name}" ng-repeat="category in $ctrl.categories">
                     <a ng-click="$ctrl.btnSelectFilter(category)" class="nav-link nav-toggle">
                         <i class="{{category.icon}}"></i>
                         <span class="title">{{category.name}}</span>
                         <span class="arrow"></span>
                     </a>
                 </li>
-                <li class="nav-item start" ng-show="$ctrl.editMode" ng-click="$ctrl.btnSelectFilter(null)">
+                <li class="nav-item start" ng-show="$ctrl.editMode" ng-click="$ctrl.btnSelectFilter({name: null})">
                     <a class="nav-link nav-toggle">
                         <i class="icon-plus"></i>
                         <span class="title">New Category</span>
