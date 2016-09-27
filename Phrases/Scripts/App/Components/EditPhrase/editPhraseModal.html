@@ -34,7 +34,7 @@
 </div>
 <div class="modal-footer row">
     <div class="col-xs-4">
-        <button class="btn btn-danger btn-lg btn-block" confirm="Are you sure you want to delete this phrase?" type="button" ng-click="$ctrl.delete()"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
+        <button class="btn btn-danger btn-lg btn-block" ng-disabled="!$ctrl.phrase.guid" confirm="Are you sure you want to delete this phrase?" type="button" ng-click="$ctrl.delete()"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
     </div>
     <div class="col-xs-8">
         <button class="btn btn-success btn-lg btn-block" ng-disabled="$ctrl.phrase.text < 1" type="button" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
