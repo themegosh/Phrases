@@ -13,6 +13,7 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Phrases.Models;
 using System.Web.Services;
+using System.Web;
 
 namespace Phrases.Controllers
 {
@@ -144,6 +145,33 @@ namespace Phrases.Controllers
                 CategoryRepository.DeleteCategory(category);
 
                 return jsonResponse(category.ToJson(), HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage CustomAudioUpload()
+        {
+            try
+            {
+                var results = "";
+                string root = HttpContext.Current.Server.MapPath("~/App_Data");
+                var provider = new MultipartFormDataStreamProvider(root);
+
+                // Read the form data.
+                Request.Content.ReadAsMultipartAsync(provider);
+
+                // This illustrates how to get the file names.
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    results += file.Headers.ContentDisposition.FileName;
+                    results += "Server file path: " + file.LocalFileName;
+                }
+
+                return jsonResponse(results, HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
