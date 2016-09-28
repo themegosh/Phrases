@@ -377,6 +377,7 @@
     <Content Include="Scripts\Angular\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\Angular\angular-ui\ui-bootstrap.js" />
     <Content Include="Scripts\Angular\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="Scripts\Angular\angular-upload.min.js" />
     <Content Include="Scripts\Angular\angular.min.js.map" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\Angular\angular-bootstrap-switch.js" />

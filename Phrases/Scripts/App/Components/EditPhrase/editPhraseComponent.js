@@ -8,6 +8,7 @@
         //properties
         $ctrl.checkedCategories = [];
         $ctrl.phrase = {};
+        $ctrl.allowedTypes = "audio/vnd.wav,audio/aac,audio/mp4";
 
         //events
         $ctrl.$onInit = function () {
@@ -84,6 +85,10 @@
                     hasCategory = true;
             });
             return hasCategory;
+        }
+
+        $ctrl.customAudioUploadResult = function (response) {
+            console.log(response);
         }
 
         //$ctrl.$on("fileSelected", function (event, args) {

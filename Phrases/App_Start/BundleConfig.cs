@@ -35,17 +35,14 @@ namespace Phrases
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/app/js").Include(
-                "~/Scripts/jQuery/jquery-ui.min.js",
+                //"~/Scripts/jQuery/jquery-ui.min.js",
                 "~/Scripts/Angular/angular.min.js",
-                "~/Scripts/Angular/angular-touch.min.js",
-                "~/Scripts/Angular/angular-route.min.js",
-                "~/Scripts/Angular/angular-http-loader.min.js",
                 "~/Scripts/Angular/angular-ui/ui-bootstrap-tpls.min.js",
-                "~/Scripts/Angular/angular-ui/ng-sortable.min.js",
+                //"~/Scripts/Angular/angular-touch.min.js",
+                //"~/Scripts/Angular/angular-route.min.js",
+                "~/Scripts/Angular/angular-http-loader.min.js",
                 "~/Scripts/Angular/angular-confirm.js",
-                //"~/Scripts/Angular/angular-soundmanager2.js",
-                "~/Scripts/Angular/angular-bootstrap-switch.js",
-                "~/Scripts/Angular/rzslider.js",
+                "~/Scripts/Angular/angular-upload.min.js",
 
                 "~/Scripts/App/Phrases.js",
                 "~/Scripts/App/Services/PhrasesService.js",
@@ -64,7 +61,7 @@ namespace Phrases
                 "~/Content/Bootstrap/bootstrap.min.css",
                 "~/Content/Theme/layout.css",
                 "~/Content/Theme/components-md.css",
-                "~/Content/Theme/plugins-md.css",
+                //"~/Content/Theme/plugins-md.css",
                 "~/Content/Theme/todo.css",
                 "~/Content/Theme/blue.css",
                 "~/Content/Site.css",
@@ -76,8 +73,8 @@ namespace Phrases
                 ));
 
             bundles.Add(new StyleBundle("~/Content/app/css").Include(
-                "~/Scripts/jQuery/jquery-ui.min.css",
-                "~/Scripts/Angular/angular-ui/ng-sortable.min.css"
+                //"~/Scripts/jQuery/jquery-ui.min.css",
+                //"~/Scripts/Angular/angular-ui/ng-sortable.min.css"
                 //"~/Scripts/Plugins/jquery.scrollbar/jquery.scrollbar.css"
                 ));
 

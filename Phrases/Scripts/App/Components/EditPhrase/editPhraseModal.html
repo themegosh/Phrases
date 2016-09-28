@@ -22,15 +22,24 @@
             </label>
         </li>
     </ul>
-    <h2>Custom Sound</h2>
-    <button type="button" ng-disabled="!$ctrl.phrase.usesCustomSound" class="btn btn-primary btn-sm pull-right" ng-click="$ctrl.btnUploadClick()">Upload</button>
-    <input type="file" ng-model="$ctrl.phrase.customSound" class="audio-hidden-input" accept=".mp4,.mp3,.wav" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
-    <label class="check mt-checkbox mt-checkbox-outline">
-        <input ng-model="$ctrl.phrase.usesCustomSound" type="checkbox" /> Use Custom Audio
-        <span></span>
-    </label>
-    <pre>{{$ctrl.phrase.usesCustomSound ? "Custom Audio File" : "Default Watson Text-To-Speech"}}</pre>
-    <p>{{$ctrl.phrase.customSound}}</p>
+    <div ng-show="$ctrl.phrase.guid">
+        <h2>Custom Sound</h2>
+        <div class="btn btn-primary btn-upload pull-right"
+             ng-disabled="!$ctrl.phrase.usesCustomSound"
+             upload-button
+             url="/api/tts/CustomAudioUpload"
+             data="$ctrl.phrase"
+             on-success="$ctrl.customAudioUploadResult(response)"
+             accept="$ctrl.allowedTypes">Upload</div>
+        <label class="check mt-checkbox mt-checkbox-outline">
+            <input ng-model="$ctrl.phrase.usesCustomSound" type="checkbox" /> Use Custom Audio
+            <span></span>
+        </label>
+        <pre>{{$ctrl.phrase.usesCustomSound ? "Custom Audio File" : "Default Watson Text-To-Speech"}}</pre>
+        <p>{{$ctrl.phrase.customSound}}</p>
+    </div>
+    
+    
 </div>
 <div class="modal-footer row">
     <div class="col-xs-4">

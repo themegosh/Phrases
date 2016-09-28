@@ -1,14 +1,10 @@
 ﻿(function () {
     "use strict";
     angular.module("Phrases", [
-        "ui.bootstrap",
-        //'angularSoundManager',
-        'frapontillo.bootstrap-switch',
-        'rzModule',
-        'ngTouch',
+        'ui.bootstrap',
         'angular-confirm',
-        'as.sortable',
-        'ng.httpLoader'
+        'ng.httpLoader',
+        'lr.upload'
     ])
     .config(['httpMethodInterceptorProvider',
         function (httpMethodInterceptorProvider) {
