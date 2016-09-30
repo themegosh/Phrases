@@ -53,7 +53,8 @@ namespace Phrases.Services
                     //determin if we actually need to query watson for a new audio file
                     var referencePhrase = PhraseRepository.GetPhrase(phrase["guid"]);
 
-                    if (!String.Equals(referencePhrase["text"], phrase["text"], StringComparison.Ordinal)) //is the text different?
+                    if (!String.Equals(referencePhrase["text"], phrase["text"], StringComparison.Ordinal) //is the text different?
+                        || (bool)((Document)phrase["customAudio"])["justChanged"] == true) //we're things just changed? (forced refresh)
                         shouldGetTTS = true;
                 }
             }
@@ -123,6 +124,8 @@ namespace Phrases.Services
             var customAudioDocument = (Document) phrase["customAudio"];
             customAudioDocument["justChanged"] = false;
             customAudioDocument["uploadedName"] = file.Headers.ContentDisposition.FileName;
+
+            SavePhrase(phrase, phrase["userId"]);
 
             return phrase;
         }

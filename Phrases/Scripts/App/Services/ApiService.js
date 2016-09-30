@@ -37,7 +37,7 @@
                 showNotification("Error", response.data, "error");
             });
         }
-
+        
         api.quickPhrase = function (phrase) {
             $http({
                 method: 'POST',

@@ -66,35 +66,30 @@
 
         $ctrl.save = function () {
             if ($ctrl.phrase.customAudio.active === true && $ctrl.phrase.customAudio.uploadedName === "") {
-                $confirm({ text: 'You have checked "Use custom audio" but not uploaded a file to use... Tap "Cancel" and upload a custom audio file, or "Ok" to save using text-to-speech.' })
+                $confirm({ text: 'You have checked "Use custom audio" but have not uploaded a file to use... Tap "Cancel" and upload a custom audio file, or "Ok" to save using text-to-speech.' })
                     .then(function () {
-                        //update the categories to align with the checked ones
-                        delete $ctrl.phrase.tempGuid; //remove unneeded data
-                        $ctrl.phrase.categories.length = 0;
-                        angular.forEach($ctrl.checkedCategories, function (category) {
-                            if (category.checked) {
-                                $ctrl.phrase.categories.push(category.guid);
-                            }
-                        });
-                        if ($ctrl.phrase.text !== "") {
-                            api.savePhrase($ctrl.phrase);
-                        }
-                        $ctrl.dismiss({ $value: 'cancel' });
+                        $ctrl.phrase.customAudio.active = false;
+                        $ctrl.saveAndClose();
                     });
             } else {
-                //update the categories to align with the checked ones
-                delete $ctrl.phrase.tempGuid; //remove unneeded data
-                $ctrl.phrase.categories.length = 0;
-                angular.forEach($ctrl.checkedCategories, function (category) {
-                    if (category.checked) {
-                        $ctrl.phrase.categories.push(category.guid);
-                    }
-                });
-                if ($ctrl.phrase.text !== "") {
-                    api.savePhrase($ctrl.phrase);
-                }
-                $ctrl.dismiss({ $value: 'cancel' });
+                $ctrl.saveAndClose();
             }
+        }
+
+        $ctrl.saveAndClose = function () {
+            delete $ctrl.phrase.tempGuid; //remove unneeded data
+            //update the categories to align with the checked ones
+            $ctrl.phrase.categories.length = 0;
+            angular.forEach($ctrl.checkedCategories, function (category) {
+                if (category.checked) {
+                    $ctrl.phrase.categories.push(category.guid);
+                }
+            });
+            if ($ctrl.phrase.text !== "") {
+                api.savePhrase($ctrl.phrase);
+            }
+            ss.forceReload = true;
+            $ctrl.dismiss({ $value: 'cancel' });
         }
 
         $ctrl.cancel = function () {
@@ -117,10 +112,13 @@
 
         $ctrl.usesCustomAudioToggle = function () {
             if (!$ctrl.phrase.customAudio.active) { //disabling custom audio
+                $ctrl.phrase.customAudio.active = true;
                 $confirm({ text: 'Deactivating this will delete the current audio file and use text-to-speech again.' })
                     .then(function () {
+                        $ctrl.customAudioStatus = "Using text-to-speech";
                         $ctrl.phrase.customAudio.justChanged = true;
                         $ctrl.phrase.customAudio.uploadedName = "";
+                        $ctrl.phrase.customAudio.active = false;
                     });
             } else { //enabling it
                 $ctrl.phrase.customAudio.justChanged = true;
@@ -142,7 +140,6 @@
                     showNotification("Success", "Audio uploaded!", "success");
                     console.log(response.data); // will output whatever you choose to return from the server on a successful upload
                     angular.copy(angular.fromJson(response.data), $ctrl.phrase);//update the current model
-                    $ctrl.phrase.customAudio.active = true;
                     $ctrl.customAudioStatus = "Using custom audio: " + $ctrl.phrase.customAudio.uploadedName;
                 },
                 function (response) {
@@ -151,6 +148,7 @@
                     console.error(response); //  Will return if status code is above 200 and lower than 300, same as $http
                 }
             );
+            ss.forceReload = true;
         }
     }
 

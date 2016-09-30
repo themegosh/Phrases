@@ -3,14 +3,17 @@
     angular.module("Phrases").factory("SoundService", [function () {
         var ss = {};
 
+        ss.forceReload = false;
+
         ss.playSound = function (guid, shouldReload) {
             $('.fab').fadeIn();
 
             var url = "api/tts/GetAudio/" + guid;
             var audio = $('#audio-ele');
-            if ($("#audio-src").attr("src") != url || shouldReload) {
+            if ($("#audio-src").attr("src") != url || shouldReload || ss.forceReload) {
                 $("#audio-src").attr("src", url);
                 audio[0].load();//load new file
+                ss.forceReload = false;
             }
             audio[0].pause();
             audio[0].currentTime = 0;
