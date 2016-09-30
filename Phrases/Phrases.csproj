@@ -391,6 +391,7 @@
     <Content Include="Scripts\Angular\angular.min.js" />
     <Content Include="Scripts\App\Components\EditCategory\editCategoryComponent.js" />
     <Content Include="Scripts\App\Components\EditCategory\editCategoryModal.html" />
+    <Content Include="Scripts\App\Directives\onFileChangeDirective.js" />
     <Content Include="Scripts\App\Components\Loader\loader.html" />
     <Content Include="Scripts\App\Components\Loader\loader1.html" />
     <Content Include="Scripts\App\Components\phraseList\phraseListComponent.js" />

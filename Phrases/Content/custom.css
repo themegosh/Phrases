@@ -204,6 +204,7 @@ body {
 .category-list label {
     margin-bottom:0;
     font-size: 20px;
+    width: 100%;
 }
 
 .category-list span {
@@ -283,7 +284,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
 }
 
 ::-webkit-scrollbar-track {

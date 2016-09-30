@@ -1,39 +1,50 @@
 ﻿(function () {
     "use strict";
-
-    EditPhrasesController.$inject = ['ApiService', 'PhrasesService', 'SoundService'];
-    function EditPhrasesController(api, ps, ss) {
+    EditPhrasesController.$inject = ['ApiService', 'PhrasesService', 'SoundService', 'upload', '$confirm'];
+    function EditPhrasesController(api, ps, ss, upload, $confirm) {
         var $ctrl = this;
 
         //properties
         $ctrl.checkedCategories = [];
         $ctrl.phrase = {};
-        $ctrl.allowedTypes = "audio/vnd.wav,audio/aac,audio/mp4";
 
         //events
         $ctrl.$onInit = function () {
-            if ($ctrl.resolve.phrase == null) {
+            if ($ctrl.resolve.phrase == null) { //new phrase
                 $ctrl.modalTitle = "New Phrase";
                 $ctrl.phrase = {
                     text: "",
-                    categories: []
+                    categories: [],
+                    customAudio: {
+                        active: false,
+                        justChanged: false,
+                        uploadedName: ""
+                    }
                 };
                 $('#txtPhrase').ready(function () {
                     $('#txtPhrase').focus();
                     $('#txtPhrase').click();
                 });
-            } else {
+            } else { //editing a phrase
                 $ctrl.modalTitle = "Edit Phrase";
                 angular.copy($ctrl.resolve.phrase, $ctrl.phrase);
-                
-                //$ctrl.phrase = $ctrl.resolve.phrase;
-            }
-            angular.copy(ps.categories, $ctrl.checkedCategories);
-            //angular.copy(ps.categories, $ctrl.categories);
 
+                if (!$ctrl.phrase.customAudio) { //fix out of date stuff
+                    $ctrl.phrase.customAudio = {
+                        active: false,
+                        justChanged: false,
+                        uploadedName: ""
+                    }
+                }
+            }
+            //other initializations
+            angular.copy(ps.categories, $ctrl.checkedCategories);
             angular.forEach($ctrl.checkedCategories, function (category) {
                 category.checked = $ctrl.hasCategory(category);
             });
+            $ctrl.customAudioStatus = $ctrl.phrase.customAudio.active ? "Using custom audio: " + $ctrl.phrase.customAudio.uploadedName : "Using text-to-speech";
+            //angular.copy(ps.categories, $ctrl.categories);
+
             console.log($ctrl);
         }
         
@@ -42,31 +53,48 @@
         }
 
         $ctrl.btnQuickPhrase = function () {
-            if ($ctrl.phrase.isClean) {
+            if ($ctrl.isClean) {
                 if ($ctrl.phrase.tempGuid)
                     ss.playSound($ctrl.phrase.tempGuid);
                 else
                     ss.playSound($ctrl.phrase.guid);
             } else {
-                $ctrl.phrase.isClean = true;
+                $ctrl.isClean = true;
                 api.quickPhrase($ctrl.phrase, true);
             }
         }
 
-        $ctrl.ok = function () {
-            //update the categories to align with the checked ones
-            delete $ctrl.phrase.tempGuid; //remove unneeded data
-            delete $ctrl.phrase.isClean;
-            $ctrl.phrase.categories.length = 0;
-            angular.forEach($ctrl.checkedCategories, function (category) {
-                if (category.checked) {
-                    $ctrl.phrase.categories.push(category.guid);
+        $ctrl.save = function () {
+            if ($ctrl.phrase.customAudio.active === true && $ctrl.phrase.customAudio.uploadedName === "") {
+                $confirm({ text: 'You have checked "Use custom audio" but not uploaded a file to use... Tap "Cancel" and upload a custom audio file, or "Ok" to save using text-to-speech.' })
+                    .then(function () {
+                        //update the categories to align with the checked ones
+                        delete $ctrl.phrase.tempGuid; //remove unneeded data
+                        $ctrl.phrase.categories.length = 0;
+                        angular.forEach($ctrl.checkedCategories, function (category) {
+                            if (category.checked) {
+                                $ctrl.phrase.categories.push(category.guid);
+                            }
+                        });
+                        if ($ctrl.phrase.text !== "") {
+                            api.savePhrase($ctrl.phrase);
+                        }
+                        $ctrl.dismiss({ $value: 'cancel' });
+                    });
+            } else {
+                //update the categories to align with the checked ones
+                delete $ctrl.phrase.tempGuid; //remove unneeded data
+                $ctrl.phrase.categories.length = 0;
+                angular.forEach($ctrl.checkedCategories, function (category) {
+                    if (category.checked) {
+                        $ctrl.phrase.categories.push(category.guid);
+                    }
+                });
+                if ($ctrl.phrase.text !== "") {
+                    api.savePhrase($ctrl.phrase);
                 }
-            });
-            if ($ctrl.phrase.text !== "") {
-                api.savePhrase($ctrl.phrase);
+                $ctrl.dismiss({ $value: 'cancel' });
             }
-            $ctrl.dismiss({ $value: 'cancel' });
         }
 
         $ctrl.cancel = function () {
@@ -87,57 +115,43 @@
             return hasCategory;
         }
 
-        $ctrl.customAudioUploadResult = function (response) {
-            console.log(response);
+        $ctrl.usesCustomAudioToggle = function () {
+            if (!$ctrl.phrase.customAudio.active) { //disabling custom audio
+                $confirm({ text: 'Deactivating this will delete the current audio file and use text-to-speech again.' })
+                    .then(function () {
+                        $ctrl.phrase.customAudio.justChanged = true;
+                        $ctrl.phrase.customAudio.uploadedName = "";
+                    });
+            } else { //enabling it
+                $ctrl.phrase.customAudio.justChanged = true;
+            }
         }
 
-        //$ctrl.$on("fileSelected", function (event, args) {
-        //    $scope.$apply(function () {            
-        //        //add the file object to the scope's files collection
-        //        $scope.files.push(args.file);
-        //    });
-        //})
+        $ctrl.customFileChanged = function () {
+            $ctrl.customAudioStatus = "Uploading...";
 
-        //$ctrl.uploadFile = function () {
-        //    var fd = new FormData();
-        //    for (var i in scope.files) {
-        //        fd.append("uploadedFile", scope.files[i]);
-        //    }
-        //    var xhr = new XMLHttpRequest();
-        //    xhr.upload.addEventListener("progress", uploadProgress, false);
-        //    xhr.addEventListener("load", uploadComplete, false);
-        //    xhr.addEventListener("error", uploadFailed, false);
-        //    xhr.addEventListener("abort", uploadCanceled, false);
-        //    xhr.open("POST", "/fileupload");
-        //    xhr.send(fd);
-        //}
-
-        //function uploadProgress(evt) {
-        //    scope.$apply(function () {
-        //        if (evt.lengthComputable) {
-        //            scope.progress = Math.round(evt.loaded * 100 / evt.total)
-        //        } else {
-        //            scope.progress = 'unable to compute'
-        //        }
-        //    })
-        //}
-
-        //function uploadComplete(evt) {
-        //    /* This event is raised when the server send back a response */
-        //    alert(evt.target.responseText)
-        //}
-
-        //function uploadFailed(evt) {
-        //    alert("There was an error attempting to upload the file.")
-        //}
-
-        //function uploadCanceled(evt) {
-        //    scope.$apply(function () {
-        //        scope.progressVisible = false
-        //    })
-        //    alert("The upload has been canceled by the user or the browser dropped the connection.")
-        //}
-        
+            upload({
+                url: '/api/tts/CustomAudioUpload',
+                method: 'POST',
+                data: {
+                    phrase: angular.toJson($ctrl.phrase, false),
+                    aFile: $("#customAudioFile"), // a jqLite type="file" element, upload() will extract all the files from the input and put them into the FormData object before sending.
+                }
+            }).then(
+                function (response) {
+                    showNotification("Success", "Audio uploaded!", "success");
+                    console.log(response.data); // will output whatever you choose to return from the server on a successful upload
+                    angular.copy(angular.fromJson(response.data), $ctrl.phrase);//update the current model
+                    $ctrl.phrase.customAudio.active = true;
+                    $ctrl.customAudioStatus = "Using custom audio: " + $ctrl.phrase.customAudio.uploadedName;
+                },
+                function (response) {
+                    showNotification("Error", "Audio could not be uploaded...", "danger");
+                    $ctrl.customAudioStatus = "Custom audio upload failed...";
+                    console.error(response); //  Will return if status code is above 200 and lower than 300, same as $http
+                }
+            );
+        }
     }
 
     angular.module("Phrases").component('editPhraseComponent', {

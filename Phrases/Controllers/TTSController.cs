@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity;
 using Phrases.Models;
 using System.Web.Services;
 using System.Web;
+using System.Threading.Tasks;
 
 namespace Phrases.Controllers
 {
@@ -74,7 +75,7 @@ namespace Phrases.Controllers
         {
             try
             {
-                var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/tts/") + id + ".mp3";
+                var filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/") + id + ".mp3";
 
                 if (!File.Exists(filePath))
                 {
@@ -153,42 +154,41 @@ namespace Phrases.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage CustomAudioUpload()
+        public async Task<HttpResponseMessage> CustomAudioUpload()
         {
             try
             {
-                var results = "";
                 string root = HttpContext.Current.Server.MapPath("~/App_Data");
                 var provider = new MultipartFormDataStreamProvider(root);
-
+                
                 // Read the form data.
-                Request.Content.ReadAsMultipartAsync(provider);
+                await Request.Content.ReadAsMultipartAsync(provider);
 
-                // This illustrates how to get the file names.
-                foreach (MultipartFileData file in provider.FileData)
-                {
-                    results += file.Headers.ContentDisposition.FileName;
-                    results += "Server file path: " + file.LocalFileName;
-                }
+                //parse out the phrase data
+                var phrase = Document.FromJson(provider.FormData.Get("phrase"));
 
-                return jsonResponse(results, HttpStatusCode.OK);
+                // Throw failure if there isnt a file or its not properly formatted
+                if (provider.FileData.Count != 1 || String.IsNullOrEmpty(provider.FileData[0].Headers.ContentDisposition.FileName))
+                    throw new Exception("Upload should contain exactly one file.");
+
+                //process the data
+                phrase = PhraseService.ProcessCustomAudioSource(
+                    phrase,
+                    provider.FileData[0]
+                );
+
+                return jsonResponse(phrase.ToJson(), HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
                 return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
             }
         }
-
-
-        private HttpResponseMessage jsonResponse(string obj, HttpStatusCode status)
+        
+        private HttpResponseMessage jsonResponse(object obj, HttpStatusCode status)
         {
-            if (status == HttpStatusCode.InternalServerError)
-            {
-                obj = JsonConvert.SerializeObject(obj);
-            }
-
             HttpResponseMessage response = Request.CreateResponse(status);
-            response.Content = new StringContent(obj, Encoding.UTF8, "application/json");
+            response.Content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
             return response;
         }
     }

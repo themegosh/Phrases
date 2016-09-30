@@ -45,7 +45,7 @@
                         <span class="arrow"></span>
                     </a>
                 </li>
-                <li class="nav-item start " ng-class="{active: $ctrl.categoryFilter.name == category.name}" ng-repeat="category in $ctrl.categories">
+                <li class="nav-item start " ng-class="{active: $ctrl.categoryFilter.name == category.name}" ng-repeat="category in $ctrl.categories | orderBy:'name'">
                     <a ng-click="$ctrl.btnSelectFilter(category)" class="nav-link nav-toggle">
                         <i class="{{category.icon}}"></i>
                         <span class="title">{{category.name}}</span>

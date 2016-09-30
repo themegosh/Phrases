@@ -43,13 +43,13 @@ namespace Phrases.Services
         {
             try
             {
-                var filenameWithoutExtention = HttpContext.Current.Server.MapPath("~/tts/");
+                var filepathWithoutExtention = HttpContext.Current.Server.MapPath("~/App_Data/");
 
                 //quickPhrase processing
                 if (phrase.Contains("tempGuid"))
-                    filenameWithoutExtention += phrase["tempGuid"];
+                    filepathWithoutExtention += phrase["tempGuid"];
                 else
-                    filenameWithoutExtention += phrase["guid"];
+                    filepathWithoutExtention += phrase["guid"];
                 
                 if (phrase["text"] != null)
                 {
@@ -57,13 +57,17 @@ namespace Phrases.Services
                     using (var client = new HttpClient(handler))
                     using (var response = client.PostAsJsonAsync(URL + "synthesize?voice=en-US_AllisonVoice&accept=audio/wav", new TTSRequest() { text = phrase["text"] }))
                     using (var mediaFile = response.Result.Content.ReadAsStreamAsync())
-                    using (var fileStream = new FileStream(filenameWithoutExtention + ".wav", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+                    using (var fileStream = new FileStream(filepathWithoutExtention + ".wav", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                     {
                         mediaFile.Result.CopyToAsync(fileStream); //create the wav file (fallback)
                     }
 
-                    ConvertToMp3(filenameWithoutExtention);
-                    
+                    PhraseService.ConvertToMp3(filepathWithoutExtention + ".wav", filepathWithoutExtention + ".mp3", 8);
+
+                    //delete the wav file
+                    if (File.Exists(filepathWithoutExtention + ".wav"))
+                        File.Delete(filepathWithoutExtention + ".wav");
+
                     return phrase;
                 }
                 else
@@ -78,18 +82,7 @@ namespace Phrases.Services
             }
         }
 
-        private static void ConvertToMp3(string filenameWithoutExtention)
-        {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            process.StartInfo = new System.Diagnostics.ProcessStartInfo();
-            process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            process.StartInfo.FileName = @"C:\sox\sox.exe";
-            process.StartInfo.Arguments = " -t wav -v 3.0 " + filenameWithoutExtention + ".wav -t mp3 -C 128.2 " + filenameWithoutExtention + ".mp3";
-            //phrase.Add("Argruments", process.StartInfo.Arguments);
-            process.Start();
-            process.WaitForExit();
-            //int exitCode = process.ExitCode;
-        }
+        
 
         private class TTSRequest
         {

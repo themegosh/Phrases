@@ -4,9 +4,9 @@
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <button type="button" ng-click="$ctrl.btnQuickPhrase()" ng-disabled="$ctrl.phrase.text < 1" class="pull-right btn btn-info btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
+        <button type="button" ng-click="$ctrl.btnQuickPhrase()" ng-disabled="$ctrl.phrase.text < 1 || $ctrl.phrase.customAudio.active" class="pull-right btn btn-info btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
         <h2 class="section-head" for="Text">Phrase Text</h2>
-        <textarea type="text" id="txtPhrase" ng-change="$ctrl.phrase.isClean = false" class="form-control input-lg" placeholder="Phrase Text" ng-model="$ctrl.phrase.text"></textarea>
+        <textarea type="text" id="txtPhrase" ng-change="$ctrl.isClean = false" class="form-control input-lg" placeholder="Phrase Text" ng-model="$ctrl.phrase.text"></textarea>
     </div>
     <!--<div class="alert alert-info">
         <strong>Url: </strong>
@@ -24,19 +24,15 @@
     </ul>
     <div ng-show="$ctrl.phrase.guid">
         <h2>Custom Sound</h2>
-        <div class="btn btn-primary btn-upload pull-right"
-             ng-disabled="!$ctrl.phrase.usesCustomSound"
-             upload-button
-             url="/api/tts/CustomAudioUpload"
-             data="$ctrl.phrase"
-             on-success="$ctrl.customAudioUploadResult(response)"
-             accept="$ctrl.allowedTypes">Upload</div>
+        <form>
+            <button type="button" ng-disabled="!$ctrl.phrase.customAudio.active" class="btn btn-primary btn-sm pull-right" ng-click="$ctrl.btnUploadClick()">Upload</button>
+            <input type="file" name="customAudioFile" id="customAudioFile" on-file-change="$ctrl.customFileChanged" class="audio-hidden-input" accept=".m4a,.mp3,.wav" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
+        </form>
         <label class="check mt-checkbox mt-checkbox-outline">
-            <input ng-model="$ctrl.phrase.usesCustomSound" type="checkbox" /> Use Custom Audio
+            <input ng-model="$ctrl.phrase.customAudio.active" ng-change="$ctrl.usesCustomAudioToggle()" type="checkbox" /> Use Custom Audio
             <span></span>
         </label>
-        <pre>{{$ctrl.phrase.usesCustomSound ? "Custom Audio File" : "Default Watson Text-To-Speech"}}</pre>
-        <p>{{$ctrl.phrase.customSound}}</p>
+        <pre>{{$ctrl.customAudioStatus}}</pre>
     </div>
     
     
@@ -46,6 +42,6 @@
         <button class="btn btn-danger btn-lg btn-block" ng-disabled="!$ctrl.phrase.guid" confirm="Are you sure you want to delete this phrase?" type="button" ng-click="$ctrl.delete()"><i class="fa fa-trash-o" aria-hidden="true"></i><span class="hidden-xs"> Delete</span></button>
     </div>
     <div class="col-xs-8">
-        <button class="btn btn-success btn-lg btn-block" ng-disabled="$ctrl.phrase.text < 1" type="button" ng-click="$ctrl.ok()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+        <button class="btn btn-success btn-lg btn-block" ng-disabled="$ctrl.phrase.text < 1" type="button" ng-click="$ctrl.save()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
     </div>
 </div>

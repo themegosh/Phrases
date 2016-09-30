@@ -53,6 +53,7 @@ namespace Phrases
                 "~/Scripts/App/Components/User/UserComponent.js",
                 "~/Scripts/App/Components/PhraseList/phraseListComponent.js",
                 "~/Scripts/App/Components/EditPhrase/editPhraseComponent.js",
+                "~/Scripts/App/Directives/onFileChangeDirective.js",
                 "~/Scripts/App/Components/EditCategory/editCategoryComponent.js",
                 "~/Scripts/App/Components/Volume/VolumeComponent.js"
                 ));
