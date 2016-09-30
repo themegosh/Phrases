@@ -46,7 +46,7 @@
                 data: angular.toJson(phrase, false),
             }).then(function successCallback(response) {
                 console.log("quickPhrase SUCCESS:");
-                angular.copy(response.data, phrase);
+                angular.copy(angular.fromJson(response.data), phrase);
                 //ps.addSoundManagerProperties(phrase);
                 ss.playSound(phrase.tempGuid, true);
                 console.log(phrase);

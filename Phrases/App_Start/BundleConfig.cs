@@ -87,7 +87,7 @@ namespace Phrases
             // force minification for development
             // There is no realese version on production 
             // must be forced to minify
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
