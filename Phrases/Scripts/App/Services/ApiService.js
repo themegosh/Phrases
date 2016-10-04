@@ -27,8 +27,8 @@
                 headers: { 'Content-Type': "application/json" },
                 data: angular.toJson(phrase, false),
             }).then(function successCallback(response) {
-                console.log("savePhrase SUCCESS:");
-                console.log(response.data);
+                //console.log("savePhrase SUCCESS:");
+                //console.log(response.data);
                 ps.savePhrase(angular.fromJson(response.data));
                 showNotification("Success", "Phrase saved.", "success");
             }, function errorCallback(response) {
@@ -47,7 +47,6 @@
             }).then(function successCallback(response) {
                 console.log("quickPhrase SUCCESS:");
                 angular.copy(angular.fromJson(response.data), phrase);
-                //ps.addSoundManagerProperties(phrase);
                 ss.playSound(phrase.tempGuid, true);
                 console.log(phrase);
             }, function errorCallback(response) {
@@ -63,8 +62,8 @@
                 url: '/api/tts/DeletePhrase',
                 data: JSON.stringify(phrase)
             }).then(function successCallback(response) {
-                console.log("deletePhrase SUCCESS: ");
-                console.log(response);
+                //console.log("deletePhrase SUCCESS: ");
+                //console.log(response);
                 ps.deletePhrase(phrase);
                 showNotification("Success", "Phrases deleted!", "success");
             }, function errorCallback(response) {
@@ -80,8 +79,8 @@
                 url: '/api/tts/SaveCategory',
                 data: JSON.stringify(category)
             }).then(function successCallback(response) {
-                console.log("saveCategory SUCCESS: ");
-                console.log(response);
+                //console.log("saveCategory SUCCESS: ");
+                //console.log(response);
                 ps.saveCategory(angular.fromJson(response.data));
                 showNotification("Success", "Category saved!", "success");
             }, function errorCallback(response) {
@@ -97,8 +96,8 @@
                 url: '/api/tts/DeleteCategory',
                 data: JSON.stringify(category)
             }).then(function successCallback(response) {
-                console.log("deleteCategory SUCCESS: ");
-                console.log(response);
+                //console.log("deleteCategory SUCCESS: ");
+                //console.log(response);
                 ps.deleteCategory(category);
                 showNotification("Success", "Category deleted!", "success");
             }, function errorCallback(response) {

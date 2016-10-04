@@ -14,7 +14,6 @@
 
         //events
         $ctrl.$onInit = function () {
-            console.log("$onInit EditPhrasesController");
             if ($ctrl.resolve.category == null) { //new category
                 $ctrl.modalTitle = "New Category";
                 $ctrl.category = {

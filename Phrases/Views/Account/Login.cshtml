@@ -24,7 +24,7 @@
         <div class="form-actions">
             <button type="submit" class="btn green uppercase">Login</button>
             <label class="rememberme check mt-checkbox mt-checkbox-outline pull-right">
-                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.CheckBoxFor(m => m.RememberMe, new { @checked = "checked" })
                 @Html.DisplayNameFor(m => m.RememberMe)
                 <span></span>
             </label>

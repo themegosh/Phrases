@@ -20,32 +20,6 @@
             $(window).resize(ps.resizeScrollbar);
         }
 
-        $ctrl.btnSelectFilter = function (category) {
-            if (!$ctrl.editMode) {
-                if (category.name === 'All')
-                    $ctrl.categoryFilter = {
-                        name: "All"
-                    };
-                else
-                    angular.copy(category, $ctrl.categoryFilter);
-            } else {
-                if (category.name === 'All')
-                    return;
-
-                //open category editor
-                var modalInstance = $uibModal.open({
-                    animation: true,
-                    component: 'editCategoryComponent',
-                    size: 'md',
-                    resolve: {
-                        category: function () {
-                            return category;
-                        }
-                    }
-                });
-            }
-        }
-
         $ctrl.btnEditMode = function () {
             if ($ctrl.editMode === true) {
                 $ctrl.editMode = false;

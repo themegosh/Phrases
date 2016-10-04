@@ -32,38 +32,7 @@
 <!-- END HEADER & CONTENT DIVIDER -->
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
-    <!-- BEGIN SIDEBAR -->
-    <div class="page-sidebar-wrapper">
-        <!-- END SIDEBAR -->
-        <div class="page-sidebar">
-            <!-- BEGIN SIDEBAR MENU -->
-            <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu ">
-                <li class="nav-item start " ng-click="$ctrl.btnSelectFilter({name: 'All'})" ng-class="{active: $ctrl.categoryFilter.name == 'All'}">
-                    <a class="nav-link nav-toggle">
-                        <i class="icon-directions"></i>
-                        <span class="title">All</span>
-                        <span class="arrow"></span>
-                    </a>
-                </li>
-                <li class="nav-item start " ng-class="{active: $ctrl.categoryFilter.name == category.name}" ng-repeat="category in $ctrl.categories | orderBy:'name'">
-                    <a ng-click="$ctrl.btnSelectFilter(category)" class="nav-link nav-toggle">
-                        <i class="{{category.icon}}"></i>
-                        <span class="title">{{category.name}}</span>
-                        <span class="arrow"></span>
-                    </a>
-                </li>
-                <li class="nav-item start" ng-show="$ctrl.editMode" ng-click="$ctrl.btnSelectFilter({name: null})">
-                    <a class="nav-link nav-toggle">
-                        <i class="icon-plus"></i>
-                        <span class="title">New Category</span>
-                        <span class="arrow"></span>
-                    </a>
-                </li>
-            </ul>
-            <!-- END SIDEBAR MENU -->
-        </div>
-        <!-- END SIDEBAR -->
-    </div>
+    <category-sidebar categories="$ctrl.categories" category-filter="$ctrl.categoryFilter" edit-mode="$ctrl.editMode"></category-sidebar>
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
@@ -91,21 +60,4 @@
     <!-- END CONTENT -->
 </div>
 <!-- END CONTAINER -->
-
-
-<!--<div class="bottom-music-bar">
-    <div class="navbar navbar-default navbar-fixed-bottom">
-        <div class="seekWrapper" seek-track>
-            <div class="seekProgress" ng-style="{width : ( progress + '%' ) }"></div>
-        </div>
-        <div class="container-fluid nowrap-elipsis">
-            <button type="button" class="btn btn-default navbar-btn" play-pause-toggle data-play='<i class="fa fa-play" aria-hidden="true"></i>' data-pause='<i class="fa fa-pause" aria-hidden="true"></i>'><i class="fa fa-play" aria-hidden="true"></i></button>
-            <span class="nowrap-elipsis">
-                <span class="playing-info">
-                    <strong>Playing:</strong> {{ currentPlaying.title }}
-                </span>
-            </span>
-        </div>
-    </div>
-</div>
-<div ng-http-loader template="Scripts/App/Components/Loader/loader1.html"></div>-->
+<div ng-http-loader template="Scripts/App/Components/Loader/loader1.html"></div>

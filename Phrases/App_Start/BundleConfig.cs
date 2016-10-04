@@ -38,7 +38,7 @@ namespace Phrases
                 //"~/Scripts/jQuery/jquery-ui.min.js",
                 "~/Scripts/Angular/angular.min.js",
                 "~/Scripts/Angular/angular-ui/ui-bootstrap-tpls.min.js",
-                //"~/Scripts/Angular/angular-touch.min.js",
+                "~/Scripts/Angular/angular-touch.min.js", //fixes ipad... http://stackoverflow.com/questions/27423437/angular-ng-click-function-not-called-on-touchscreen-devices
                 //"~/Scripts/Angular/angular-route.min.js",
                 "~/Scripts/Angular/angular-http-loader.min.js",
                 "~/Scripts/Angular/angular-confirm.js",
@@ -52,6 +52,7 @@ namespace Phrases
                 "~/Scripts/App/Components/Phrases/PhrasesComponent.js",
                 "~/Scripts/App/Components/User/UserComponent.js",
                 "~/Scripts/App/Components/PhraseList/phraseListComponent.js",
+                "~/Scripts/App/Components/CategorySidebar/categorySidebarComponent.js",
                 "~/Scripts/App/Components/EditPhrase/editPhraseComponent.js",
                 "~/Scripts/App/Directives/onFileChangeDirective.js",
                 "~/Scripts/App/Components/EditCategory/editCategoryComponent.js",
@@ -87,7 +88,7 @@ namespace Phrases
             // force minification for development
             // There is no realese version on production 
             // must be forced to minify
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿(function () {
     "use strict";
 
-    PhraseListController.$inject = ['ApiService', 'PhrasesService', '$uibModal', '$filter', 'SoundService'];
-    function PhraseListController(api, ps, $uibModal, $filter, ss) {
+    PhraseListController.$inject = ['$uibModal', '$filter', 'SoundService'];
+    function PhraseListController($uibModal, $filter, ss) {
         var $ctrl = this;
 
         //properties
@@ -14,7 +14,7 @@
 
         //events
         $ctrl.$onInit = function () {
-            console.log($ctrl);
+            //console.log($ctrl);
             $ctrl.phrases = $filter('selectedCategory')($ctrl.allPhrases, $ctrl.categoryFilter);
             angular.forEach($ctrl.allTags, function (tag) {
                 $ctrl.checkedTags.push({
@@ -29,23 +29,7 @@
             //$ctrl.phrases = $filter('selectedCategory')($ctrl.allPhrases, $ctrl.categoryFilter);
             //var desiredFilter = $filter('selectedCategory');
         }
-
-        //todo: https://github.com/a5hik/ng-sortable
-        //$ctrl.dragControlListeners = {
-        //    //accept: function (sourceItemHandleScope, destSortableScope) {return true},//override to determine drag is allowed or not. default is true.
-        //    itemMoved: function (event) {},//Do what you want
-        //    orderChanged: function(event) {},//Do what you want
-        //    //containment: '#phraseContainer',//optional param.
-        //    //clone: true, //optional param for clone feature.
-        //    //allowDuplicates: false //optional param allows duplicates to be dropped.
-        //};
-
-        //    $scope.dragControlListeners1 = {
-        //        //containment: '#board',//optional param.
-        //        //allowDuplicates: true //optional param allows duplicates to be dropped.
-        //};
-
-        
+                
         $ctrl.btnPlay = function (phrase) {
             if (!$ctrl.editMode && phrase != null) {
                 ss.playSound(phrase.guid);

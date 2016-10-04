@@ -26,8 +26,8 @@
 
             ps.resizeScrollbar();
 
-            console.log("ps.importUserData()");
-            console.log(ps);
+            //console.log("ps.importUserData()");
+            //console.log(ps);
         }
 
         ps.resizeScrollbar = function () {
@@ -43,18 +43,18 @@
                 if (aPhrase.guid == phrase.guid) { //update this one instead of adding
                     shouldAdd = false;
                     ps.phrases[key] = angular.copy(phrase);
-                    console.log("ps.save() updating phrase");
+                    //console.log("ps.save() updating phrase");
                 }
             });
             if (shouldAdd === true) {
-                console.log("ps.savePhrase() saving new phrase");
+                //console.log("ps.savePhrase() saving new phrase");
                 ps.phrases.push(phrase);
             }
             ps.resizeScrollbar();
         }
         
         ps.deletePhrase = function (phrase) {
-            console.log("ps.deletePhrase() deleting phrase");
+            //console.log("ps.deletePhrase() deleting phrase");
             angular.forEach(ps.phrases, function (aPhrase, key) {
                 if (aPhrase.text === phrase.text) {
                     ps.phrases.splice(key, 1); //remove this one
@@ -69,18 +69,18 @@
                 if (aCategory.guid == category.guid) { //update this one instead of adding
                     shouldAdd = false;
                     ps.categories[key] = angular.copy(category);
-                    console.log("ps.saveCategory() updating category");
+                    //console.log("ps.saveCategory() updating category");
                 }
             });
             if (shouldAdd === true) {
                 ps.categories.push(category);
-                console.log("ps.saveCategory() saving new category");
+                //console.log("ps.saveCategory() saving new category");
             }
             ps.resizeScrollbar();
         }
 
         ps.deleteCategory = function (category) {
-            console.log("ps.deleteCategory() deleting category");
+            //console.log("ps.deleteCategory() deleting category");
             angular.forEach(ps.categories, function (aCategory, key) {
                 if (aCategory.name === category.name) {
                     ps.categories.splice(key, 1); //remove this one

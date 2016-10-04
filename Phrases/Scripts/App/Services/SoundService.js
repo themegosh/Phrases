@@ -17,12 +17,16 @@
             }
             audio[0].pause();
             audio[0].currentTime = 0;
-            audio[0].oncanplaythrough = audio[0].play();
+            audio[0].oncanplaythrough = audio[0].play().catch(function (e) {
+                showNotification("Hey!", "Looks like your browser blocked the audio playback. Click [Play] again!", "info");
+                console.log("Browser blocked the initial audio playback... TODO: FIX THIS.");
+                console.log(e);
+            });
 
             audio[0].addEventListener('ended', function () {
                 ss.updateFab();
             });
-
+            
             ss.updateFab();
         }
 
