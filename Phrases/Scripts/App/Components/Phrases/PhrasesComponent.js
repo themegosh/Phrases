@@ -1,8 +1,8 @@
-﻿(function () {
+(function () {
     "use strict";
 
-    PhrasesController.$inject = ['$scope', 'SoundService', 'ApiService', 'PhrasesService', '$uibModal'];
-    function PhrasesController($scope, ss, api, ps, $uibModal) {
+    PhrasesController.$inject = ['$scope', 'SoundService', 'ApiService', 'PhrasesService', '$uibModal', '$state'];
+    function PhrasesController($scope, ss, api, ps, $uibModal, $state) {
         var $ctrl = this;
 
         //properties

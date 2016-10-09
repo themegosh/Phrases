@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Phrases
 {
@@ -14,6 +15,8 @@ namespace Phrases
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+            
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -21,7 +24,7 @@ namespace Phrases
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            //json
+            //anythin
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
     }

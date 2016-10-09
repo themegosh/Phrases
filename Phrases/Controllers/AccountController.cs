@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Phrases.Models;
 using Phrases.Services;
+using Newtonsoft.Json;
 
 namespace Phrases.Controllers
 {
@@ -67,10 +68,12 @@ namespace Phrases.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [LayoutInjector("_LoginRegisterLayout")]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            var asdasd = JsonConvert.SerializeObject(model);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
