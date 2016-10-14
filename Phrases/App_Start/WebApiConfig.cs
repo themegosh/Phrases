@@ -9,6 +9,9 @@ namespace Phrases
 {
     public static class WebApiConfig
     {
+        public static string UrlPrefix { get { return "api"; } }
+        public static string UrlPrefixRelative { get { return "~/api"; } }
+
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
@@ -20,7 +23,7 @@ namespace Phrases
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
+                routeTemplate: WebApiConfig.UrlPrefix + "/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
