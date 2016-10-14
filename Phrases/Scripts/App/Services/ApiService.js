@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    angular.module("Phrases").factory("ApiService", ['$http', "PhrasesService", 'SoundService', function ($http, ps, ss) {
+    angular.module("Phrases").factory("ApiService", ['$http', "PhrasesService", 'SoundService', '$state', function ($http, ps, ss, $state) {
 
         var api = {};
         var base_url = "http://localhost:61678";
@@ -12,7 +12,7 @@
                 url: base_url + '/api/tts/getUserData'
             }).then(function successCallback(response) {
                 console.log("getAllPhrases SUCCESS: ");
-                console.log(response.data);
+                console.log(response);
                 ps.importUserData(angular.fromJson(response.data));
             }, function errorCallback(response) {
                 console.log("getAllPhrases FAIL:");
@@ -48,7 +48,8 @@
                 data: angular.toJson(loginData, false),
             }).then(function successCallback(response) {
                 console.log("login SUCCESS:");
-                console.log(response.data);
+                console.log(response);
+                $state.go("phrasesPage");
                 //ps.savePhrase(angular.fromJson(response.data));
                 showNotification("Success", "Logged In.", "success");
             }, function errorCallback(response) {

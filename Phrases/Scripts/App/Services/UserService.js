@@ -24,7 +24,12 @@
                 console.log(response.data);
                 showNotification("Error", response.data, "error");
             });
-        } 
+        }
+
+        user.logout = function () {
+            delete user.data;
+            $state.go('logInPage');
+        }
         
         user.isAuthenticated = function (){
             if (angular.isDefined(user.data)){

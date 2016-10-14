@@ -13,11 +13,13 @@
         
         //events
         $ctrl.$onInit = function () {
-            console.log("")
+        }
+
+        $ctrl.btnLogin = function () {
             api.login({
-                "Email":"mathewdf@gmail.com",
-                "Password":"jamaca23",
-                "RememberMe":true
+                "Email": "mathewdf@gmail.com",
+                "Password": "jamaca23",
+                "RememberMe": true
             });
         }
 
