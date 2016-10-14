@@ -12,11 +12,11 @@
         
         $stateProvider
         
-        .state('phrasesState', {
+        .state('phrasesPage', {
             url: '',
             component: 'phrases'
         })
-        .state('loginState', {
+        .state('loginPage', {
             url: '/login',
             component: 'login'
         })
@@ -27,14 +27,24 @@
         
     }]);
 
-    phrasesApp.run(function($rootScope, PhrasesService, $state) {
-        // Listen to '$locationChangeSuccess', not '$stateChangeStart'
-        $rootScope.$on('$locationChangeSuccess', function() {
-            if (angular.isUndefined(PhrasesService.user.User)) {
-                $state.go('loginState');
-            }
-        })
-    });
+
+    function authenticate($q, User, $state, $timeout) {
+        if (user.isAuthenticated()) {
+            // Resolve the promise successfully
+            return $q.when()
+        } else {
+            // The next bit of code is asynchronously tricky.
+
+            $timeout(function () {
+                // This code runs after the authentication promise has been rejected.
+                // Go to the log-in page
+                $state.go('loginPage')
+            })
+
+            // Reject the authentication promise to prevent the state from loading
+            return $q.reject()
+        }
+    }
 
 
 })();

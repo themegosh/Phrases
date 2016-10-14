@@ -549,6 +549,7 @@
     <Content Include="Scripts\App\Services\ApiService.js" />
     <Content Include="Scripts\App\Services\PhrasesService.js" />
     <Content Include="Scripts\App\Services\SoundService.js" />
+    <Content Include="Scripts\App\Services\UserService.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\jQuery\jquery-3.1.0.js" />
