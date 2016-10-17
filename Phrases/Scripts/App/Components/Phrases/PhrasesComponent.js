@@ -13,6 +13,7 @@
         
         //events
         $ctrl.$onInit = function () {
+            console.log("PhraasesController init");
             api.getUserData();
             $ctrl.categories = ps.categories;
             $ctrl.phrases = ps.phrases;

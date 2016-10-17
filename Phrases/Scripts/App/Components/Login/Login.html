@@ -1,86 +1,30 @@
-﻿
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>My Voice</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-    <link href="/Content/Bootstrap/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/Content/Theme/layout.css" rel="stylesheet"/>
-    <link href="/Content/Theme/components-md.css" rel="stylesheet"/>
-    <link href="/Content/Theme/todo.css" rel="stylesheet"/>
-    <link href="/Content/Theme/blue.css" rel="stylesheet"/>
-    <link href="/Content/Site.css" rel="stylesheet"/>
-    <link href="/Content/FontAwesome/font-awesome.min.css" rel="stylesheet"/>
-    <link href="/Content/Theme/simple-line-icons.min.css" rel="stylesheet"/>
-    <link href="/Content/Theme/bootstrap-switch.min.css" rel="stylesheet"/>
-    <link href="/Content/Theme/toastr.css" rel="stylesheet"/>
-    <link href="/Content/custom.css" rel="stylesheet"/>
-    <link href="/Content/Theme/login.css" rel="stylesheet"/>
-
-    
-</head>
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md page-sidebar-fixed">
-
-    <div ng-app="Phrases" class="content">
-    <form action="/Account/Login?ReturnUrl=%2F" class="login-form" method="post" role="form"><input name="__RequestVerificationToken" type="hidden" value="3AYT6Z-iEAuI0qPJev-f3cdbv9mjFjrkoDOOM-swbP7BOJkmxlVb94rny8NunIi9mkIUOh_3Fn-_UQv5s_6HrIX5f4NTManjOO1XFOJtbE81" />        <h3 class="form-title font-green">Sign In</h3>
-            <div class="form-group">
-                <label class="control-label visible-ie8 visible-ie9" for="Email">Email</label>
-                <input class="form-control form-control-solid placeholder-no-fix" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" placeholder="Email" type="text" value="" />
-                <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label visible-ie8 visible-ie9" for="Password">Password</label>
-                <input class="form-control form-control-solid placeholder-no-fix" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" placeholder="Password" type="password" />
-                <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-            </div>
-            <div class="form-actions">
-                <button type="button" ng-click="$ctrl.btnLogin()" class="btn green uppercase">Login</button>
-                <label class="rememberme check mt-checkbox mt-checkbox-outline pull-right">
-                    <input checked="checked" data-val="true" data-val-required="The Remember me field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
-                    Remember me
-                    <span></span>
-                </label>
-            </div>
-            <div class="create-account">
-                <p>
-                    <a class="uppercase" href="/Account/Register">Create an account</a>
-                </p>
-            </div>
-    </form>
+﻿<div class="login">
+    <div  class="content">
+        <form class="login-form" method="post" role="form"><input name="__RequestVerificationToken" type="hidden" value="3AYT6Z-iEAuI0qPJev-f3cdbv9mjFjrkoDOOM-swbP7BOJkmxlVb94rny8NunIi9mkIUOh_3Fn-_UQv5s_6HrIX5f4NTManjOO1XFOJtbE81" />        <h3 class="form-title font-green">Sign In</h3>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9" for="Email">Email</label>
+                    <input ng-model="$ctrl.user.Email" class="form-control form-control-solid placeholder-no-fix" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The Email field is required." id="Email" name="Email" placeholder="Email" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9" for="Password">Password</label>
+                    <input ng-model="$ctrl.user.Password" class="form-control form-control-solid placeholder-no-fix" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" placeholder="Password" type="password" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="button" ng-click="$ctrl.btnLogin()" class="btn green uppercase">Login</button>
+                    <label class="rememberme check mt-checkbox mt-checkbox-outline pull-right">
+                        <input ng-model="$ctrl.user.RememberMe" checked="checked" data-val="true" data-val-required="The Remember me field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
+                        Remember me
+                        <span></span>
+                    </label>
+                </div>
+                <div class="create-account">
+                    <p>
+                        <a class="uppercase" href="/Account/Register">Create an account</a>
+                    </p>
+                </div>
+        </form>
     </div>
-
-    <script src="/Scripts/jQuery/jquery-3.1.0.min.js"></script>
-    <script src="/Scripts/Bootstrap/bootstrap.min.js"></script>
-    <script src="/Scripts/Plugins/toastr.js"></script>
-    <script src="/Scripts/App/Custom.js"></script>
-    <script src="/Scripts/Angular/angular.min.js"></script>
-    <script src="/Scripts/Angular/angular-ui/ui-bootstrap-tpls.min.js"></script>
-    <script src="/Scripts/Angular/angular-ui/ui-router.min.js"></script>
-    <script src="/Scripts/Angular/angular-touch.min.js"></script>
-    <script src="/Scripts/Angular/angular-http-loader.min.js"></script>
-    <script src="/Scripts/Angular/angular-confirm.js"></script>
-    <script src="/Scripts/Angular/angular-upload.min.js"></script>
-    <script src="/Scripts/App/MyVoice.js"></script>
-    <script src="/Scripts/App/Services/PhrasesService.js"></script>
-    <script src="/Scripts/App/Services/ApiService.js"></script>
-    <script src="/Scripts/App/Services/SoundService.js"></script>
-    <script src="/Scripts/App/Filters/PhrasesFilter.js"></script>
-    <script src="/Scripts/App/Components/Phrases/PhrasesComponent.js"></script>
-    <script src="/Scripts/App/Components/User/UserComponent.js"></script>
-    <script src="/Scripts/App/Components/PhraseList/phraseListComponent.js"></script>
-    <script src="/Scripts/App/Components/CategorySidebar/categorySidebarComponent.js"></script>
-    <script src="/Scripts/App/Components/EditPhrase/editPhraseComponent.js"></script>
-    <script src="/Scripts/App/Components/EditCategory/editCategoryComponent.js"></script>
-    <script src="/Scripts/App/Components/Login/LoginComponent.js"></script>
-    <script src="/Scripts/App/Directives/onFileChangeDirective.js"></script>
-
-
-</body>
-</html>
-
-
-
+</div>
 

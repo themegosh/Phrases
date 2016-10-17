@@ -169,7 +169,7 @@ namespace Phrases.Controllers
 
                 // Throw failure if there isnt a file or its not properly formatted
                 if (provider.FileData.Count != 1 || String.IsNullOrEmpty(provider.FileData[0].Headers.ContentDisposition.FileName))
-                    throw new Exception("Upload should contain exactly one file.");
+                    throw new Exception("Upload should upload exactly one file.");
 
                 //process the data
                 phrase = PhraseService.ProcessCustomAudioSource(

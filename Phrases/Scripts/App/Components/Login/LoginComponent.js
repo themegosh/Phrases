@@ -1,26 +1,26 @@
 (function () {
     "use strict";
 
-    LoginController.$inject = ['$scope', 'ApiService', 'PhrasesService', '$uibModal'];
-    function LoginController($scope, api, ps, $uibModal) {
+    LoginController.$inject = ['$scope', 'ApiService', 'PhrasesService', 'UserService', '$uibModal'];
+    function LoginController($scope, api, ps, us, $uibModal) {
         var $ctrl = this;
+        $ctrl.user = {};
 
         //properties
-        $ctrl.editMode = false;
-        $ctrl.categoryFilter = {
-            name: "All"
-        };
         
         //events
         $ctrl.$onInit = function () {
+
         }
 
         $ctrl.btnLogin = function () {
-            api.login({
-                "Email": "mathewdf@gmail.com",
-                "Password": "jamaca23",
-                "RememberMe": true
-            });
+            //{
+            //    "Email": "mathewdf@gmail.com",
+            //    "Password": "jamaca23",
+            //    "RememberMe": true
+            //}
+            console.log($ctrl.user);
+            us.login($ctrl.user);
         }
 
     }

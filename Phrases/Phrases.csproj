@@ -70,6 +70,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin.Cors, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
       <Private>True</Private>
@@ -99,6 +103,10 @@
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Routing" />
@@ -199,6 +207,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\OldAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\UserData.cs" />
     <Compile Include="SampleIdentity.cs" />
@@ -333,147 +342,14 @@
     <Content Include="Content\Theme\todo-2.css" />
     <Content Include="Content\Theme\todo.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
-    <Content Include="Content_old\bootstrap-theme.css" />
-    <Content Include="Content_old\bootstrap-theme.min.css" />
-    <Content Include="Content_old\bootstrap.css" />
-    <Content Include="Content_old\bootstrap.min.css" />
-    <Content Include="Content_old\Bootstrap\bootstrap-theme.css" />
-    <Content Include="Content_old\Bootstrap\bootstrap-theme.min.css" />
-    <Content Include="Content_old\Bootstrap\bootstrap.css" />
-    <Content Include="Content_old\Bootstrap\bootstrap.min.css" />
-    <Content Include="Content_old\custom.css" />
-    <Content Include="Content_old\FontAwesome\font-awesome.css" />
-    <Content Include="Content_old\FontAwesome\font-awesome.min.css" />
-    <Content Include="Content_old\FontAwesome\fontawesome-webfont.svg" />
-    <Content Include="Content_old\Fonts\Simple-Line-Icons.dev.svg" />
-    <Content Include="Content_old\Fonts\Simple-Line-Icons.svg" />
-    <Content Include="Content_old\img\accordion-plusminus.png" />
-    <Content Include="Content_old\img\ajax-loading.gif" />
-    <Content Include="Content_old\img\ajax-modal-loading.gif" />
-    <Content Include="Content_old\img\arrow-down.png" />
-    <Content Include="Content_old\img\avatar.png" />
-    <Content Include="Content_old\img\avatar1.jpg" />
-    <Content Include="Content_old\img\avatar10.jpg" />
-    <Content Include="Content_old\img\avatar11.jpg" />
-    <Content Include="Content_old\img\avatar1_small.jpg" />
-    <Content Include="Content_old\img\avatar2.jpg" />
-    <Content Include="Content_old\img\avatar3.jpg" />
-    <Content Include="Content_old\img\avatar3_small.jpg" />
-    <Content Include="Content_old\img\avatar4.jpg" />
-    <Content Include="Content_old\img\avatar5.jpg" />
-    <Content Include="Content_old\img\avatar6.jpg" />
-    <Content Include="Content_old\img\avatar7.jpg" />
-    <Content Include="Content_old\img\avatar8.jpg" />
-    <Content Include="Content_old\img\avatar9.jpg" />
-    <Content Include="Content_old\img\hor-menu-red-arrow.png" />
-    <Content Include="Content_old\img\icon-color-close.png" />
-    <Content Include="Content_old\img\icon-color.png" />
-    <Content Include="Content_old\img\icon-img-down.png" />
-    <Content Include="Content_old\img\icon-img-up.png" />
-    <Content Include="Content_old\img\inbox-nav-arrow-blue.png" />
-    <Content Include="Content_old\img\loading-spinner-blue.gif" />
-    <Content Include="Content_old\img\loading-spinner-default.gif" />
-    <Content Include="Content_old\img\loading-spinner-grey.gif" />
-    <Content Include="Content_old\img\loading.gif" />
-    <Content Include="Content_old\img\logo-big-white.png" />
-    <Content Include="Content_old\img\logo-big.png" />
-    <Content Include="Content_old\img\logo-default.png" />
-    <Content Include="Content_old\img\logo.png" />
-    <Content Include="Content_old\img\menu-toggler.png" />
-    <Content Include="Content_old\img\overlay-icon.png" />
-    <Content Include="Content_old\img\photo1.jpg" />
-    <Content Include="Content_old\img\photo2.jpg" />
-    <Content Include="Content_old\img\portlet-collapse-icon-white.png" />
-    <Content Include="Content_old\img\portlet-collapse-icon.png" />
-    <Content Include="Content_old\img\portlet-config-icon-white.png" />
-    <Content Include="Content_old\img\portlet-config-icon.png" />
-    <Content Include="Content_old\img\portlet-expand-icon-white.png" />
-    <Content Include="Content_old\img\portlet-expand-icon.png" />
-    <Content Include="Content_old\img\portlet-reload-icon-white.png" />
-    <Content Include="Content_old\img\portlet-reload-icon.png" />
-    <Content Include="Content_old\img\portlet-remove-icon-white.png" />
-    <Content Include="Content_old\img\portlet-remove-icon.png" />
-    <Content Include="Content_old\img\remove-icon-small.png" />
-    <Content Include="Content_old\img\search_icon_light.png" />
-    <Content Include="Content_old\img\sidebar-menu-arrow-reverse.png" />
-    <Content Include="Content_old\img\sidebar-menu-arrow-right.png" />
-    <Content Include="Content_old\img\sidebar-menu-arrow.png" />
-    <Content Include="Content_old\img\sidebar-toggler-inverse.png" />
-    <Content Include="Content_old\img\sidebar-toggler.png" />
-    <Content Include="Content_old\img\sidebar_arrow_icon_light.png" />
-    <Content Include="Content_old\img\sidebar_arrow_icon_light_rtl.png" />
-    <Content Include="Content_old\img\sidebar_inline_toggler_icon_blue.jpg" />
-    <Content Include="Content_old\img\sidebar_inline_toggler_icon_darkblue.jpg" />
-    <Content Include="Content_old\img\sidebar_inline_toggler_icon_default.jpg" />
-    <Content Include="Content_old\img\sidebar_inline_toggler_icon_grey.jpg" />
-    <Content Include="Content_old\img\sidebar_inline_toggler_icon_light.jpg" />
-    <Content Include="Content_old\img\sidebar_inline_toggler_icon_light2.jpg" />
-    <Content Include="Content_old\img\sidebar_toggler_icon_blue.png" />
-    <Content Include="Content_old\img\sidebar_toggler_icon_darkblue.png" />
-    <Content Include="Content_old\img\sidebar_toggler_icon_default.png" />
-    <Content Include="Content_old\img\sidebar_toggler_icon_grey.png" />
-    <Content Include="Content_old\img\sidebar_toggler_icon_light.png" />
-    <Content Include="Content_old\img\sidebar_toggler_icon_light2.png" />
-    <Content Include="Content_old\Theme\blue.css" />
-    <Content Include="Content_old\Theme\blue.min.css" />
-    <Content Include="Content_old\Theme\bootstrap-switch.min.css" />
-    <Content Include="Content_old\Theme\components-md.css" />
-    <Content Include="Content_old\Theme\components.css" />
-    <Content Include="Content_old\Theme\components.min.css" />
-    <Content Include="Content_old\Theme\dark.css" />
-    <Content Include="Content_old\Theme\dark.min.css" />
-    <Content Include="Content_old\Theme\default.css" />
-    <Content Include="Content_old\Theme\default.min.css" />
-    <Content Include="Content_old\Theme\fonts\Simple-Line-Icons.dev.svg" />
-    <Content Include="Content_old\Theme\fonts\Simple-Line-Icons.svg" />
-    <Content Include="Content_old\Theme\grey.css" />
-    <Content Include="Content_old\Theme\grey.min.css" />
-    <Content Include="Content_old\Theme\layout.css" />
-    <Content Include="Content_old\Theme\light.css" />
-    <Content Include="Content_old\Theme\light.min.css" />
-    <Content Include="Content_old\Theme\login.css" />
-    <Content Include="Content_old\Theme\plugins-md.css" />
-    <Content Include="Content_old\Theme\plugins-md.min.css" />
-    <Content Include="Content_old\Theme\plugins.css" />
-    <Content Include="Content_old\Theme\plugins.min.css" />
-    <Content Include="Content_old\Theme\rzslider.css" />
-    <Content Include="Content_old\Theme\rzslider.min.css" />
-    <Content Include="Content_old\Theme\simple-line-icons.min.css" />
-    <Content Include="Content_old\Theme\ticket.css" />
-    <Content Include="Content_old\Theme\toastr.css" />
-    <Content Include="Content_old\Theme\toastr.min.css" />
-    <Content Include="Content_old\Theme\todo-2.css" />
-    <Content Include="Content_old\Theme\todo.css" />
-    <Content Include="Content_old\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content_old\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content_old\bootstrap.min.css.map" />
-    <Content Include="Content_old\bootstrap.css.map" />
-    <Content Include="Content_old\bootstrap-theme.min.css.map" />
-    <Content Include="Content_old\bootstrap-theme.css.map" />
     <Content Include="IdentityDynamoDb.pfx" />
-    <Content Include="Content_old\Bootstrap\bootstrap-theme.css.map" />
-    <Content Include="Content_old\Bootstrap\bootstrap-theme.min.css.map" />
-    <Content Include="Content_old\Bootstrap\bootstrap.css.map" />
-    <Content Include="Content_old\Bootstrap\bootstrap.min.css.map" />
-    <Content Include="Content_old\FontAwesome\fontawesome-webfont.eot" />
-    <Content Include="Content_old\FontAwesome\fontawesome-webfont.ttf" />
-    <Content Include="Content_old\FontAwesome\fontawesome-webfont.woff" />
-    <Content Include="Content_old\FontAwesome\fontawesome-webfont.woff2" />
-    <Content Include="Content_old\FontAwesome\FontAwesome.otf" />
-    <Content Include="Content_old\Theme\fonts\Simple-Line-Icons.eot" />
-    <Content Include="Content_old\Theme\fonts\Simple-Line-Icons.ttf" />
-    <Content Include="Content_old\Theme\fonts\Simple-Line-Icons.woff" />
-    <Content Include="Content_old\Fonts\Simple-Line-Icons.eot" />
-    <Content Include="Content_old\Fonts\Simple-Line-Icons.ttf" />
-    <Content Include="Content_old\Fonts\Simple-Line-Icons.woff" />
-    <Content Include="Content_old\Fonts\Simple-Line-Icons.woff2" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />

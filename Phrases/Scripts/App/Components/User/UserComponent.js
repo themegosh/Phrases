@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
-    UserController.$inject = ['$scope', '$element', '$attrs', '$http'];
-    function UserController($scope, $element, $attrs, $http) {
+    UserController.$inject = ['$scope', '$element', '$attrs', '$http', 'UserService'];
+    function UserController($scope, $element, $attrs, $http, us) {
         var $ctrl = this;
 
         //properties
@@ -12,16 +12,7 @@
         }
 
         $ctrl.btnLogOut = function () {
-            $http({
-                method: 'POST',
-                url: '/Account/LogOff'
-            }).then(function successCallback(response) {
-                window.location = window.location;
-                console.log(response);
-            }, function errorCallback(response) {
-                console.log(response);
-                window.location = window.location;
-            });
+            us.logout();
         }
         
     }
