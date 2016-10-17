@@ -19,7 +19,7 @@
             //    "Password": "jamaca23",
             //    "RememberMe": true
             //}
-            console.log($ctrl.user);
+            //console.log($ctrl.user);
             us.login($ctrl.user);
         }
 

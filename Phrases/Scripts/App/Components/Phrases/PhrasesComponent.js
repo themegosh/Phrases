@@ -34,7 +34,12 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 component: 'userComponent',
-                size: 'sm'
+                size: 'sm',
+                resolve: {
+                    user: function () {
+                        return null;
+                    }
+                }
             });
         }
 

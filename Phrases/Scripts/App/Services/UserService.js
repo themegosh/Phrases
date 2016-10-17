@@ -3,7 +3,8 @@
 
     angular.module("Phrases").factory("UserService", ['$http', "PhrasesService", 'SoundService', 'ApiService', '$state', function ($http, ps, ss, api, $state) {
         var user = {};
-        var base_url = "http://localhost:61678";
+        //var base_url = "http://localhost:61678";
+        var base_url = "http://phrases.dmdev.ca";
         
         //{"Email":"","Password":"","RememberMe":true}
         user.login = function (loginData) {

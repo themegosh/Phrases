@@ -4,7 +4,8 @@
     angular.module("Phrases").factory("ApiService", ['$http', "PhrasesService", 'SoundService', '$state', function ($http, ps, ss, $state) {
 
         var api = {};
-        var base_url = "http://localhost:61678";
+        //var base_url = "http://localhost:61678";
+        var base_url = "http://phrases.dmdev.ca"
 
         api.getUserData = function () {
             $http({

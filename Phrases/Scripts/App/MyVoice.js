@@ -8,8 +8,10 @@
         'ui.router'
     ]);
         
-    phrasesApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    phrasesApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
         
+        //$httpProvider.defaults.withCredentials = true;
+
         $stateProvider
             .state('phrasesPage', {
                 url: '/',
@@ -25,7 +27,7 @@
         $urlRouterProvider.otherwise('/');
         
         function authenticate($q, UserService, $state, $timeout) {
-            if (UserService.isAuthenticated()) {
+            if (UserService.isAuthenticated(true)) {
                 console.log("authenticate isAuthenticated");
                 return $q.when()
             } else {

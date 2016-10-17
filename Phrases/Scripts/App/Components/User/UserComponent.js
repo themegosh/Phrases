@@ -8,10 +8,11 @@
         
         //events
         $ctrl.$onInit = function () {
-            
+            console.log($ctrl);
         }
 
         $ctrl.btnLogOut = function () {
+            $ctrl.dismiss({ $value: 'cancel' });
             us.logout();
         }
         
@@ -19,6 +20,10 @@
 
     angular.module("Phrases").component('userComponent', {
         templateUrl: '/Scripts/App/Components/User/UserModal.html',
-        controller: UserController
+        controller: UserController,
+        bindings: {
+            close: '&',
+            dismiss: '&'
+        }
     });
 })();
