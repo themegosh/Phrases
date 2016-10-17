@@ -19,7 +19,7 @@
             .state('loginPage', {
                 url: '/login',
                 component: 'login',
-                resolve: { authenticate: authenticate }
+                //resolve: { authenticate: authenticate }
             });
         
         $urlRouterProvider.otherwise('/');

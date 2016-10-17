@@ -71,7 +71,6 @@
                 if (shouldRestore) {
                     user.restoreIdentity();
                 }
-
                 return false;
             }
         }
