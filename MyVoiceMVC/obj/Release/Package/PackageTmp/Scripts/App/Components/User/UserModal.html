@@ -1,0 +1,8 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">User Options</h3>
+    <h4>{{$ctrl.user.userName}}</h4>
+</div>
+<div class="modal-body">
+    <a href="/Manage/ChangePassword/" class="btn btn-lg btn-block btn-primary">Change Password</a>
+    <button class="btn btn-lg btn-block btn-danger" ng-click="$ctrl.btnLogOut()" confirm="Are you sure you want to log out?">Log Out</button>
+</div>
