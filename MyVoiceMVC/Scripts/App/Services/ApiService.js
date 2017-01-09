@@ -10,8 +10,8 @@
                 method: 'Get',
                 url: '/tts/getUserData'
             }).then(function successCallback(response) {
-                console.log("getAllPhrases SUCCESS: ");
-                console.log(response);
+                //console.log("getAllPhrases SUCCESS: ");
+                //console.log(response);
                 ps.processUserData(angular.fromJson(response.data));
             }, function errorCallback(response) {
                 console.log("getAllPhrases FAIL:");
@@ -27,8 +27,8 @@
                 headers: { 'Content-Type': "application/json" },
                 data: angular.toJson(phrase, false),
             }).then(function successCallback(response) {
-                console.log("savePhrase SUCCESS:");
-                console.log(response.data);
+                //console.log("savePhrase SUCCESS:");
+                //console.log(response.data);
                 ps.savePhrase(angular.fromJson(response.data));
                 showNotification("Success", "Phrase saved.", "success");
             }, function errorCallback(response) {
@@ -46,10 +46,10 @@
                 headers: { 'Content-Type': "application/json" },
                 data: angular.toJson(tempPhrase, false),
             }).then(function successCallback(response) {
-                console.log("quickPhrase SUCCESS:");
+                //console.log("quickPhrase SUCCESS:");
                 angular.copy(angular.fromJson(response.data), tempPhrase);
                 ss.playSound(tempPhrase, true);
-                console.log(tempPhrase);
+                //console.log(tempPhrase);
             }, function errorCallback(response) {
                 console.log("quickPhrase FAIL:");
                 console.log(response.data);
@@ -63,8 +63,8 @@
                 url: '/tts/DeletePhrase',
                 data: JSON.stringify(phrase)
             }).then(function successCallback(response) {
-                console.log("deletePhrase SUCCESS: ");
-                console.log(response);
+                //console.log("deletePhrase SUCCESS: ");
+                //console.log(response);
                 ps.deletePhrase(phrase);
                 showNotification("Success", "Phrases deleted!", "success");
             }, function errorCallback(response) {
@@ -80,8 +80,8 @@
                 url: '/tts/SaveCategory',
                 data: JSON.stringify(category)
             }).then(function successCallback(response) {
-                console.log("saveCategory SUCCESS: ");
-                console.log(response);
+                //console.log("saveCategory SUCCESS: ");
+                //console.log(response);
                 ps.saveCategory(angular.fromJson(response.data));
                 showNotification("Success", "Category saved!", "success");
             }, function errorCallback(response) {
@@ -97,8 +97,8 @@
                 url: '/tts/DeleteCategory',
                 data: JSON.stringify(category)
             }).then(function successCallback(response) {
-                console.log("deleteCategory SUCCESS: ");
-                console.log(response);
+                //console.log("deleteCategory SUCCESS: ");
+                //console.log(response);
                 ps.deleteCategory(category);
                 showNotification("Success", "Category deleted!", "success");
             }, function errorCallback(response) {

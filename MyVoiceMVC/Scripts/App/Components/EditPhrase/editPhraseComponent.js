@@ -43,7 +43,7 @@
             $ctrl.customAudioStatus = $ctrl.phrase.customAudio.hasCustomAudio ? "Using custom audio: " + $ctrl.phrase.customAudio.name : "Using text-to-speech";
             //angular.copy(ps.categories, $ctrl.categories);
 
-            console.log($ctrl);
+            //console.log($ctrl);
         }
         
         $ctrl.btnUploadClick = function () {

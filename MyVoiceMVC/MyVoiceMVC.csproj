@@ -458,7 +458,8 @@
     <Content Include="Scripts\jQuery\jquery-3.1.0.min.map" />
     <Content Include="Scripts\jQuery\jquery-3.1.0.slim.min.map" />
     <Content Include="Views\Shared\_LoginRegisterLayout.cshtml" />
-    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\MyVoice.pubxml" />
+    <None Include="Properties\PublishProfiles\MyVoiceTest.pubxml" />
     <Content Include="Views\Manage\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>

@@ -3,7 +3,7 @@
     <!-- END SIDEBAR -->
     <div class="page-sidebar">
         <!-- BEGIN SIDEBAR MENU -->
-        <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu ">
+        <!--<ul class="page-sidebar-menu page-sidebar-menu-hover-submenu ">
             <li class="nav-item start " ng-click="$ctrl.btnSelectFilter({name: 'All'})" ng-class="{active: $ctrl.categoryFilter.name == 'All'}">
                 <a class="nav-link nav-toggle">
                     <i class="icon-directions"></i>
@@ -13,9 +13,9 @@
             </li>
             <li class="nav-item start " ng-class="{active: $ctrl.categoryFilter.name == category.name}" ng-repeat="category in $ctrl.categories | orderBy:'name'">
                 <a ng-click="$ctrl.btnSelectFilter(category)" class="nav-link nav-toggle">
-                    <i class="{{category.icon}}"></i>
+                    <i class="{{category.icon}}" aria-hidden="true"></i>
                     <span class="title">{{category.name}}</span>
-                    <span class="arrow"></span>
+                    <span class="arrow" aria-hidden="true"></span>
                 </a>
             </li>
             <li class="nav-item start" ng-show="$ctrl.editMode" ng-click="$ctrl.btnSelectFilter({name: null})">
@@ -25,7 +25,24 @@
                     <span class="arrow"></span>
                 </a>
             </li>
-        </ul>
+        </ul>-->
+        <div class="page-sidebar-menu">
+            <button class="btn-category" ng-click="$ctrl.btnSelectFilter({name: 'All'})" ng-class="{active: $ctrl.categoryFilter.name == 'All'}">
+                <i class="icon-directions" aria-hidden="true"></i>
+                <span class="title">All</span>
+                <span class="arrow"></span>
+            </button>
+            <button class="btn-category " ng-click="$ctrl.btnSelectFilter(category)"  ng-class="{active: $ctrl.categoryFilter.name == category.name}" ng-repeat="category in $ctrl.categories | orderBy:'name'">
+                <i class="{{category.icon}}" aria-hidden="true"></i>
+                <span class="title">{{category.name}}</span>
+                <span class="arrow"></span>
+            </button>
+            <button class="btn-category" ng-show="$ctrl.editMode" ng-click="$ctrl.btnSelectFilter({name: null})">
+                <i class="icon-plus" aria-hidden="true"></i>
+                <span class="title">New Category</span>
+                <span class="arrow"></span>
+            </button>
+        </div>
         <!-- END SIDEBAR MENU -->
     </div>
     <!-- END SIDEBAR -->

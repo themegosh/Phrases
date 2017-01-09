@@ -4,49 +4,85 @@
         var ss = {};
 
         ss.forceReload = false;
+        ss.isInit = false;
 
-        ss.playSound = function (phrase, shouldReload) {
+        ss.currentPhrase = {};
+        ss.currentPhraseProgress = {};
+        ss.audio = {};
+
+        ss.init = function () {
+            ss.isInit = true;
+            ss.audio = $('#audio-ele')[0];
+            //ss.audio.addEventListener('timeupdate', ss.onAudioTimeUpdate);
+        }
+
+        //this entire thing is gross. rewrite it at some point
+        ss.playSound = function (phrase, shouldReload, $event) {
+
+            if (!ss.isInit) {
+                ss.init();
+            }
+
+            ss.currentPhrase = phrase;
+            ss.currentPhraseProgress = $($event.currentTarget).find('.phrase-progress').first();
+            ss.currentPhraseProgress.width('0%');
+
             $('.fab').fadeIn();
-            phrase.loading = true;
-            var url = "/api/audio/GetAudio/" + phrase.guid + "?userGuid=" + ps.user.userGuid;
-            var audio = $('#audio-ele');
+            ss.currentPhrase.loading = true;
+            var url = "/api/audio/GetAudio/" + ss.currentPhrase.guid + "?userGuid=" + ps.user.userGuid;
+            
             if ($("#audio-src").attr("src") != url || shouldReload || ss.forceReload) {
                 $("#audio-src").attr("src", url);
-                audio[0].load();//load new file
+                ss.audio.load();//load new file
                 ss.forceReload = false;
             }
-            audio[0].pause();
-            audio[0].currentTime = 0;
-            audio[0].oncanplaythrough = function () {
-                phrase.loading = false;
-                audio[0].play().catch(function (e) {
-                    showNotification("Hey!", "Looks like your browser blocked the audio playback. Click [Play] again!", "info");
-                    console.log("Browser blocked the initial audio playback... TODO: FIX THIS.");
-                    console.log(e);
-                });
-                $rootScope.$apply();
+            ss.audio.pause();
+            ss.audio.currentTime = 0;
+            ss.audio.oncanplaythrough = function () {
+                ss.currentPhraseProgress.stop().animate({ width: '100%' }, ss.audio.duration * 1000, 'linear', function () { ss.currentPhraseProgress.width('0%') });
+                ss.onCanPlayThrough();
             };
-
-            audio[0].addEventListener('ended', function () {
+            
+            ss.audio.addEventListener('ended', function () {
                 ss.updateFab();
             });
-            
+        }
+
+        ss.onCanPlayThrough = function () {
+            ss.currentPhrase.loading = false;
+            ss.audio.play().catch(function (e) {
+                showNotification("Hey!", "Looks like your browser blocked the audio playback. Click [Play] again!", "info");
+                console.log("Browser blocked the initial audio playback... TODO: FIX THIS.");
+                console.log(e);
+            });
             ss.updateFab();
+            $rootScope.$apply();
+        }
+
+        ss.onAudioTimeUpdate = function () {
+            if (ss.audio.currentTime != ss.audio.duration && ss.audio.currentTime != 0) {
+                ss.currentPhrase.playProgress = ((ss.audio.currentTime / ss.audio.duration) * 100) + "%";
+            } else {
+                ss.currentPhrase.playProgress = null;
+            }
+
+            //console.log("TIME UPDATED: " + ss.audio.currentTime + " OF " + ss.audio.duration + ": " + ss.currentPhrase.playProgress);
+
+            $rootScope.$apply();
         }
 
         ss.playPause = function () {
-            var audio = $('#audio-ele');
-            if (audio[0].duration > 0 && !audio[0].paused) {
-                audio[0].pause();
+            if (ss.audio.duration > 0 && !ss.audio.paused) {
+                ss.audio.pause();
             } else {
-                audio[0].currentTime = 0;
-                audio[0].oncanplaythrough = audio[0].play();
+                ss.audio.currentTime = 0;
+                ss.audio.oncanplaythrough = ss.onCanPlayThrough();
             }
             ss.updateFab();
         }
 
         ss.updateFab = function () {
-            if ($('#audio-ele')[0].paused) {
+            if (ss.audio.paused) {
                 $('.fab').html('<i class="fa fa-play" aria-hidden="true"></i>');
             } else {
                 $('.fab').html('<i class="fa fa-pause" aria-hidden="true"></i>');

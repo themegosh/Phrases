@@ -30,9 +30,16 @@
             //var desiredFilter = $filter('selectedCategory');
         }
                 
-        $ctrl.btnPlay = function (phrase) {
+        $ctrl.btnPlay = function (phrase, $event) {
+
+            //fix any phrases that are in a broken state. (interrupted before finished loading)
+            angular.forEach($ctrl.phrases, function (aPhrase, key) {
+                aPhrase.loading = false;
+                aPhrase.playProgress = null;
+            });
+
             if (!$ctrl.editMode && phrase != null) {
-                ss.playSound(phrase);
+                ss.playSound(phrase, false, $event);
             } else {
                 var modalInstance = $uibModal.open({
                     animation: true,

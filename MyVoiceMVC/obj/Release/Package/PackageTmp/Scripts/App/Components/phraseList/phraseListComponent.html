@@ -20,12 +20,13 @@
     </div>
     <div>
         <div id="phraseContainer" ng-model="$ctrl.phrases">
-            <div ng-repeat="phrase in $ctrl.phrases  | selectedCategory:$ctrl.categoryFilter | orderBy:$ctrl.sortProperty.type:$ctrl.sortProperty.reverse track by $index" ng-click="$ctrl.btnPlay(phrase)">
+            <div ng-repeat="phrase in $ctrl.phrases  | selectedCategory:$ctrl.categoryFilter | orderBy:$ctrl.sortProperty.type:$ctrl.sortProperty.reverse track by $index" ng-click="$ctrl.btnPlay(phrase, $event)">
                 <div class="todo-projects-item clearfix">
                     <div ng-show="$ctrl.editMode" class="todo-inline todo-float-r">
                         <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
                     </div>
                     <div class="phrase" ng-class="{'loading': phrase.loading == true}" >{{ phrase.text }}</div>
+                    <div class="phrase-progress" ng-style="{ width: phrase.playProgress ? phrase.playProgress : '0%' }"></div>
                     <!--<pre>{{phrase | json}}</pre>-->
                 </div>
                 <div class="todo-projects-divider"></div>
