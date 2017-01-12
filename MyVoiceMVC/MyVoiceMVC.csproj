@@ -461,6 +461,7 @@
     <None Include="Properties\PublishProfiles\MyVoice.pubxml" />
     <None Include="Properties\PublishProfiles\MyVoiceTest.pubxml" />
     <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Shared\_PhrasesLayout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

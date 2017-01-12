@@ -17,14 +17,14 @@ namespace MyVoiceMVC.Controllers
     [Authorize]
     public class TTSController : Controller
     {
-        public ActionResult Index()
-        {
-            var userId = User.Identity.GetUserId();
+        //public ActionResult Index()
+        //{
+        //    var userId = User.Identity.GetUserId();
 
-            //LogRepository.Log("Hello world!");
+        //    //LogRepository.Log("Hello world!");
 
-            return Json(new { stuff = userId }, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(new { stuff = userId }, JsonRequestBehavior.AllowGet);
+        //}
 
         [HttpPost]
         public ActionResult SavePhrase(Phrase phrase)

@@ -13,7 +13,7 @@ namespace MyVoiceMVC.Controllers
         {
             ViewBag.Title = "My Voice";
 
-            return View();
+            return View("Index", "_PhrasesLayout");
         }
     }
 }

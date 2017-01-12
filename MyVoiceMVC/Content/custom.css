@@ -276,7 +276,7 @@ body {
 
 .page-sidebar-wrapper {
     position:fixed;
-    overflow-y:scroll;
+    overflow-y:auto;
     background-color: #26344b;
 }
 
@@ -342,6 +342,7 @@ body {
     color: #c3cee0;
     outline:none;
     border:none;
+    border-top: 1px solid #2b3b55;
 }
 
 .btn-category:hover {

@@ -4,8 +4,8 @@
     ViewBag.Title = "Manage Account";
 }
 
-<div class="login">
-    <div class="content">
+@*<div class="">
+    <div class="">
         <h3 class="form-title font-green">@ViewBag.Title</h3>
 
         <p class="">@ViewBag.StatusMessage</p>
@@ -15,4 +15,51 @@
             </p>
         </div>
     </div>
+</div>*@
+<div class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md page-sidebar-fixed">
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner ">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="#">
+                    <span>My Voice</span>
+                </a>
+                <div class="menu-toggler sidebar-toggler hide">
+                    <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                </div>
+            </div>
+            <!-- END LOGO -->
+            <form class="nav-search" ng-submit="$ctrl.btnCreateNewPhrase()">
+                <div class="input-group">
+                    <span></span>
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="$ctrl.btnUser()" class="btn btn-primary"><i class="fa fa-user" aria-hidden="true"></i> User</button>
+                        <button type="button" ng-click="$ctrl.btnUser()" class="btn btn-link"><i class="fa fa-user" aria-hidden="true"></i> User</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                asd
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <div ng-http-loader template="Scripts/App/Components/Loader/loader1.html"></div>
 </div>

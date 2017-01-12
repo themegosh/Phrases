@@ -29,6 +29,9 @@
                     <span></span>
                 </label>
             </div>
+            @*<div class="form-actions">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </div>*@
             <div class="create-account">
                 <p>
                     @Html.ActionLink("Create an account", "Register", null, new { @class = "uppercase" })
