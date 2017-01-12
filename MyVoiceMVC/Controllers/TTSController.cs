@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using MyVoiceMVC.Models;
 using MyVoiceMVC.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -141,6 +142,23 @@ namespace MyVoiceMVC.Controllers
                 PhraseRepository.DeleteCategory(category, userId);
 
                 return Json(category, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return Json(new { error = ex.ToString() });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult LogThing()
+        {
+            try
+            {
+                var error = Request.Form["errorMsg"] + " line: " + Request.Form["lineNumber"] + " url: " + Request.Form["url"];
+                LogRepository.Log(error);
+
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

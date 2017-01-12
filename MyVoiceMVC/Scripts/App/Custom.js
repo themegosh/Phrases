@@ -18,3 +18,22 @@
     toastr[type](message, title);
 
 }
+
+
+window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+    
+    $.ajax({
+        method: "POST",
+        url: '/tts/logthing/',
+        data: {
+            errorMsg: errorMsg,
+            url: url,
+            lineNumber: lineNumber
+        }
+    }).done(function () {
+        console.log("Error logged.");
+    });
+
+    return false;
+}
+
