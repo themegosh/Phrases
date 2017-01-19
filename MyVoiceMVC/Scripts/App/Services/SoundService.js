@@ -16,6 +16,12 @@
             ss.audio = $('#audio-ele')[0];
             ss.audioSrc = $('#audio-src');
             //ss.audio.addEventListener('timeupdate', ss.onAudioTimeUpdate);
+
+            ss.audio.addEventListener('ended', function () {
+
+                //showNotification("Hey!", "ended", "info");
+                ss.updateFab();
+            });
         }
 
         //this entire thing is gross. rewrite it at some point
@@ -44,22 +50,38 @@
             
             //load the audio if needed
             if (ss.audioSrc.attr("src") != url || shouldReload || ss.forceReload) {
+
+                //showNotification("Hey!", "loading", "info");
                 ss.audioSrc.attr("src", url);
                 ss.audio.load();//load new file
                 ss.forceReload = false;
+
+                ss.audio.oncanplaythrough = ss.onCanPlayThrough;//once the audio is loaded, play
+            } else {
+                //showNotification("Hey!", "else Play", "info");
+                if (ss.currentPhraseProgress) {
+                    ss.currentPhraseProgress.stop().width('0%');
+                    ss.currentPhraseProgress.animate({ width: '100%' }, ss.audio.duration * 1000, 'linear', function () { $(this).width('0%') });
+                }
+                ss.currentPhrase.loading = false;
+                ss.audio.play().catch(function (e) {
+                    //iOS & android [ajax tts to audio > api success > play new audio] doesnt work (for the first ever play)... needs to hit play at least once first
+                    //workaround: preload 1s length, muted audio file then ajax request TODO
+                    showNotification("Hey!", "Looks like your browser blocked the audio playback. Click [Play] again!", "info");
+                    console.log("Browser blocked the initial audio playback... TODO: FIX THIS.");
+                    console.log(e);
+                });
             }
+            ss.audio.currentTime = 0; //start over
             
             //if it was already playing pause it
-            ss.audio.pause();
-            ss.audio.currentTime = 0; //start over
-            ss.audio.oncanplaythrough = ss.onCanPlayThrough;//once the audio is loaded, play
+            //ss.audio.pause();
             
-            ss.audio.addEventListener('ended', function () {
-                ss.updateFab();
-            });
+            
         }
 
         ss.onCanPlayThrough = function () {
+            //showNotification("Hey!", "onCanPlayThrough", "info");
             if (ss.currentPhraseProgress) {
                 ss.currentPhraseProgress.stop().width('0%');
                 ss.currentPhraseProgress.animate({ width: '100%' }, ss.audio.duration * 1000, 'linear', function () { $(this).width('0%') });
