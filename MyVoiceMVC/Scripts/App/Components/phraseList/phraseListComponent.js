@@ -33,10 +33,10 @@
         $ctrl.btnPlay = function (phrase, $event) {
 
             //fix any phrases that are in a broken state. (interrupted before finished loading)
-            angular.forEach($ctrl.phrases, function (aPhrase, key) {
-                aPhrase.loading = false;
-                aPhrase.playProgress = null;
-            });
+            for (var i = 0; i < $ctrl.phrases.length; i++) {
+                $ctrl.phrases[i].loading = false;
+                $ctrl.phrases[i].playProgress = null;
+            }
 
             if (!$ctrl.editMode && phrase != null) {
                 ss.playSound(phrase, false, $event);

@@ -39,7 +39,7 @@ namespace MyVoiceMVC.Controllers
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { error = ex.ToString() });
+                return Json(new { error = ex.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -56,7 +56,7 @@ namespace MyVoiceMVC.Controllers
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { error = ex.ToString() });
+                return Json(new { error = ex.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -72,7 +72,7 @@ namespace MyVoiceMVC.Controllers
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { error = ex.ToString() });
+                return Json(new { error = ex.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -100,7 +100,7 @@ namespace MyVoiceMVC.Controllers
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { error = ex.ToString() });
+                return Json(new { error = ex.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -128,7 +128,7 @@ namespace MyVoiceMVC.Controllers
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { error = ex.ToString() });
+                return Json(new { error = ex.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -146,7 +146,7 @@ namespace MyVoiceMVC.Controllers
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { error = ex.ToString() });
+                return Json(new { error = ex.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -163,7 +163,7 @@ namespace MyVoiceMVC.Controllers
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return Json(new { error = ex.ToString() });
+                return Json(new { error = ex.ToString() }, JsonRequestBehavior.AllowGet);
             }
         }
 
