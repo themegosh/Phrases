@@ -34,7 +34,6 @@
 
             //set new bindings
             ss.currentPhrase = phrase;
-            ss.currentPhrase.loading = true;
             if ($event)
                 ss.currentPhraseProgress = $($event.currentTarget).find('.phrase-progress').first();
             else
@@ -44,6 +43,7 @@
             
             //load the audio if needed
             if (ss.audioSrc.attr("src") != url || shouldReload || ss.forceReload) {
+                ss.currentPhrase.loading = true;
                 ss.audioSrc.attr("src", url);
                 ss.audio.load();//load new file
                 ss.forceReload = false;
