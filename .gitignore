@@ -25,6 +25,7 @@ _UpgradeReport_Files/
 bin/
 obj/
 TestResults/
+.vs/
 ###################
 # Web publish log #
 ###################
@@ -78,3 +79,6 @@ _[Ss]cripts
 *.wma
 *.ogg
 *.m4a
+
+##private production passwords for DB and IBM
+MyVoiceMVC/Web.Release.config
