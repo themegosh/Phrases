@@ -9,13 +9,14 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 
 namespace MyVoiceMVC.Services
 {
     public class WatsonService
     {
-        private const string USERNAME = "a80450f8-88b3-4a4d-9b25-15d8adf2bc7f";
-        private const string PASSWORD = "VGOobHWj5Nev";
+        private static string USERNAME = WebConfigurationManager.AppSettings["IBM_USERNAME"];
+        private static string PASSWORD = WebConfigurationManager.AppSettings["IBM_PASSWORD"];
         private const string URL = "https://stream.watsonplatform.net/text-to-speech/api/v1/";
 
         //not used, yet
