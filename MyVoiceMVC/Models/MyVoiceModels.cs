@@ -10,9 +10,9 @@ namespace MyVoiceMVC.Models
         public string guid { get; set; } = String.Empty;
         public string text { get; set; } = String.Empty;
         public string userGuid { get; set; } = String.Empty;
-        public List<string> categories { get; set; } = new List<string>();
+        public IEnumerable<string> categories { get; set; } = new List<string>();
         public DateTime date { get; set; } = new DateTime();
-        public CustomAudio customAudio { get; set; } = new CustomAudio();
+        public string customAudioName { get; set; } = null;
         public bool forceRefresh { get; set; } = false;
         public bool temporary { get; set; } = false;
 
@@ -24,12 +24,5 @@ namespace MyVoiceMVC.Models
         public string userGuid { get; set; } = String.Empty;
         public string name { get; set; } = String.Empty;
         public string icon { get; set; } = String.Empty;
-    }
-
-    public class CustomAudio
-    {
-        public bool hasCustomAudio { get; set; } = false;
-        public string name { get; set; } = String.Empty;
-    }
-    
+    }    
 }

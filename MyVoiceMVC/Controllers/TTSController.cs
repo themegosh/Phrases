@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using MyVoiceMVC.Models;
+using MyVoiceMVC.Repositories;
 using MyVoiceMVC.Services;
 using Newtonsoft.Json;
 using System;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,7 +19,7 @@ namespace MyVoiceMVC.Controllers
     [Authorize]
     public class TTSController : Controller
     {
-        //public ActionResult Index()
+        //public async Task<ActionResult> Index()
         //{
         //    var userId = User.Identity.GetUserId();
 
@@ -27,12 +29,12 @@ namespace MyVoiceMVC.Controllers
         //}
 
         [HttpPost]
-        public ActionResult SavePhrase(Phrase phrase)
+        public async Task<ActionResult> SavePhrase(Phrase phrase)
         {
             try
             {
                 var userId = User.Identity.GetUserId();
-                phrase = PhraseService.SavePhrase(phrase, userId);
+                phrase = await PhraseService.SavePhrase(phrase, userId);
 
                 return Json(phrase, JsonRequestBehavior.AllowGet);
             }
@@ -44,12 +46,12 @@ namespace MyVoiceMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeletePhrase(Phrase phrase)
+        public async Task<ActionResult> DeletePhrase(Phrase phrase)
         {
             try
             {
                 var userId = User.Identity.GetUserId();
-                PhraseService.DeletePhrase(phrase, userId);
+                await PhraseService.DeletePhrase(phrase, userId);
 
                 return Json(phrase, JsonRequestBehavior.AllowGet);
             }
@@ -61,11 +63,11 @@ namespace MyVoiceMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult QuickPhrase(Phrase phrase)
+        public async Task<ActionResult> QuickPhrase(Phrase phrase)
         {
             try
             {
-                phrase = PhraseService.QuickPhrase(phrase);
+                phrase = await PhraseService.QuickPhrase(phrase);
 
                 return Json(phrase, JsonRequestBehavior.AllowGet);
             }
@@ -78,7 +80,7 @@ namespace MyVoiceMVC.Controllers
 
 
         [HttpGet]
-        public ActionResult GetUserData()
+        public async Task<ActionResult> GetUserData()
         {
             try
             {
@@ -86,8 +88,8 @@ namespace MyVoiceMVC.Controllers
 
                 var userData = new
                 {
-                    Categories = PhraseRepository.GetAllCategories(userId),
-                    Phrases = PhraseService.GetAllPhrases(userId),
+                    Categories = await PhraseRepository.GetAllCategories(userId),
+                    Phrases = await PhraseService.GetAllPhrases(userId),
                     User = new
                     {
                         userGuid = userId,
@@ -107,7 +109,7 @@ namespace MyVoiceMVC.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveCategory(Category category)
+        public async Task<ActionResult> SaveCategory(Category category)
         {
             try
             {
@@ -116,11 +118,11 @@ namespace MyVoiceMVC.Controllers
                 if (String.IsNullOrEmpty(category.guid))
                 {
                     category.guid = Guid.NewGuid().ToString();
-                    PhraseRepository.InsertCategory(category, userId);
+                    await PhraseRepository.InsertCategory(category, userId);
                 }
                 else
                 {
-                    PhraseRepository.UpdateCategory(category, userId);
+                    await PhraseRepository.UpdateCategory(category, userId);
                 }
 
                 return Json(category, JsonRequestBehavior.AllowGet);
@@ -133,13 +135,13 @@ namespace MyVoiceMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteCategory(Category category)
+        public async Task<ActionResult> DeleteCategory(Category category)
         {
             try
             {
                 var userId = User.Identity.GetUserId();
 
-                PhraseRepository.DeleteCategory(category, userId);
+                await PhraseRepository.DeleteCategory(category, userId);
 
                 return Json(category, JsonRequestBehavior.AllowGet);
             }
@@ -151,12 +153,12 @@ namespace MyVoiceMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogThing()
+        public async Task<ActionResult> LogThing()
         {
             try
             {
                 var error = Request.Form["errorMsg"] + " line: " + Request.Form["lineNumber"] + " url: " + Request.Form["url"];
-                LogRepository.Log(error);
+                await LogRepository.Log(error);
 
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
@@ -186,7 +188,7 @@ namespace MyVoiceMVC.Controllers
         //            throw new Exception("Upload should upload exactly one file.");
 
         //        //process the data
-        //        phrase = PhraseService.ProcessCustomAudioSource(
+        //        phrase = await PhraseService.ProcessCustomAudioSource(
         //            phrase,
         //            provider.FileData[0]
         //        );

@@ -1,4 +1,5 @@
 ﻿using MyVoiceMVC.Models;
+using MyVoiceMVC.Repositories;
 using MyVoiceMVC.Services;
 using Newtonsoft.Json;
 using System;
@@ -18,7 +19,7 @@ namespace MyVoiceMVC.Controllers
     public class AudioController : ApiController
     {
         [HttpGet]
-        public HttpResponseMessage GetAudio(string id, string userGuid)
+        public async Task<HttpResponseMessage> GetAudio(string id, string userGuid)
         {
             try
             {
@@ -26,15 +27,16 @@ namespace MyVoiceMVC.Controllers
 
                 if (!File.Exists(filePath))
                 {
-                    var phrase = PhraseRepository.GetPhrase(id, userGuid);
+                    var phrase = await PhraseRepository.GetPhrase(id, userGuid);
                     if (phrase != null)
-                        WatsonService.GetTTS(phrase); //dev/production causes file inconsistiency. Create missing file.
+                        await WatsonService.GetTTS(phrase); //dev/production causes file inconsistiency. Create missing file.
                 }
 
                 var stream = new FileStream(filePath, FileMode.Open);
-                var result = new HttpResponseMessage(HttpStatusCode.OK);
-
-                result.Content = new StreamContent(stream);
+                var result = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StreamContent(stream)
+                };
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("audio/mpeg");
                 result.Content.Headers.ContentRange = new ContentRangeHeaderValue(stream.Length);
 
@@ -42,12 +44,14 @@ namespace MyVoiceMVC.Controllers
             }
             catch (Exception ex)
             {
-                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
+                var response = Request.CreateResponse(HttpStatusCode.InternalServerError);
+                response.Content = new StringContent(JsonConvert.SerializeObject(ex.ToString()), Encoding.UTF8, "application/json");
+                return response;
             }
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> CustomAudioUpload()
+        public async Task<IHttpActionResult> CustomAudioUpload()
         {
             try
             {
@@ -66,25 +70,18 @@ namespace MyVoiceMVC.Controllers
                     throw new Exception("Upload should upload exactly one file.");
 
                 //process the data
-                phrase = PhraseService.ProcessCustomAudioSource(
+                phrase = await PhraseService.ProcessCustomAudioSource(
                     phrase,
                     provider.FileData[0],
                     userGuid
                 );
 
-                return jsonResponse(JsonConvert.SerializeObject(phrase), HttpStatusCode.OK);
+                return Json(phrase);
             }
             catch (Exception ex)
             {
-                return jsonResponse(ex.ToString(), HttpStatusCode.InternalServerError);
+                return Content(HttpStatusCode.BadRequest, ex.ToString());
             }
-        }
-
-        private HttpResponseMessage jsonResponse(object obj, HttpStatusCode status)
-        {
-            HttpResponseMessage response = Request.CreateResponse(status);
-            response.Content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
-            return response;
         }
     }
 }

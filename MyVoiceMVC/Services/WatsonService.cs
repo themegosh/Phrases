@@ -1,4 +1,5 @@
 ﻿using MyVoiceMVC.Models;
+using MyVoiceMVC.Repositories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,12 @@ namespace MyVoiceMVC.Services
 {
     public class WatsonService
     {
-        private static string USERNAME = WebConfigurationManager.AppSettings["IBM_USERNAME"];
-        private static string PASSWORD = WebConfigurationManager.AppSettings["IBM_PASSWORD"];
+        private static readonly string USERNAME = WebConfigurationManager.AppSettings["IBM_USERNAME"];
+        private static readonly string PASSWORD = WebConfigurationManager.AppSettings["IBM_PASSWORD"];
         private const string URL = "https://stream.watsonplatform.net/text-to-speech/api/v1/";
 
         //not used, yet
-        public static Task<string> GetVoices()
+        public static async Task<string> GetVoices()
         {
             try
             {
@@ -28,19 +29,19 @@ namespace MyVoiceMVC.Services
                 using (var client = new HttpClient(handler))
                 using (var response = client.GetAsync(URL + "voices"))
                 {
-                    return response.Result.Content.ReadAsStringAsync();
+                    return await response.Result.Content.ReadAsStringAsync();
                 }
             }
             catch (Exception ex)
             {
-                LogRepository.Log(ex.ToString());
+                await LogRepository.Log(ex.ToString());
                 throw ex;
             }
 
         }
 
         //query watson and save the file to the ~/App_Data/ dir based on the hash'd "Text"
-        public static Phrase GetTTS(Phrase phrase)
+        public static async Task<Phrase> GetTTS(Phrase phrase)
         {
             try
             {
@@ -61,7 +62,7 @@ namespace MyVoiceMVC.Services
                     using (var mediaFile = response.Result.Content.ReadAsStreamAsync())
                     using (var fileStream = new FileStream(filepathWithoutExtention + ".wav", FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                     {
-                        mediaFile.Result.CopyToAsync(fileStream); //create the wav file (fallback)
+                        await mediaFile.Result.CopyToAsync(fileStream); //create the wav file (fallback)
                     }
 
                     PhraseService.ConvertToMp3(filepathWithoutExtention + ".wav", filepathWithoutExtention + ".mp3", 8);
@@ -79,7 +80,7 @@ namespace MyVoiceMVC.Services
             }
             catch (Exception ex)
             {
-                LogRepository.Log(ex.ToString());
+                await LogRepository.Log(ex.ToString());
                 throw ex;
             }
         }
