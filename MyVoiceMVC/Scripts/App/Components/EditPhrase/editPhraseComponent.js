@@ -10,15 +10,12 @@
 
         //events
         $ctrl.$onInit = function () {
-            if ($ctrl.resolve.phrase == null) { //new phrase
+            if ($ctrl.resolve.phrase === null) { //new phrase
                 $ctrl.modalTitle = "New Phrase";
                 $ctrl.phrase = {
                     text: "",
                     categories: [],
-                    customAudio: {
-                        hasCustomAudio: false,
-                        uploadedName: ""
-                    }
+                    customAudio: null
                 };
                 $('#txtPhrase').ready(function () {
                     $('#txtPhrase').focus();
@@ -40,7 +37,7 @@
             angular.forEach($ctrl.checkedCategories, function (category) {
                 category.checked = $ctrl.hasCategory(category);
             });
-            $ctrl.customAudioStatus = $ctrl.phrase.customAudio.hasCustomAudio ? "Using custom audio: " + $ctrl.phrase.customAudio.name : "Using text-to-speech";
+            $ctrl.customAudioStatus = $ctrl.phrase.customAudio !== null ? "Using custom audio: " + $ctrl.phrase.customAudio : "Using text-to-speech";
             //angular.copy(ps.categories, $ctrl.categories);
 
             //console.log($ctrl);
@@ -61,10 +58,10 @@
         }
 
         $ctrl.save = function () {
-            if ($ctrl.phrase.customAudio.hasCustomAudio === true && !$ctrl.phrase.customAudio.name) {
+            if ($ctrl.phrase.customAudio === '') {
                 $confirm({ text: 'You have checked "Use custom audio" but have not uploaded a file to use... Tap "Cancel" and upload a custom audio file, or "Ok" to save using text-to-speech.' })
                     .then(function () {
-                        $ctrl.phrase.customAudio.hasCustomAudio = false;
+                        $ctrl.phrase.customAudio = null;
                         $ctrl.saveAndClose();
                     });
             } else {
@@ -100,20 +97,19 @@
         $ctrl.hasCategory = function (aCategory) {
             var hasCategory = false;
             angular.forEach($ctrl.phrase.categories, function (category) {
-                if (aCategory.guid == category)
+                if (aCategory.guid === category)
                     hasCategory = true;
             });
             return hasCategory;
         }
 
         $ctrl.usesCustomAudioToggle = function () {
-            if (!$ctrl.phrase.customAudio.hasCustomAudio) { //disabling custom audio
-                $ctrl.phrase.customAudio.hasCustomAudio = true;
-                $confirm({ text: 'Deactivating this will delete the current audio file and use text-to-speech again.' })
+            if ($ctrl.phrase.customAudio === null) { //disabling custom audio
+                $ctrl.phrase.customAudio = '';
+                $confirm({ text: 'Deactivating this will delete the current custom audio file and use text-to-speech again.' })
                     .then(function () {
                         $ctrl.customAudioStatus = "Using text-to-speech";
-                        $ctrl.phrase.customAudio.name = "";
-                        $ctrl.phrase.customAudio.hasCustomAudio = false;
+                        $ctrl.phrase.customAudio= null;
                         $ctrl.phrase.forceRefresh = true;
                     });
             } else { //enabling it
@@ -137,7 +133,7 @@
                     showNotification("Success", "Audio uploaded!", "success");
                     console.log(response.data); // will output whatever you choose to return from the server on a successful upload
                     angular.copy(angular.fromJson(response.data), $ctrl.phrase);//update the current model
-                    $ctrl.customAudioStatus = "Using custom audio: " + $ctrl.phrase.customAudio.name;
+                    $ctrl.customAudioStatus = "Using custom audio: " + $ctrl.phrase.customAudio;
                 },
                 function (response) {
                     showNotification("Error", "Audio could not be uploaded...", "danger");

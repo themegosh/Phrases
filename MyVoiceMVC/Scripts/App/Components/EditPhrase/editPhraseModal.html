@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
     <div class="form-group">
-        <button type="button" ng-click="$ctrl.btnQuickPhrase()" ng-disabled="$ctrl.phrase.text < 1 || $ctrl.phrase.customAudio.hasCustomAudio" class="pull-right btn btn-info btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
+        <button type="button" ng-click="$ctrl.btnQuickPhrase()" ng-disabled="!$ctrl.phrase.text || $ctrl.phrase.customAudio" class="pull-right btn btn-info btn-lg"><i class="fa fa-play" aria-hidden="true"></i> Play</button>
         <h2 class="section-head" for="Text">Phrase Text</h2>
         <textarea type="text" id="txtPhrase" ng-change="$ctrl.isClean = false" class="form-control input-lg" placeholder="Phrase Text" ng-model="$ctrl.phrase.text"></textarea>
     </div>
@@ -25,7 +25,7 @@
     <div ng-show="$ctrl.phrase.guid">
         <h2>Custom Sound</h2>
         <form>
-            <button type="button" ng-disabled="!$ctrl.phrase.customAudio.hasCustomAudio" class="btn btn-primary btn-sm pull-right" ng-click="$ctrl.btnUploadClick()">Upload</button>
+            <button type="button" ng-disabled="$ctrl.phrase.customAudio === null" class="btn btn-primary btn-sm pull-right" ng-click="$ctrl.btnUploadClick()">Upload</button>
             <input type="file" name="customAudioFile" id="customAudioFile" on-file-change="$ctrl.customFileChanged" class="audio-hidden-input" accept=".m4a,.mp3,.wav" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
         </form>
         <label class="check mt-checkbox mt-checkbox-outline">

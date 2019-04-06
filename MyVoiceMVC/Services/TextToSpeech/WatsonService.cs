@@ -12,16 +12,16 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
 
-namespace MyVoiceMVC.Services
+namespace MyVoiceMVC.Services.TextToSpeech
 {
-    public class WatsonService
+    public class WatsonService : ITextToSpeech
     {
         private static readonly string USERNAME = WebConfigurationManager.AppSettings["IBM_USERNAME"];
         private static readonly string PASSWORD = WebConfigurationManager.AppSettings["IBM_PASSWORD"];
         private const string URL = "https://stream.watsonplatform.net/text-to-speech/api/v1/";
 
         //not used, yet
-        public static async Task<string> GetVoices()
+        public async Task<string> GetVoices()
         {
             try
             {
@@ -41,7 +41,7 @@ namespace MyVoiceMVC.Services
         }
 
         //query watson and save the file to the ~/App_Data/ dir based on the hash'd "Text"
-        public static async Task<Phrase> GetTTS(Phrase phrase)
+        public async Task<Phrase> GetTTS(Phrase phrase)
         {
             try
             {

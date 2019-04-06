@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -19,6 +20,11 @@ namespace MyVoiceMVC
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //GoogleCloudServices require this credentials file. 
+            //https://cloud.google.com/text-to-speech/docs/quickstart-client-libraries
+            var path = System.Web.Hosting.HostingEnvironment.MapPath("~/Phrases-276aabe6b3ad.json");
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path, EnvironmentVariableTarget.Process);
         }
         
         protected void Session_Start(object sender, EventArgs e)

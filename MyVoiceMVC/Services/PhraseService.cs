@@ -1,5 +1,6 @@
 ﻿using MyVoiceMVC.Models;
 using MyVoiceMVC.Repositories;
+using MyVoiceMVC.Services.TextToSpeech;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -59,7 +60,9 @@ namespace MyVoiceMVC.Services
             }
 
             if (shouldGetTTS)
-                phrase = await WatsonService.GetTTS(phrase); //update the TTS
+            {
+                phrase = await new GoogleTextToSpeechService().GetTTS(phrase);
+            }               
 
             if (newPhrase)
                 await PhraseRepository.InsertPhrase(phrase, userGuid);
@@ -82,7 +85,7 @@ namespace MyVoiceMVC.Services
 
             phrase.guid = Guid.NewGuid().ToString(); //each "quick phrase" is temporary and will be deleted on its own. thus needs its own guid
 
-            phrase = await WatsonService.GetTTS(phrase);
+            phrase = await new GoogleTextToSpeechService().GetTTS(phrase);
 
             string filePath = HttpContext.Current.Server.MapPath("~/tts/") + phrase.guid;
 

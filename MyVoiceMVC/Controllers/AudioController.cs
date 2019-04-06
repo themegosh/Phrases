@@ -1,6 +1,7 @@
 ﻿using MyVoiceMVC.Models;
 using MyVoiceMVC.Repositories;
 using MyVoiceMVC.Services;
+using MyVoiceMVC.Services.TextToSpeech;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace MyVoiceMVC.Controllers
                 {
                     var phrase = await PhraseRepository.GetPhrase(id, userGuid);
                     if (phrase != null)
-                        await WatsonService.GetTTS(phrase); //dev/production causes file inconsistiency. Create missing file.
+                        await new GoogleTextToSpeechService().GetTTS(phrase); //dev/production causes file inconsistiency. Create missing file.
                 }
 
                 var stream = new FileStream(filePath, FileMode.Open);
